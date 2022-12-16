@@ -4,6 +4,8 @@ var canvas = document.getElementById('game');
 // Get a reference to the canvas context
 var context = canvas.getContext('2d');
 
+
+
 // draw border 
 context.strokeRect(10,10,100,50);
 
@@ -25,6 +27,7 @@ let tileCount = 20;
 
 // define the size of each individual tile so that food doesn't take up so much space
 let tileSize = canvas.width / tileCount - 2;
+
 
 // defing where snake first appears, 10,10 starting from 0,0
 let headX = 10;
@@ -79,9 +82,19 @@ function clearScreen() {
 // draw our snake, accomplish this by defining its color and filling a rectangle with the snake attributes
 function drawSnake() {
     
+    
+    // Set the shadow color to white
+    context.shadowColor = 'white';
+    
+    // Set the shadow blur to a large value to create a strong glow effect
+    context.shadowBlur = 3;
+    
+    // Set the shadow offset to 0
+    context.shadowOffsetX = 0; 
+    context.shadowOffsetY = 0;
 
-    context.fillStyle = 'green';
-
+    tileSize = 15;
+    context.fillStyle = 'white';
     for(let i = 0; i < snakeParts.length; i++) {
         let part = snakeParts[i];
         context.fillRect(part.x * tileCount, part.y * tileCount, tileSize, tileSize);
@@ -94,7 +107,7 @@ function drawSnake() {
         snakeParts.shift();
     }
     // placed here so that the head always appears first when refreshing
-    context.fillStyle = 'orange';
+    context.fillStyle = 'white';
     context.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize);
     
 }
