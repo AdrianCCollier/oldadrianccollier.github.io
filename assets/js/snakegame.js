@@ -109,12 +109,50 @@ function drawSnake() {
     // placed here so that the head always appears first when refreshing
     context.fillStyle = 'white';
     context.fillRect(headX * tileCount, headY * tileCount, tileSize, tileSize);
-    
+
+        // Set up some variables to control the googly eye effect
+const eyeSize = 3.9;
+const irisSize = 2;
+const wobbleAmplitude = 0.2;
+const wobbleFrequency = 0.01;
+const wobblePhase = Date.now() * wobbleFrequency;
+
+// Draw the left googly eye
+context.beginPath();
+context.arc(headX * tileCount + 5 + Math.sin(wobblePhase) * wobbleAmplitude, headY * tileCount + 4.7, eyeSize, 0, 2 * Math.PI);
+context.fillStyle = 'white'; // Change the fill color to white
+context.fill();
+context.strokeStyle = 'black'; // Set the stroke color to black
+context.lineWidth = 1; // Set the line width to 1 pixel
+context.stroke(); // Stroke the eye to add a border
+
+// Draw the left iris
+context.beginPath();
+context.arc(headX * tileCount + 5 + Math.sin(wobblePhase) * wobbleAmplitude, headY * tileCount + 5, irisSize, 0, 2 * Math.PI);
+context.fillStyle = 'black';
+context.fill();
+
+// Draw the right googly eye
+context.beginPath();
+context.arc(headX * tileCount + 10 + Math.sin(wobblePhase + Math.PI) * wobbleAmplitude, headY * tileCount + 4.5, eyeSize, 0, 2 * Math.PI);
+context.fillStyle = 'white'; // Change the fill color to white
+context.fill();
+context.strokeStyle = 'black'; // Set the stroke color to black
+context.lineWidth = 1; // Set the line width to 1 pixel
+context.stroke(); // Stroke the eye to add a border
+
+// Draw the right iris
+context.beginPath();
+context.arc(headX * tileCount + 10 + Math.sin(wobblePhase + Math.PI) * wobbleAmplitude, headY * tileCount + 5, irisSize, 0, 2 * Math.PI);
+context.fillStyle = 'black';
+context.fill();
 }
 
 function drawApple() {
     context.fillStyle  = 'red';
     context.fillRect(appleX * tileCount, appleY * tileCount, tileSize, tileSize);
+
+    
 }
 
 function isGameOver() {
