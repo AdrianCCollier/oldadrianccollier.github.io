@@ -46,6 +46,12 @@ let yVelocity = 0;
 // define our game score
 let score = 0;
 
+// define sounds
+const biteSound = new Audio("/assets/sounds/appleBite.mp3");
+
+const gameOverSound = new Audio("/assets/sounds/gameOverSound.mp3");
+
+
 // call additional functions and refresh canvas 1000 milliseconds / defined speed
 // changeSnakePosition() must be called first in order to maintain game over logic consistent. Check if any collisions have occurred, if they have, don't call the other functions, just call game over
 function drawGame() {
@@ -127,6 +133,7 @@ function isGameOver() {
         context.fillStyle = gradient;
 
         context.fillText("Game Over", canvas.width / 6.5, canvas.height / 2.1)
+        gameOverSound.play();
 
     }
     // check self collisions
@@ -151,6 +158,7 @@ function checkAppleCollision() {
         score++;
         speed++;
         tailLength++;
+        biteSound.play();
 
     }
 }

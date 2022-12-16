@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+body {
+
+    background-color: gray;
+}
+
+#game-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 0 auto;
+}
+
+#game-container #title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Audiowide', sans-serif;
+    font-size: 40px;
+    text-align: center;
+    border: 2px solid red;
+    margin: 50px;
+    padding: 10px;
+    height: 30px;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    color: #A053FF;
+    text-shadow: 0 0 10px #A053FF;
+    background-color: #333;
+}
+
+#game-container #game {
+    display: block;
+    border-style: solid;
+    border-width: 5px;
+    border-color: purple;
+    outline-style: solid;
+    outline-color: red;
+    margin: 0 auto;
+}
+
+
