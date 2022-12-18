@@ -182,7 +182,27 @@ body {
 		top: 5%;
 }
 
-
+#restart-button {
+	display: none;
+	position: absolute;
+		font-family: 'Arcade', sans-serif;
+		font-size: 23px;
+		font-weight: bold;
+		letter-spacing: 2px;
+		color: #A053FF;
+		text-shadow: 0 0 10px #A053FF;
+		top: 60%;
+		left: 42%;
+		border-style: solid;
+		border-color: #6a5e79;
+		border-width: 2px;
+		border-radius: 10px;
+		padding: 0px 20px;
+	
+		height: 10%;
+		/* text-align: center;
+		justify-content: center; */
+}
 
 
 ol,

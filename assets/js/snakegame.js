@@ -113,7 +113,7 @@ function drawSnake() {
         // Set up some variables to control the googly eye effect
 const eyeSize = 3.9;
 const irisSize = 2;
-const wobbleAmplitude = 0.2;
+const wobbleAmplitude = 0.3;
 const wobbleFrequency = 0.01;
 const wobblePhase = Date.now() * wobbleFrequency;
 
@@ -185,6 +185,9 @@ function isGameOver() {
 
         context.fillText("Game Over", canvas.width / 6.5, canvas.height / 2.1)
         gameOverSound.play();
+
+        // Show the restart button
+    document.getElementById("restart-button").style.display = "inline-block";
 
     }
     // check self collisions
