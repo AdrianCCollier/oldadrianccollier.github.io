@@ -183,10 +183,9 @@ body {
 }
 
 #restart-button {
-	
 		display: inline-block;
 		position: absolute;
-		z-index: 1;
+		z-index: 2;
 		font-family: 'Arcade', sans-serif;
 		font-size: 23px;
 		font-weight: bold;
@@ -195,6 +194,7 @@ body {
 		text-shadow: 0 0 10px #A053FF;
 		top: 60%;
 		left: 39%;
+
 		border-style: solid;
 		border-color: #6a5e79;
 		border-width: 2px;

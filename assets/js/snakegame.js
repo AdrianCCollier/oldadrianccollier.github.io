@@ -7,6 +7,9 @@ var context = canvas.getContext('2d');
 // get a reference to the restart button
 var restartButton = document.getElementById('restart-button');
 
+var homeButton = document.getElementById('home-button').addEventListener('click', function() {
+    console.log('home button clicked');
+});
 
 
 // draw border 
@@ -62,8 +65,8 @@ const gameOverSound = new Audio("/assets/sounds/gameOverSound.mp3");
 // changeSnakePosition() must be called first in order to maintain game over logic consistent. Check if any collisions have occurred, if they have, don't call the other functions, just call game over
 function drawGame() {
     changeSnakePosition();
-    let result = isGameOver();
-    if(result == true) {
+    let gameOver = isGameOver();
+    if(gameOver == true) {
         return;
     }
     clearScreen();
@@ -75,6 +78,8 @@ function drawGame() {
     console.log('drawing... ')
     setTimeout(drawGame, 1000 / speed);
 }
+// setInterval(drawGame, 1000 / speed);
+
 
 // clear the screen and draw black canvas
 function clearScreen() {
@@ -158,6 +163,9 @@ function drawApple() {
     
 }
 
+
+
+
 function isGameOver() {
     let gameOver = false;
 
@@ -176,6 +184,21 @@ function isGameOver() {
     }
 
     if(gameOver) {
+        restartButton.style.display = 'block';
+    }
+    else {
+        restartButton.style.display = 'none';
+    }
+    restartButton.addEventListener('click', function() {
+            gameOver = false;
+            console.log('restart button clicked');
+            restartGame();
+        });
+
+    
+    
+    if(gameOver) {
+
         context.fillStyle = "white";
         context.font = "50px Verdana";
 
@@ -188,14 +211,7 @@ function isGameOver() {
 
         context.fillText("Game Over", canvas.width / 6.5, canvas.height / 2.1)
         gameOverSound.play();
-        console.log('game ended');
-
-        restartButton.addEventListener('click', function() {
-            console.log('restart button was clicked');
-        });      
-
-
-
+        console.log('game ended');  
 
 
     
@@ -205,8 +221,11 @@ function isGameOver() {
 } // end isGameOver
 
 function restartGame() {
-    console.log('button clicked');
-}
+    console.log('restartGame function reached');
+    
+    window.location.reload();
+
+} // end restartGame
 
 function drawScore() {
     context.fillStyle = "white";
