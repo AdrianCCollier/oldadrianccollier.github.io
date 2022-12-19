@@ -183,8 +183,10 @@ body {
 }
 
 #restart-button {
-	display: none;
-	position: absolute;
+	
+		display: inline-block;
+		position: absolute;
+		z-index: 1;
 		font-family: 'Arcade', sans-serif;
 		font-size: 23px;
 		font-weight: bold;
@@ -192,16 +194,12 @@ body {
 		color: #A053FF;
 		text-shadow: 0 0 10px #A053FF;
 		top: 60%;
-		left: 42%;
+		left: 39%;
 		border-style: solid;
 		border-color: #6a5e79;
 		border-width: 2px;
 		border-radius: 10px;
 		padding: 0px 20px;
-	
-		height: 10%;
-		/* text-align: center;
-		justify-content: center; */
 }
 
 

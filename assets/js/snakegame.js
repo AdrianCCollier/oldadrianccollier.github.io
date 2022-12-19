@@ -4,6 +4,9 @@ var canvas = document.getElementById('game');
 // Get a reference to the canvas context
 var context = canvas.getContext('2d');
 
+// get a reference to the restart button
+var restartButton = document.getElementById('restart-button');
+
 
 
 // draw border 
@@ -185,17 +188,25 @@ function isGameOver() {
 
         context.fillText("Game Over", canvas.width / 6.5, canvas.height / 2.1)
         gameOverSound.play();
+        console.log('game ended');
 
-        // Show the restart button
-    document.getElementById("restart-button").style.display = "inline-block";
+        restartButton.addEventListener('click', function() {
+            console.log('restart button was clicked');
+        });      
 
-    }
-    // check self collisions
 
+
+
+
+    
+    } // end if game over 
 
     return gameOver;
-}
+} // end isGameOver
 
+function restartGame() {
+    console.log('button clicked');
+}
 
 function drawScore() {
     context.fillStyle = "white";
