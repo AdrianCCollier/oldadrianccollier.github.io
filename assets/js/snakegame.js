@@ -169,6 +169,14 @@ function drawApple() {
 function isGameOver() {
     let gameOver = false;
 
+    // self collision detection
+    for (let i = 0; i < snakeParts.length; i++) {
+        if (snakeParts[i].x === headX && snakeParts[i].y === headY && speed < 1) {
+            gameOver = true;
+        } // end if 
+    } // end for 
+
+    
     // check wall collisions
     if(headX < 0) {
         gameOver = true;
@@ -182,6 +190,9 @@ function isGameOver() {
     else if(headY === tileCount) {
         gameOver = true;
     }
+
+
+
 
     if(gameOver) {
         restartButton.style.display = 'block';
