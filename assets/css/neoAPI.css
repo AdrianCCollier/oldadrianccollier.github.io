@@ -162,7 +162,7 @@ body {
 	position: absolute;
 	z-index: 1;
 	top: -10%;
-	left: 43%;
+	left: 7%;
 	right: 0;
 	bottom: 0;
 	font-family: 'Audiowide', sans-serif;
@@ -172,7 +172,7 @@ body {
 	text-shadow: 0 0 10px #A053FF;
 
 }
-#game {
+#neoMap {
 	box-shadow: black 20px 10px 50px;
 	border-color: #FF00FF;
 	border-width: 10px;
@@ -185,7 +185,6 @@ body {
 #restart-button {
 		display: inline-block;
 		position: absolute;
-		display: none;
 		z-index: 2;
 		font-family: 'Arcade', sans-serif;
 		font-size: 23px;

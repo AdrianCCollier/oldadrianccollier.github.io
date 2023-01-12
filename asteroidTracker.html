@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Bootstrap CDN-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+
+    <!--CSS Link-->
+    <link rel="stylesheet" href="assets/css/asteroidTracker.css" />
+
+    <title>Near Earth Asteroid Tracker</title>
+  </head>
+  <body>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2">
+      <div class="container">
+        <a href="#" class="navbar-brand">Near Earth Asteroid Tracker</a>
+
+        <!--Navbar Hamburger Menu Button-->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navmenu"></div>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="#Home" class="nav-link">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#aboutme" class="nav-link">About Me</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#Resume" class="nav-link">Resume</a>
+          </li>
+        </ul>
+      </div>
+      <!-- End of Navbar Container-->
+    </nav>
+
+    <!--Showcase for Canvas-->
+
+    <section class="bg-dark text-light p-5 text-center text-sm-start">
+      <div class="container">
+        <div class="d-sm-flex align-items-center justify-content-between">
+          <div>
+            <h1>
+              Near Earth <span class="text-danger"> Asteroid </span>Tracker
+            </h1>
+
+            <p class="lead my-4 mx-2">
+              Built using NASA's NeoWS API to fetch JSON data about nearby
+              asteroids which then gets integrated into the Canvas API to
+              visualize the solar system and to plot asteroids with their actual
+              coordinates.
+            </p>
+            <button class="btn btn-primary btn-lg">Start</button>
+          </div>
+          <img class=img-fluid w-50 d-none d-sm-block"
+          src="images/asteroidTracker/asteroid.jpg" alt="">
+        </div>
+      </div>
+    </section>
+
+    <div class="grid-container">
+      <div class="canvas-grid">
+        <canvas id="neoMap" width="1000" height="600"></canvas>
+      </div>
+      <!-- End canvas-grid -->
+      <div class="display-grid">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th colspan="2">Asteroid Tracker</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>ID:</td>
+              <td id="neo-id"></td>
+            </tr>
+            <tr>
+              <td>Name:</td>
+              <td id="neo-name"></td>
+            </tr>
+            <tr>
+              <td>Size:</td>
+              <td id="neo-size"></td>
+            </tr>
+            <tr>
+              <td>Potentially Dangerous:</td>
+              <td id="neo-danger"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- End display-grid -->
+      <div class="settings-grid">
+        <div class="settings-container">
+          <input
+            type="range"
+            min="1"
+            max="15"
+            value="5"
+            class="slider"
+            id="neoRange"
+          />
+          <!--Slider current number element, style later-->
+          <span id="neoCount" class="neo-counter">3</span>
+        </div>
+      </div>
+      <!-- End settings-grid -->
+    </div>
+    <!-- End grid-container -->
+
+    <!--Bootstrap JS Bundle-->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="assets/js/asteroidTracker.js"></script>
+  </body>
+</html>

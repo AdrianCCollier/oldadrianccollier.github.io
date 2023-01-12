@@ -26,7 +26,7 @@ class SnakePart{
 }
 
 // define snake speed
-let speed = 7;
+let speed = 20;
 
 // used to represent that there's 20 tiles across and 20 tiles down
 let tileCount = 20;
@@ -78,7 +78,6 @@ function drawGame() {
     console.log('drawing... ')
     setTimeout(drawGame, 1000 / speed);
 }
-// setInterval(drawGame, 1000 / speed);
 
 
 // clear the screen and draw black canvas
@@ -106,7 +105,7 @@ function drawSnake() {
     for(let i = 0; i < snakeParts.length; i++) {
         let part = snakeParts[i];
         context.fillRect(part.x * tileCount, part.y * tileCount, tileSize, tileSize);
-    }
+    } // end for 
     
     // put a new snake part at the end of the list
     // remove the further item from the snake parts if more than current  tail length
@@ -157,11 +156,27 @@ context.fill();
 }
 
 function drawApple() {
-    context.fillStyle  = 'red';
-    context.fillRect(appleX * tileCount, appleY * tileCount, tileSize, tileSize);
+  // Create a new Image object
+  let broccoliImage = new Image()
 
-    
+  // Set the source of the image to the URL of your broccoli image
+  broccoliImage.src = 'images/apple.png'
+
+  // Draw the broccoli image on the canvas at the position specified by the appleX and appleY variables
+  context.drawImage(
+    broccoliImage,
+    appleX * tileCount,
+    appleY * tileCount,
+    tileSize,
+    tileSize
+  )
 }
+
+function sayHi() {
+    console.log('hi');
+}
+
+sayHi();
 
 
 
@@ -169,10 +184,14 @@ function drawApple() {
 function isGameOver() {
     let gameOver = false;
 
+    if(yVelocity === 0 && xVelocity === 0)
+    return false;
     // self collision detection
     for (let i = 0; i < snakeParts.length; i++) {
-        if (snakeParts[i].x === headX && snakeParts[i].y === headY && speed < 1) {
+        let part = snakeParts[i];
+        if (part.x === headX && part.y === headY) {
             gameOver = true;
+            break;
         } // end if 
     } // end for 
 
