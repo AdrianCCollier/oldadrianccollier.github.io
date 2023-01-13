@@ -9,7 +9,7 @@ function clearCanvas() {
 
 function drawMap(neoData) {
   globalNeoData = neoData
-  clearCanvas();
+  clearCanvas()
 
   const apiKey = 'CBQjMERq2te14gAxcxr28G49RjlyUPjGq37Fwker'
   const canvas = document.getElementById('neoMap')
@@ -19,11 +19,13 @@ function drawMap(neoData) {
   const maxDistance = 200 // Maximum distance of the NEOs from the Sun
   const orbitOffset = 10 // Offset to add to the radius of each orbit
   const scaleFactor = 2.3
-  const centerOffsetX = (canvas.width - 900 * scaleFactor) / 2 // Calculate the horizontal offset to center the map
+  const centerOffsetX = (canvas.width - 800 * scaleFactor) / 2 // Calculate the horizontal offset to center the map
   const centerOffsetY = (canvas.height - 600 * scaleFactor) / 2 // Calculate the vertical offset to center the map
 
-  // // // Clear the canvas
-  //   ctx.clearRect(0, 0, canvas.width, canvas.height)
+  for (let i = 0; i < neoData.length; i++) {
+    const neo = neoData[i]
+    neo.randomAngle = Math.random() * 2 * Math.PI //generate random angle
+  }
 
   // Draw the Sun
   ctx.fillStyle = 'yellow'
@@ -35,6 +37,16 @@ function drawMap(neoData) {
     0,
     2 * Math.PI
   )
+  ctx.fill()
+
+  // Draw Earth
+  const earthRadius = 6;
+  const earthX = 475 * scaleFactor + centerOffsetX
+  const earthY = 300 * scaleFactor + centerOffsetY
+
+  ctx.fillStyle = 'blue'
+  ctx.beginPath()
+  ctx.arc(earthX, earthY, earthRadius * scaleFactor, 0, 2 * Math.PI)
   ctx.fill()
 
   // Draw the orbits of the NEOs
@@ -69,13 +81,13 @@ function drawMap(neoData) {
     const b = a * 0.6 // Minor axis
     const radius = Math.sqrt(
       (a * a * b * b) /
-        (a * a * Math.sin(neo.angle) * Math.sin(neo.angle) +
-          b * b * Math.cos(neo.angle) * Math.cos(neo.angle))
+        (a * a * Math.sin(neo.randomAngle) * Math.sin(neo.randomAngle) +
+          b * b * Math.cos(neo.randomAngle) * Math.cos(neo.randomAngle))
     ) // Calculate the radius of the NEO's position on the elliptical orbit
     ctx.beginPath()
     ctx.arc(
-      400 * scaleFactor + radius * Math.cos(neo.angle) + centerOffsetX, // Use the angle and radius of the orbit to calculate the position of the NEO
-      300 * scaleFactor + radius * Math.sin(neo.angle) + centerOffsetY,
+      400 * scaleFactor + radius * Math.cos(neo.randomAngle) + centerOffsetX, // Use the angle and radius of the orbit to calculate the position of the NEO
+      300 * scaleFactor + radius * Math.sin(neo.randomAngle) + centerOffsetY,
       neoRadius * scaleFactor,
       0,
       2 * Math.PI
@@ -100,15 +112,15 @@ function drawMap(neoData) {
       const b = a * 0.6 // Minor axis
       const radius = Math.sqrt(
         (a * a * b * b) /
-          (a * a * Math.sin(neo.angle) * Math.sin(neo.angle) +
-            b * b * Math.cos(neo.angle) * Math.cos(neo.angle))
+          (a * a * Math.sin(neo.randomAngle) * Math.sin(neo.randomAngle) +
+            b * b * Math.cos(neo.randomAngle) * Math.cos(neo.randomAngle))
       ) // Calculate the radius of the NEO's position on the elliptical orbit
 
       // Calculate the position of the NEO
       const neoX =
-        400 * scaleFactor + radius * Math.cos(neo.angle) + centerOffsetX
+        400 * scaleFactor + radius * Math.cos(neo.randomAngle) + centerOffsetX
       const neoY =
-        300 * scaleFactor + radius * Math.sin(neo.angle) + centerOffsetY
+        300 * scaleFactor + radius * Math.sin(neo.randomAngle) + centerOffsetY
 
       ctx.beginPath()
       ctx.arc(neoX, neoY, neoRadius * scaleFactor, 0, 2 * Math.PI)
@@ -142,13 +154,13 @@ function drawMap(neoData) {
       const b = a * 0.6 // Minor axis
       const radius = Math.sqrt(
         (a * a * b * b) /
-          (a * a * Math.sin(neo.angle) * Math.sin(neo.angle) +
-            b * b * Math.cos(neo.angle) * Math.cos(neo.angle))
+          (a * a * Math.sin(neo.randomAngle) * Math.sin(neo.randomAngle) +
+            b * b * Math.cos(neo.randomAngle) * Math.cos(neo.randomAngle))
       ) // Calculate the radius of the NEO's position on the elliptical orbit
       ctx.beginPath()
       ctx.arc(
-        400 * scaleFactor + radius * Math.cos(neo.angle) + centerOffsetX, // Use the angle and radius of the orbit to calculate the position of the NEO
-        300 * scaleFactor + radius * Math.sin(neo.angle) + centerOffsetY,
+        400 * scaleFactor + radius * Math.cos(neo.randomAngle) + centerOffsetX, // Use the angle and radius of the orbit to calculate the position of the NEO
+        300 * scaleFactor + radius * Math.sin(neo.randomAngle) + centerOffsetY,
         neoRadius * scaleFactor,
         0,
         2 * Math.PI
