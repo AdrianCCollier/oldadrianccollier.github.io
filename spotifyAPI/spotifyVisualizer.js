@@ -1,3 +1,4 @@
+console.log('js connected');
 var svg = d3.select(".audio-wave")
 .attr("width", "100%")
 .attr("height", "100%");
