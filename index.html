@@ -2,27 +2,60 @@
 
 <html>
   <head>
-    <title>My Portfolio</title>
+    <title>Coding Projects</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="assets/css/main.css" />
   </head>
   <body id="top">
+
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2">
+      <div class="container">
+        <a href="#" class="navbar-brand">Spotify Audio Visualizer</a>
+
+        <!--Navbar Hamburger Menu Button-->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navmenu"></div>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a href="index.html" class="nav-link">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#aboutme" class="nav-link">About Me</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#Resume" class="nav-link">Resume</a>
+          </li>
+        </ul>
+      </div>
+      <!-- End of Navbar Container-->
+    </nav>
+
+
     <!-- Banner -->
     <!--
 				To use a video as your background, set data-video to the name of your video without
 				its extension (eg. images/banner). Your video must be available in both .mp4 and .webm
 				formats to work correctly.
 			-->
-    <section id="banner" data-video="images/banner">
+    <section id="banner" data-video="images/bokeh">
       <div class="inner">
         <header>
-          <h1>My Portfolio</h1>
+          <h1>Adrian Collier</h1>
           <p>
             Check out my coding projects<br />
-            Designed by <br />
-            <a href="https://github.com/AdrianCCollier">AdrianCCollier</a> on
-            GitHub
+            Pls hire me
           </p>
         </header>
         <a href="#main" class="more">Learn More</a>
@@ -35,17 +68,16 @@
         <!-- Boxes -->
         <div class="thumbnails">
           <div class="box">
-            <a href="https://youtu.be/s6zR2T9vn2c" class="image fit"
-              ><img src="images/todo.jpg" alt=""
+            <a href="spotifyVisualizer.html" class="image fit"
+              ><img src="images/spotifyVisualizer/2.jfif" alt=""
             /></a>
             <div class="inner">
-              <h3>To-Do List</h3>
+              <h3>Spotify Audio Visualizer</h3>
               <p>
-                Built using HTML, CSS, JavaScript, MongoDB. A Fully featured
-                To-Do List.
+                Built using HTML, CSS, JavaScript, MongoDB. Visualize your favorite songs.
               </p>
               <a
-                href="https://youtu.be/s6zR2T9vn2c"
+                href="spotifyVisualizer.html"
                 class="button fit"
                 data-poptrox="youtube,800x400"
                 >Demo</a
@@ -55,7 +87,7 @@
 
           <div class="box">
             <a href="asteroidTracker.html" class="image fit"
-              ><img src="images/mars.jpg" alt=""
+              ><img src="images/asteroidTracker/asteroidthumb.jpg" alt=""
             /></a>
             <div class="inner">
               <h3>Near Earth Asteroid Tracker</h3>
@@ -122,11 +154,7 @@
             >
           </li>
         </ul>
-        <p class="copyright">
-          &copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>.
-          Images: <a href="https://unsplash.com/">Unsplash</a>. Videos:
-          <a href="http://coverr.co/">Coverr</a>.
-        </p>
+        
       </div>
     </footer>
 

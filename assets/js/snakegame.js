@@ -26,7 +26,7 @@ class SnakePart{
 }
 
 // define snake speed
-let speed = 20;
+let speed = 7;
 
 // used to represent that there's 20 tiles across and 20 tiles down
 let tileCount = 20;
