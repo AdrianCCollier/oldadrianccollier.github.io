@@ -75,7 +75,7 @@ function drawMap(neoData) {
       2 * Math.PI
     ) // Draw the elliptical orbit line centered at (400, 300)
     ctx.stroke()
-  }
+  } // end for loop
 
   // Draw the NEOs
   ctx.fillStyle = 'white'
@@ -145,11 +145,12 @@ function drawMap(neoData) {
 
   // Click NEO and request endpoint feature
   canvas.addEventListener('click', async (event) => {
+    clearCanvas();
     // Get the position and size of the canvas element
     const rect = canvas.getBoundingClientRect()
     // Get the position of the mouse click relative to the canvas
-    const x = event.clientX - rect.left
-    const y = event.clientY - rect.top
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
 
     // Loop through the NEO data and check if the mouse click position is inside the path of any of the NEOs
     for (let i = 0; i < neoData.length; i++) {
