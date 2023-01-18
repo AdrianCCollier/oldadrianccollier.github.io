@@ -1,15 +1,20 @@
+// global array to store neo data and make its scope available to all functions. Used to pass fetch promise from the back end to front end with drawMap()
 let globalNeoData = []
 
+// This function is used to clear the canvas, this is necessary when interacting with the slider in order to remove old asteroids and their orbital lines.
 function clearCanvas() {
   const canvas = document.getElementById('neoMap');
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 } // end clearCanvas
 
-
+// front-end main function, it can be broken down into these features:
+// - draw the sun on the canvas
+// - draw earth on on the canvas
+// - 
 function drawMap(neoData) {
   globalNeoData = neoData
-  clearCanvas()
+  clearCanvas();
 
   const apiKey = 'CBQjMERq2te14gAxcxr28G49RjlyUPjGq37Fwker'
   const canvas = document.getElementById('neoMap')
@@ -22,12 +27,13 @@ function drawMap(neoData) {
   const centerOffsetX = (canvas.width - 800 * scaleFactor) / 2 // Calculate the horizontal offset to center the map
   const centerOffsetY = (canvas.height - 600 * scaleFactor) / 2 // Calculate the vertical offset to center the map
 
+  // traverse our neoData array to extract data into a variable called neo and multiply it by 2pi to make neos appear in random places throughout their orbit.  
   for (let i = 0; i < neoData.length; i++) {
     const neo = neoData[i]
     neo.randomAngle = Math.random() * 2 * Math.PI //generate random angle
   }
 
-  // Draw the Sun
+  // Here I'm drawing the sun by using the context methods of the Canvas API. Creating a circle and coloring it yellow. It can be resized with the variables.
   ctx.fillStyle = 'yellow'
   ctx.beginPath()
   ctx.arc(
@@ -39,7 +45,7 @@ function drawMap(neoData) {
   )
   ctx.fill()
 
-  // Draw Earth
+  // Here I'm drawing earth in a similar way.
   const earthRadius = 6;
   const earthX = 475 * scaleFactor + centerOffsetX
   const earthY = 300 * scaleFactor + centerOffsetY
@@ -49,11 +55,11 @@ function drawMap(neoData) {
   ctx.arc(earthX, earthY, earthRadius * scaleFactor, 0, 2 * Math.PI)
   ctx.fill()
 
-  // Draw the orbits of the NEOs
+  // Here I'm drawing the orbital lines of the neos. This is done by traversing our neoData array and extracting the data. 
   ctx.strokeStyle = 'grey'
   ctx.lineWidth = 1
   for (let i = 0; i < neoData.length; i++) {
-    const neo = neoData[i]
+    const neo = neoData[i];
     const a =
       Math.min(sunRadius + orbitOffset * i + neo.distance, maxDistance) *
       scaleFactor // Major axis
@@ -174,6 +180,8 @@ function drawMap(neoData) {
   }) // end event listener
 
   // Function to make the fetch request to the API and display the information about the NEO
+
+  // Given an API key and referenceID endpoint, we can get more information about a neo. We extract the info and store them into variables for future use
   async function displayNEOInfo(referenceId) {
     // fetch API credentials
     const apiKey = 'CBQjMERq2te14gAxcxr28G49RjlyUPjGq37Fwker'
@@ -206,14 +214,15 @@ function placeholder2() {
   console.log('placeholder')
 }
 
+// this function acts as the back-end component which makes requests to NASA's API endpoints with the API key provided by them. Specifically, we are receiving our JSON response and storing it into a data variable which is then converted into an array list of the nearest neos
 async function getNEOs(limit) {
   const apiKey = 'CBQjMERq2te14gAxcxr28G49RjlyUPjGq37Fwker'
   const endPoint = 'https://api.nasa.gov/neo/rest/v1/neo/browse'
   const url = `${endPoint}?api_key=${apiKey}&limit=${limit}`
 
   try {
-    const response = await fetch(url)
-    const data = await response.json()
+    const response = await fetch(url);
+    const data = await response.json();
 
     // Transform the data into a format that can be used by the drawMap function
     const neoData = data.near_earth_objects.map((neo) => ({
