@@ -14,21 +14,14 @@
     />
 
     <!--CSS Link-->
+
     <link rel="stylesheet" href="assets/css/spotifyVisualizer.css" />
-    
 
     <title>Spotify Audio Visualizer</title>
   </head>
   <body>
-
-    
     <!--Spotify Playback SDK-->
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
-
-    
-
-
-
 
     <!--Navbar-->
     <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-2">
@@ -64,39 +57,48 @@
     </nav>
 
     <!--Search bar feature-->
-<form class="search-form">
-  <div class="form-row d-flex">
-    <div class="col-9">
-      <input type="text" class="form-control" id="search-input" placeholder="Search for songs or artists">
-    </div>
-    <div class="col-3">
-      <button class="btn btn-outline-secondary" type="submit" id="search-button">Search</button>
-    </div>
-  </div>
-</form>
-
-
-
-
-
+    <form class="search-form">
+      <div class="form-row d-flex">
+        <div class="col-9">
+          <input
+            type="text"
+            class="form-control"
+            id="search-input"
+            placeholder="Search for songs or artists"
+          />
+        </div>
+        <div class="col-3">
+          <button
+            class="btn btn-outline-secondary"
+            type="submit"
+            id="search-button"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </form>
 
     <div class="audio-visualization-container bg-dark text-light">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h2 class="text-center my-4">Audio Visualization</h2>
-        <div class="audio-wave-container mx-auto">
-          <svg class="audio-wave"></svg>
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="text-center my-4">Audio Visualization</h2>
+            <div class="audio-wave-container mx-auto">
+              <svg class="audio-wave"></svg>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<button id="togglePlay">Toggle Play</button>
+    <div class="togglePlayModule">
+      <div class="center">
+        <button id="togglePlay">Toggle Play</button>
+      </div>
+    </div>
 
     <script src="//d3js.org/d3.v3.min.js"></script>
-    <script src="spotifyAPI/spotifyVisualizer.js"></script>
-    <script src="assets/js/spotifyVisualizer.js"></script>
-</body>
+    <script src="/assets/js/spotifyVisualizer.js"></script>
+  </body>
 </html>
