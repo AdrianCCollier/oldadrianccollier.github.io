@@ -1,4 +1,5 @@
 console.log('js connected')
+console.log('working..')
 var svg = d3.select('.audio-wave').attr('width', '100%').attr('height', '100%')
 
 var rect = svg
