@@ -9,9 +9,17 @@
 
 var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
+
+var app = express();
 var cors = require('cors');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
+var livereload = require('connect-livereload');
+app.use(livereload());
+
+// when our user is redirected to /main after succesfully logging in, render the UI page
+// var path = require('path');
+// var visualizerPath = path.join(__dirname, '../', "spotifyVisualizer.html");
 
 var client_id = 'a62cb8b39bcf46ff923442a330ef6294'; // Your client id
 var client_secret = '2c1ab41a08c347d7864c9713076a5a9e'; // Your secret
@@ -100,7 +108,7 @@ app.get('/callback', function(req, res) {
     }
 
     // redirect user to our UI page
-    res.redirect('/main');
+    res.redirect('/spotifyVisualizer');
   } else {
     // handle error, redirect to error page
     res.redirect('/error?error=' + error);
@@ -134,10 +142,9 @@ app.get('/callback', function(req, res) {
 });
 
 // main page
-app.get('/main', function(req, res) {
-  // code here
-  res.send('<h1>Welcome to the main page</h1>');
-
+app.get('/spotifyVisualizer', function(req, res) {
+  res.sendFile(__dirname + "/public/spotifyVisualizer.html");
+  
 });
 
 
