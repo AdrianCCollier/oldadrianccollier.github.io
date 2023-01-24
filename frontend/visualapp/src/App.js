@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import Footer from './components/footer';
 import SearchBar from './components/SearchBar'
 // import data from "./SearchData.json"
-import BlackBox from './components/BlackBox';
+// import BlackBox from './components/BlackBox';
 import Navbar from "./components/navbar";
 
 function App() {
