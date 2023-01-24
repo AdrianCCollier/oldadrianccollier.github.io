@@ -1,0 +1,30 @@
+body {
+  width: 100vw;
+  height: 100vw;
+}
+
+gallery {
+  width: 50%; /* adjust as needed */
+  height: 50%; /* adjust as needed */
+  border: 5px;
+  border-style: solid;
+  border-color: black;
+  display: flex; /* to align the items horizontally */
+  align-items: center; /* to center the items vertically */
+  justify-content: center; /* to center the items horizontally */
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
+}
+
+first {
+  width: 25px; /* adjust as needed */
+  height: 25px; /* adjust as needed */
+  border: 3px;
+  border-style: solid;
+  border-color: black;
+  margin-right: 10px; /* adjust as needed */
+}
