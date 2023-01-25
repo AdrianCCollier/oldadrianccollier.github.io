@@ -4,7 +4,7 @@ import Footer from './components/footer'
 import Main from './components/main'
 import Resume from './components/Resume'
 import AsteroidTracker from './components/AsteroidTracker'
-import SnakeGame from './components/snakeGame'
+import SnakeGame from './components/SnakeGame';
 import SpotifyAudioUI from './components/SpotifyAudioUI'
 import { Routes, Route } from 'react-router-dom'
 import '../src/App.css'
