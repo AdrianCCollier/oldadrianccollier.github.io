@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from './components/navbar'
-import Gallery from './components/gallery'
+import Main from './components/main'
 import Footer from './components/footer'
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Navbar />
       <h1>Hi </h1>
-      <Gallery />
+      <Main />
       <Footer />
     </div>
   )
