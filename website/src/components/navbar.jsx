@@ -21,26 +21,26 @@ function Navbar() {
       </a>
       <ul className={active}>
         <li className="nav__item">
-          <a href="../FIXME" className="nav__link">
+          <a href="/" className="nav__link">
             Home
           </a>
         </li>
-        <li className="nav__item">
+        {/* <li className="nav__item">
           <a href="../FIXME" className="nav__link">
             About Me
           </a>
-        </li>
+        </li> */}
         <li className="nav__item">
-          <a href="../FIXME" className="nav__link">
+          <a href="/resume" className="nav__link">
             Resume
           </a>
         </li>
         
-        <li className="nav__item">
-          <a href=".." className="nav__link">
+        {/* <li className="nav__item">
+          <a href="/contact" className="nav__link">
             Contact
           </a>
-        </li>
+        </li> */}
       </ul>
       <div onClick={navToggle} className={icon}>
         <div className="line1"></div>

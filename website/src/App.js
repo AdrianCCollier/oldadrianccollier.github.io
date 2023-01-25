@@ -1,17 +1,32 @@
 import React from 'react'
-import './App.css'
-import Navbar from './components/navbar'
+import Navbar from "./components/navbar"
+import Footer from "./components/footer"
 import Main from './components/main'
-import Footer from './components/footer'
+import Resume from './components/Resume';
+import AsteroidTracker from './components/AsteroidTracker'
+import SnakeGame from './components/SnakeGame';
+import SpotifyAudioUI from './components/SpotifyAudioUI';
+import {Routes, Route} from "react-router-dom";
+import '../src/App.css'
 
 function App() {
   return (
-    <div className="App">
+    <>
       <Navbar />
-      <Main />
-      <Footer />
-    </div>
-  )
-}
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/resume" element={<Resume />} />
 
-export default App
+        <Route path="/AsteroidTracker" element={<AsteroidTracker />} />
+
+        <Route path="/SpotifyAudioUI" element={<SpotifyAudioUI />} />
+
+        <Route path="/Snakegame" element={<SnakeGame />} />
+      </Routes>
+
+      <Footer />
+    </>
+  )
+};
+
+export default App;
