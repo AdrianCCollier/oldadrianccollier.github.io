@@ -1,12 +1,12 @@
 import React from 'react'
-import Navbar from "./components/navbar"
-import Footer from "./components/footer"
+import Navbar from './components/navbar'
+import Footer from './components/footer'
 import Main from './components/main'
-import Resume from './components/Resume';
+import Resume from './components/Resume'
 import AsteroidTracker from './components/AsteroidTracker'
-import SnakeGame from './components/SnakeGame';
-import SpotifyAudioUI from './components/SpotifyAudioUI';
-import {Routes, Route} from "react-router-dom";
+import SnakeGame from './components/snakeGame'
+import SpotifyAudioUI from './components/SpotifyAudioUI'
+import { Routes, Route } from 'react-router-dom'
 import '../src/App.css'
 
 function App() {
@@ -27,6 +27,6 @@ function App() {
       <Footer />
     </>
   )
-};
+}
 
-export default App;
+export default App
