@@ -14,9 +14,7 @@ function SnakeGame() {
             </a>
             <div className="inner">
               <h3>This is the snake page</h3>
-              <p>
-                ...
-              </p>
+              <p>...</p>
               <a
                 href="FIXME"
                 className="button fit"
