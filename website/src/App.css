@@ -9,10 +9,6 @@
   
 }
 
-#main {
-  background-color: black;
-}
-
 body {
   padding: 0;
   margin: 0;
@@ -82,7 +78,6 @@ a {
   transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
-  border-bottom: 1px dotted;
   outline: 0;
 }
 
@@ -252,7 +247,11 @@ header h6 + p {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  background-color: red;
+  /* background-color: black; */
+  font-family: 'Pixelated', sans-serif;
+  margin-top: 10%;
+  
+  
   
 }
 
@@ -282,8 +281,9 @@ header h6 + p {
 .box {
   border-radius: 4px;
   margin-bottom: 2em;
-  background: #2c2c32;
+  background: #131212;
   text-align: center;
+  box-shadow: 0px 0px 10px #000000;
 }
 
   .box > :last-child,
@@ -409,15 +409,17 @@ button,
   -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-  background-color: #70c7be;
-  border-radius: 4px;
-  border: 0;
-  color: #ffffff !important;
+  transition: all 0.2s ease-in-out;
+  background-color: #268748;
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  
   cursor: pointer;
   display: inline-block;
   font-weight: 400;
   height: 2.85em;
+  width: 100%;
   line-height: 2.95em;
   padding: 0 1.5em;
   text-align: center;
@@ -430,7 +432,8 @@ button,
   input[type="button"]:hover,
   button:hover,
   .button:hover {
-    background-color: #82cec6;
+    background-color: #27b1a3;
+    box-shadow: 0px 0px 10px #27b1a3;
   }
 
   input[type="submit"]:active,
@@ -439,6 +442,7 @@ button,
   button:active,
   .button:active {
     background-color: #5ec0b6;
+    box-shadow: 0px 0px 20px #5ec0b6;
   }
 
   input[type="submit"].icon,
@@ -481,6 +485,7 @@ button,
   button.big,
   .button.big {
     font-size: 1.35em;
+     padding: 15px 25px;
   }
 
   input[type="submit"].disabled, input[type="submit"]:disabled,

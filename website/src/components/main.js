@@ -1,5 +1,5 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 const Main = () => {
   return (
     <div id="main">
@@ -7,9 +7,9 @@ const Main = () => {
         <div className="thumbnails">
           
           <div className="box">
-            <a href="/" className="image fit">
-            <img src={require('../components/images/asteroid.jpg')} alt="Asteroid" />
-            </a>
+          <Link to="../" className="image fit">
+              <img src={require('../components/images/asteroid.jpg')} alt="Asteroid" />
+            </Link>
             <div className="inner">
               <h3>Spotify Audio Visualizer</h3>
               <p>
@@ -50,7 +50,7 @@ const Main = () => {
               </a>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>

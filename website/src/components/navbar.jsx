@@ -17,7 +17,7 @@ function Navbar() {
   return (
     <nav className="nav">
       <a href="../FIXME" className="nav__brand">
-        Adrian Collier
+        
       </a>
       <ul className={active}>
         <li className="nav__item">
@@ -27,21 +27,17 @@ function Navbar() {
         </li>
         <li className="nav__item">
           <a href="../FIXME" className="nav__link">
-            About
+            About Me
           </a>
         </li>
         <li className="nav__item">
           <a href="../FIXME" className="nav__link">
-            Portfolio
+            Resume
           </a>
         </li>
+        
         <li className="nav__item">
-          <a href="../FIXME" className="nav__link">
-            Skills
-          </a>
-        </li>
-        <li className="nav__item">
-          <a href="../F" className="nav__link">
+          <a href=".." className="nav__link">
             Contact
           </a>
         </li>
