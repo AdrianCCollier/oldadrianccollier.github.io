@@ -1,19 +1,15 @@
-import { React } from 'react'
+import React from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Navbar from './components/navbar'
-import Gallery from './components/Gallery'
+import Gallery from './components/gallery'
 import Footer from './components/footer'
-// import SearchBar from './components/SearchBar'
-// // import data from "./SearchData.json"
-// import BlackBox from './components/BlackBox'
-
 
 function App() {
   return (
     <div className="App">
       <Navbar />
-      <h1>yoooooooooooooooooooooooooooooooooooooooooooooooooooo </h1>
+      <h1>Hi </h1>
       <Gallery />
       <Footer />
     </div>
