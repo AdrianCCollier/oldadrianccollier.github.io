@@ -1,15 +1,17 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import snakeGame from './snakeGame'
+import {Routes, Route} from "react-router-dom";
+
 const Main = () => {
   return (
     <div id="main">
       <div className="inner">
         <div className="thumbnails">
           
-          <div className="box">
-          <Link to="../" className="image fit">
-              <img src={require('../components/images/asteroid.jpg')} alt="Asteroid" />
-            </Link>
+        <div className="box">
+            <a href="/" className="image fit">
+            <img src={require('../components/images/asteroid.jpg')} alt="Asteroid" />
+            </a>
             <div className="inner">
               <h3>Spotify Audio Visualizer</h3>
               <p>
@@ -20,6 +22,10 @@ const Main = () => {
               </a>
             </div>
           </div>
+
+
+
+          
 
           <div className="box">
             <a href="/" className="image fit">
