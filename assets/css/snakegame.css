@@ -136,6 +136,14 @@ body {
 	line-height: 1;
 }
 
+#game-container{
+	background: ;
+	border-style: solid;
+	border-width: 10px;
+	border-color: red;
+}
+
+
 #home-button {
 	position: absolute;
 	font-family: 'Arcade', sans-serif;
@@ -1299,7 +1307,6 @@ button.style3:active,
 
 }
 
-/* Poptrox */
 
 .poptrox-popup {
 	-moz-box-sizing: content-box;
@@ -1371,7 +1378,7 @@ button.style3:active,
 
 }
 
-/* Banner */
+
 
 #banner {
 	-moz-align-items: center;
@@ -1554,7 +1561,7 @@ body.is-loading #banner:before {
 	opacity: 1;
 }
 
-/* Main */
+
 
 #main {
 	padding: 4em 0 2em 0;
@@ -1583,7 +1590,7 @@ body.is-loading #banner:before {
 
 }
 
-/* Footer */
+
 
 #footer {
 	padding: 4em 0 2em 0;

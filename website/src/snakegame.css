@@ -1,0 +1,70 @@
+
+
+.game-container{
+display: flex;
+align-items: center;
+justify-content: center;
+position: absolute;
+border-style: dotted;
+border-color: rgb(255, 255, 255);
+height: 80%;
+width: 100%;
+margin-top: 5px;
+margin-bottom: 5px;
+} 
+
+.game {
+	box-shadow: black 20px 10px 50px;
+	border-color: #FF00FF;
+	border-width: 10px;
+	border-style: solid;
+	position: relative;
+		z-index: 0;
+		top: 5%;
+}
+
+/* .restart-button {
+		display: inline-block;
+		position: absolute;
+		display: none;
+		z-index: 2;
+		font-family: 'Arcade', sans-serif;
+		font-size: 23px;
+		font-weight: bold;
+		letter-spacing: 2px;
+		color: #A053FF;
+		text-shadow: 0 0 10px #A053FF;
+		top: 60%;
+		left: 39%;
+
+		border-style: solid;
+		border-color: #6a5e79;
+		border-width: 2px;
+		border-radius: 10px;
+		padding: 0px 20px;
+} */
+
+
+/* @-ms-viewport {
+	width: device-width;
+} */
+
+/* .title {
+	position: absolute;
+	z-index: 1;
+	top: -10%;
+	left: 43%;
+	right: 0;
+	bottom: 0;
+	font-family: 'Audiowide', sans-serif;
+	font-size: 40px;
+	letter-spacing: 2px;
+	color: #A053FF;
+	text-shadow: 0 0 10px #A053FF;
+
+} */
+
+
+
+
+

@@ -1,33 +1,18 @@
-import React from 'react'
-
-function SnakeGame() {
+import React from 'react';
+import '../snakegame.css';
+const SnakeGame = () => {
   return (
-    <div id="main">
-      <div className="inner">
-        <div className="thumbnails">
-          <div className="box">
-            <a href="/snakeGame" className="image fit">
-              <img
-                src={require('../components/images/asteroid.jpg')}
-                alt="Asteroid"
-              />
-            </a>
-            <div className="inner">
-              <h3>This is the snake page</h3>
-              <p>...</p>
-              <a
-                href="FIXME"
-                className="button fit"
-                data-poptrox="youtube,800x400"
-              >
-                Demo
-              </a>
-            </div>
-          </div>
-        </div>
+    <div>
+      <div className="game-container">
+        {/* <div className="title">Snek</div> */}
+        <canvas className="game" width="800" height="400"></canvas>
       </div>
+
+      {/* <button className="restart-button">Play Again</button> */}
+      {/* <script src="assets/js/snakegame.js"></script> */}
     </div>
   )
 }
 
-export default SnakeGame
+export default SnakeGame;
+
