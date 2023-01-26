@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   font-family: 'Nunito', sans-serif;
-  background-image: linear-gradient(90deg, #272529, #8820dd);
+  
   
 }
 
@@ -281,9 +281,13 @@ header h6 + p {
 .box {
   border-radius: 4px;
   margin-bottom: 2em;
+  
   background: #131212;
   text-align: center;
   box-shadow: 0px 0px 10px #000000;
+  /* border-color: black;
+  border-style: solid;
+  border-width: 10px; */
 }
 
   .box > :last-child,
