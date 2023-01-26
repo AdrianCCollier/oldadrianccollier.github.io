@@ -1,6 +1,4 @@
 import React from 'react';
-// import snakeGame from './snakeGame'
-// import {Routes, Route} from "react-router-dom";
 
 const Main = () => {
   return (
@@ -17,7 +15,7 @@ const Main = () => {
             <div className="inner">
               <h3>Near Earth Asteroid Tracker UI</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt asperiores consequuntur fuga 
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
               </p>
               <a
                 href="/AsteroidTracker"

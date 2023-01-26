@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
 export const FooterWrapper = styled.footer`
-  background: rgb(0, 33, 65);
+  background: rgb(0, 0, 0);
   color: #fff;
   padding: 2rem 0;
   text-align: center;
   position: fixed;
   bottom: 0;
   width: 100%;
-`;
+`
 
 export const FooterLinks = styled.div`
   display: flex;
