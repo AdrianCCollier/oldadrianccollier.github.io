@@ -85,7 +85,7 @@ time,
 mark,
 audio,
 video {
-	margin: 0;
+	/* margin: 0;
 		padding: 0;
 		border: 0;
         flex-direction: column;
@@ -93,7 +93,7 @@ video {
         align-items: center;
 		font-size: 100%;
 		font: inherit;
-		padding: 0;
+		padding: 0; */
 	margin: auto;
 	display: block;
 	width: 800px;
@@ -122,60 +122,6 @@ section {
 body {
 	line-height: 1;
 }
-
-.navbar {
-    transition: all 0.4s;
-}
-
-.navbar .nav-link {
-    color: #fff;
-}
-
-.navbar .nav-link:hover,
-.navbar .nav-link:focus {
-    color: #fff;
-    text-decoration: none;
-}
-
-.navbar .navbar-brand {
-    color: #fff;
-}
-
-
-/* Change navbar styling on scroll */
-.navbar.active {
-    background: #fff;
-    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.navbar.active .nav-link {
-    color: #555;
-}
-
-.navbar.active .nav-link:hover,
-.navbar.active .nav-link:focus {
-    color: #555;
-    text-decoration: none;
-}
-
-.navbar.active .navbar-brand {
-    color: #555;
-}
-
-
-/* Change navbar styling on small viewports */
-@media (max-width: 991.98px) {
-    .navbar {
-        background: #fff;
-    }
-
-    .navbar .navbar-brand, .navbar .nav-link {
-        color: #555;
-    }
-}
-
-
-
 
 
 #home-button {
@@ -233,7 +179,7 @@ body {
 		font-size: 23px;
 		font-weight: bold;
 		letter-spacing: 2px;
-		color: #A053FF;
+		color: #5e2993;
 		text-shadow: 0 0 10px #A053FF;
 		top: 60%;
 		left: 39%;
