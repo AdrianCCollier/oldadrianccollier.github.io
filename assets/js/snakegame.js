@@ -1,3 +1,14 @@
+$(function () {
+    $(window).on('scroll', function () {
+        if ( $(window).scrollTop() > 10 ) {
+            $('.navbar').addClass('active');
+        } else {
+            $('.navbar').removeClass('active');
+        }
+    });
+});
+
+
 // Get a reference to the canvas element
 var canvas = document.getElementById('game');
 
@@ -156,30 +167,14 @@ context.fill();
 }
 
 function drawApple() {
-  // Create a new Image object
-  let broccoliImage = new Image()
-
-  // Set the source of the image to the URL of your broccoli image
-  broccoliImage.src = 'images/apple.png'
-
-  // Draw the broccoli image on the canvas at the position specified by the appleX and appleY variables
-  context.drawImage(
-    broccoliImage,
-    appleX * tileCount,
-    appleY * tileCount,
-    tileSize,
-    tileSize
-  )
-}
-
-function sayHi() {
-    console.log('hi');
-}
-
-sayHi();
-
-
-
+    context.beginPath();
+    context.arc(appleX * tileCount + 
+    tileCount / 2, appleY * tileCount + tileCount / 2, 
+    tileCount / 2 - 2, 0, 2 * Math.PI);
+    context.fillStyle = 'red';
+    context.fill();
+  }
+  
 
 function isGameOver() {
     let gameOver = false;

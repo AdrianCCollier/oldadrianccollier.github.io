@@ -2,15 +2,6 @@
 @import url(font-awesome.min.css);
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Passion+One:400");
 
-/*
-	Full Motion by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
-*/
-
-/* Reset, allow all browsers to display properties the same way, overwrite normal CSS */
-
-
 
 
 html,
@@ -94,7 +85,7 @@ time,
 mark,
 audio,
 video {
-	/* margin: 0;
+	margin: 0;
 		padding: 0;
 		border: 0;
         flex-direction: column;
@@ -102,11 +93,7 @@ video {
         align-items: center;
 		font-size: 100%;
 		font: inherit;
-		vertical-align: baseline; */
-
-
-
-	padding: 0;
+		padding: 0;
 	margin: auto;
 	display: block;
 	width: 800px;
@@ -136,12 +123,59 @@ body {
 	line-height: 1;
 }
 
-#game-container{
-	background: ;
-	border-style: solid;
-	border-width: 10px;
-	border-color: red;
+.navbar {
+    transition: all 0.4s;
 }
+
+.navbar .nav-link {
+    color: #fff;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar .navbar-brand {
+    color: #fff;
+}
+
+
+/* Change navbar styling on scroll */
+.navbar.active {
+    background: #fff;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.active .nav-link {
+    color: #555;
+}
+
+.navbar.active .nav-link:hover,
+.navbar.active .nav-link:focus {
+    color: #555;
+    text-decoration: none;
+}
+
+.navbar.active .navbar-brand {
+    color: #555;
+}
+
+
+/* Change navbar styling on small viewports */
+@media (max-width: 991.98px) {
+    .navbar {
+        background: #fff;
+    }
+
+    .navbar .navbar-brand, .navbar .nav-link {
+        color: #555;
+    }
+}
+
+
+
 
 
 #home-button {

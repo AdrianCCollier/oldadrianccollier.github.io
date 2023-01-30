@@ -317,7 +317,7 @@
 		-webkit-flex-wrap: wrap;
 		-ms-flex-wrap: wrap;
 		flex-wrap: wrap;
-		background-color: red;
+		
 		
 	}
 
@@ -852,7 +852,7 @@
 		}
 
 /* Table */
-
+/* 
 	.table-wrapper {
 		-webkit-overflow-scrolling: touch;
 		overflow-x: auto;
@@ -917,7 +917,7 @@
 
 			table.alt tfoot {
 				border-top: 0;
-			}
+			} */
 
 /* Button */
 
@@ -1370,9 +1370,12 @@
 
 	#footer {
 		padding: 4em 0 2em 0;
-		background-color: #0b0a0a;
+		background-color: #03093d;
 		text-align: center;
 	}
+
+
+	
 
 		#footer .inner {
 			width: 50%;
@@ -1395,13 +1398,7 @@
 
 			}
 
-		#footer .copyright {
-			color: rgba(13, 12, 12, 0.5);
-			font-size: 0.9em;
-			margin: 0 0 2em 0;
-			padding: 0;
-			text-align: center;
-		}
+		
 
 		@media screen and (max-width: 736px) {
 
