@@ -34,14 +34,14 @@ body {
     grid-template-rows: repeat(5, 1fr);
     grid-gap: 10px;
 }
-/* #button-container button {
+#button-container button {
     width: auto;
     height: auto;
     border: solid black 5px;
     border-radius: 50%;
     padding: 2px;
     box-sizing: border-box;
-} */
+}
 
 
 
