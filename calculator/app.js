@@ -1,12 +1,5 @@
-const buttonContainer = document.getElementById("button-container");
+const btnSeven = document.getElementById('btn-seven ');
 
-for(let i = 0; i < 20; i++) {
-
-    let button = document.createElement("button");
-
-    button.textContent = "Button " + (i + 1);
-    button.id = "button" + (i + 1);
-
-    buttonContainer.appendChild(button);
-
-} // end for 
+btnSeven.addEventListener('click', () => {
+    console.log('yo');
+});

@@ -3,6 +3,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content:center;
+    background-color: rgb(82, 75, 75);
 }
 
 #calculator {
@@ -25,21 +26,23 @@ body {
 }
 
 #button-container {
-    margin: 2px;
-    width: 100%;
-    height:100%;
+    margin: 5%;
+    width: 90%;
+    height: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    
     grid-gap: 10px;
 }
-
-#button {
-    width: 10%;
-    height: 30px;
+/* #button-container button {
+    width: auto;
+    height: auto;
     border: solid black 5px;
-    border-radius: 10px;
+    border-radius: 50%;
+    padding: 2px;
+    box-sizing: border-box;
+} */
 
-    
-}
+
+
+
