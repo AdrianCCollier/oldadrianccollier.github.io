@@ -14,7 +14,17 @@ close_btn.addEventListener('click', function () {
 
 
 
-// Other
+
+
+
+
+
+
+
+
+
+
+// Other jQuery
 (function($) {
 
 	skel.breakpoints({

@@ -9,12 +9,6 @@ const Footer = () => {
         <a href="https://github.com/adrianccollier">
           <FaGithub size={20} />
         </a>
-        {/* <a href="https://www.facebook.com/adrian.collier.71">
-          <FaFacebook size={20} />
-        </a>
-        <a href="https://www.instagram.com/adrianccollier/">
-          <FaInstagram size={20} />
-        </a> */}
         <a href="mailto:adrianccollier@gmail.com">
           <FaEnvelope size={20} />
         </a>
