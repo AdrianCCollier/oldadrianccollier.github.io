@@ -1,9 +1,20 @@
-/*
-	Full Motion by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
-*/
 
+// Navbar DOM
+let menus = document.querySelector('.navbar')
+let menus_btn = document.querySelector('.menu-btn')
+let close_btn = document.querySelector('.close-btn')
+
+menus_btn.addEventListener('click', function () {
+  menus.classList.add('active2')
+})
+
+close_btn.addEventListener('click', function () {
+  menus.classList.remove('active2')
+})
+
+
+
+// Other
 (function($) {
 
 	skel.breakpoints({
