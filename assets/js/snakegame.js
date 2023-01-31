@@ -26,10 +26,10 @@ class SnakePart {
 }
 
 // define snake speed
-let speed = 2
+let speed = 7;
 
 // used to represent that there's 20 tiles across and 20 tiles down
-let tileCount = 20
+let tileCount = 20;
 
 // define the size of each individual tile so that food doesn't take up so much space
 let tileSize = canvas.width / tileCount - 2
