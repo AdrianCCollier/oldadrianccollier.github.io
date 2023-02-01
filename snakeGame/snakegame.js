@@ -1,7 +1,3 @@
-
-
-
-
 // Get a reference to the canvas element
 var canvas = document.getElementById('game')
 
