@@ -158,7 +158,7 @@ section {
 
 /* End Navbar */
 
-/* html,
+html,
 body,
 div,
 span,
@@ -245,7 +245,7 @@ video {
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	left: 0;
+	/* left: 0; */
 	right: 0; 
 }
 
@@ -265,10 +265,10 @@ section {
 
 body {
 	line-height: 1;
-} */
+}
 
 /* Navbar only */
-body {
+/* body {
 	height: 100vh;
 	width: 100vw;
 	overflow: hidden;
@@ -424,7 +424,7 @@ body {
 	  letter-spacing: 0.9rem;
 	  text-align: center;
 	}
-  }
+  } */
   
   /* End Navbar */
 
@@ -435,29 +435,36 @@ body {
   margin: 0;
 } */
 
-/* #game-container {
+#game-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* text-align: center; */
   height: 100vh;
+  width: 100vw;
+  background-color: black;
   
-} */
+}
 
-
-/* #title {
+#title {
   position: absolute;
+  text-align: center;
   z-index: 1;
-  top: -10%;
-  left: 43%;
+  top: 0;
+  left: 0;
   right: 0;
-  bottom: 0;
+  width: 100%;
   font-family: 'Audiowide', sans-serif;
   font-size: 40px;
   letter-spacing: 2px;
   color: #a053ff;
   text-shadow: 0 0 10px #a053ff;
-} */
-/* #game {
+}
+
+
+
+
+#game {
   box-shadow: black 5px 5px 50px;
   border-color: #ff00ff;
   border-width: 10px;
@@ -466,15 +473,15 @@ body {
   width: 700px;
   z-index: 0;
   top: 5%;
-} */
+}
 
 
-/* #restart-container{
+#restart-container{
 	background-color: red;
 	height: 100px;
 	width: 100px;
-} */
-/* #restart-button {
+}
+#restart-button {
   display: inline-block;
   position: absolute;
   display: none;
@@ -493,7 +500,7 @@ body {
   border-width: 2px;
   border-radius: 10px;
   padding: 0px 20px;
-} */
+}
 
 /* ol,
 ul {
@@ -1426,7 +1433,7 @@ table.alt tfoot {
 
 /* Button */
 
-/* input[type='submit'],
+input[type='submit'],
 input[type='reset'],
 input[type='button'],
 button,
@@ -1585,7 +1592,7 @@ button.style3:active,
   .button {
     padding: 0;
   }
-} */
+}
 
 /* .poptrox-popup {
 	-moz-box-sizing: content-box;
