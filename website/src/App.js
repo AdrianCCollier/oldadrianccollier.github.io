@@ -7,7 +7,9 @@ import AsteroidTracker from './components/AsteroidTracker'
 import SnakeGame from './components/snakeGame';
 import SpotifyAudioUI from './components/SpotifyAudioUI'
 import { Routes, Route } from 'react-router-dom'
-import '../src/App.css'
+import '../src/App.css';
+
+
 
 function App() {
   return (
