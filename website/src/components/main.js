@@ -15,7 +15,9 @@ const Main = () => {
             <div className="inner">
               <h3>Near Earth Asteroid Tracker UI</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                Built with React and D3.js, this web app uses NASA's 
+                NeoWS API to track the nearest asteroids to Earth and 
+                visualizes the solar system with their coordinates with D3.js
               </p>
               <a
                 href="/AsteroidTracker"
