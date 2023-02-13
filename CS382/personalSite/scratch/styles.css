@@ -70,7 +70,7 @@ main {
     align-items: center;
     justify-content: center;
     width: 200px;
-    height: 250px;
+    height: 200px;
     margin-right: 20px;
     border: 2px solid white;
     overflow: hidden;
@@ -87,7 +87,7 @@ main {
 .gallery-container{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content:center;
     align-items: center;
     margin-top: 20px;
     background-color: white;
@@ -102,6 +102,20 @@ main {
     border: 5px solid black;
     
 }
+
+.project-image {
+    height: 40%;
+    width: 100%;
+    
+}
+
+.project-inner {
+    background-color: black;
+    height: 60%;
+    width: 100%;
+}
+
+
 
 footer {
     background-color: #2b2b2b;

@@ -95,7 +95,7 @@ body {
   -ms-overflow-style: scrollbar;
 }
 
-/* Box Model */
+/* My Project Boxes */
 
 *,
 *:before,
@@ -298,36 +298,6 @@ hr.major {
   text-align: right;
 }
 
-/* Section/Article */
-
-section.special,
-article.special {
-  text-align: center;
-}
-
-header p {
-  color: rgba(255, 255, 255, 0.5);
-  position: relative;
-  margin: 0 0 1.5em 0;
-}
-
-header h2 + p {
-  font-size: 1.25em;
-  margin-top: -1em;
-}
-
-header h3 + p {
-  font-size: 1.1em;
-  margin-top: -0.8em;
-}
-
-header h4 + p,
-header h5 + p,
-header h6 + p {
-  font-size: 0.9em;
-  margin-top: -0.6em;
-}
-
 /* Box */
 
 body {
@@ -416,26 +386,7 @@ body {
   padding: 0;
 }
 
-/* Icon */
 
-.icon {
-  text-decoration: none;
-  border-bottom: none;
-  position: relative;
-}
-
-.icon:before {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-family: FontAwesome;
-  font-style: normal;
-  font-weight: normal;
-  text-transform: none !important;
-}
-
-.icon > .label {
-  display: none;
-}
 
 /* Image */
 
@@ -754,6 +705,11 @@ button.style3:active,
     width: 95%;
   }
 }
+
+
+
+
+
 
 /* Footer Code */
 
