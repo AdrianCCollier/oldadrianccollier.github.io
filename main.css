@@ -1,3 +1,50 @@
+/* About me container styling */
+
+.about-container{
+    display: flex;
+}
+
+.about-me {
+    text-align: left;
+    padding: 20px;
+    border: 2px solid yellow;
+}
+
+.about-me h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.about-me p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 300px;
+    height: 200px;
+    margin-right: 20px;
+    border: 2px solid white;
+    overflow: hidden;
+}
+
+.picture img {
+    width: 100%;
+}
+
+.bio {
+    flex: 1;
+}
+
+
+
+
+/* Navbar Styling */
+
 *,
 *::after,
 *::before {
