@@ -124,88 +124,44 @@ a {
   transform: rotate(45deg) translate(-4px, -5px);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
-.App {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Nunito', sans-serif;
-}
-
-body {
-  padding: 0;
-  margin: 0;
-  -ms-overflow-style: scrollbar;
-}
-
 /* My Project Boxes */
-
-*,
-*:before,
-*:after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-body,
-input,
-select,
-textarea {
+body {
   color: rgba(255, 255, 255, 0.75);
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 14pt;
-  font-weight: 300;
   line-height: 1.65;
 }
 
 @media screen and (max-width: 1680px) {
-  body,
-  input,
-  select,
-  textarea {
+  body {
     font-size: 11pt;
   }
 }
 
 @media screen and (max-width: 1280px) {
-  body,
-  input,
-  select,
-  textarea {
+  body {
     font-size: 11pt;
   }
 }
 
 @media screen and (max-width: 980px) {
-  body,
-  input,
-  select,
-  textarea {
+  body {
     font-size: 12pt;
   }
 }
 
 @media screen and (max-width: 736px) {
-  body,
-  input,
-  select,
-  textarea {
+  body {
     font-size: 12pt;
   }
 }
 
 @media screen and (max-width: 480px) {
-  body,
-  input,
-  select,
-  textarea {
+  body {
     font-size: 12pt;
   }
 }
 
-a {
+/* a {
   -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
@@ -213,9 +169,9 @@ a {
   color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   outline: 0;
-}
+} */
 
-a:hover {
+/* a:hover {
   color: #fff;
   border: none;
 }
@@ -224,12 +180,12 @@ strong,
 b {
   color: #fff;
   font-weight: 400;
-}
+} */
 
-em,
+/* em,
 i {
   font-style: italic;
-}
+} */
 
 p {
   margin: 0 0 2em 0;
@@ -345,33 +301,23 @@ hr.major {
 /* Box */
 
 body {
-  background-color: rgb(35, 33, 37)
+  background-color: rgb(11, 10, 11);
+  
 }
 
 .thumbnails {
-  display: -moz-flex;
-  display: -webkit-flex;
-  display: -ms-flex;
   display: flex;
-  -moz-align-items: stretch;
-  -webkit-align-items: stretch;
-  -ms-align-items: stretch;
   align-items: stretch;
-  -moz-justify-content: center;
-  -webkit-justify-content: center;
-  -ms-justify-content: center;
   justify-content: center;
-  -moz-flex-wrap: wrap;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  font-family: 'Pixelated', sans-serif;
-  margin-top: 15%;
+  margin-top: 5%;
+  margin-bottom: 10%;
 }
 
 .thumbnails .box {
-  margin: 0 1em 2em 1em;
+  margin: 0em 1em 2em 1em;
   width: 30%;
+  background-color: black;
 }
 
 @media screen and (max-width: 1280px) {
@@ -391,10 +337,9 @@ body {
 .box {
   border-radius: 4px;
   margin-bottom: 2em;
-
   background: #131212;
   text-align: center;
-  box-shadow: 0px 0px 10px #000000;
+  box-shadow: 0px 0px 15px #000000;
 }
 
 .box > :last-child,
