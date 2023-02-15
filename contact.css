@@ -82,38 +82,65 @@ a {
   transform: rotate(45deg) translate(-4px, -5px);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
-.App {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Nunito', sans-serif;
-}
-
-body {
-  padding: 0;
-  margin: 0;
-  -ms-overflow-style: scrollbar;
-}
 
 /* Contact styling */
 
-
+/* Contact styling */
 main {
-    background-color: red;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-color: #000000;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-container {
+  background-color: #ffffff;
+  width: 400px;
+  padding: 20px;
+  margin-bottom: 15%;
+}
+
+h2 {
+  color: #000000;
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
 }
 
 table {
-    border: black solid 3px;
-    width: 50%;
-    margin-bottom: 50px;
+  background-color: #fff;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 }
+
+th, td {
+  padding: 10px;
+  font-size: 1.2em;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+i {
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover, i:hover {
+  color: #fff;
+  background-color: #333;
+}
+
+
+
+
+
 
 /* Footer Code */
 
