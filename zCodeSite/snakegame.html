@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Font-awesome import for footer-->
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+
+
+    <!-- Actual CSS for this this page-->
+    <link rel="stylesheet" href="/zCodeSite/snakegame.css">
+    <title>Snek</title>
+</head>
+<body>
+
+    
+      <!--Navbar-->
+      <nav class="nav">
+      <a href="/" class="nav__brand"></a>
+      <ul class="nav__menu">
+        <li class="nav__item">
+          <a href="/" class="nav__link">Home</a>
+        </li>
+        <li class="nav__item">
+          <a href="/zCodeSite/contact.html" class="nav__link">Contact</a>
+        </li>
+      </ul>
+      <div class="nav__toggler">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+      </div>
+    </nav>
+
+    <!-- Main body-->
+    <main>
+
+      <div id="title">Snek</div>
+    <div id="game-container">
+        
+        <canvas id="game" width="400" height="400"></canvas>
+        
+        <button class="button" id="restart-button">Play Again</button>
+        
+        
+    </div>
+      
+    </main>
+    
+      <!--Footer-->
+<footer id="footerWrapper">
+    <div id="footerLinks">
+      <a href="mailto:adrianccollier@gmail.com"><i class="fa-sharp fa-solid fa-envelope fa-xl"></i></a>
+      <a href="https://github.com/AdrianCCollier"><i class="fa-brands fa-github fa-xl"></i></a> 
+      <a href="./Adrian Collier Resume.pdf"><i class="fa-solid fa-download fa-xl" alt="Download Resume"></i></a> 
+    </div>
+</footer>
+
+
+<script src="/zCodeSite/snakegame.js"></script>
+</body>
+</html>

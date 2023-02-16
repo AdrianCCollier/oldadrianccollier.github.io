@@ -1,0 +1,218 @@
+/* Navbar Styling */
+*,
+*::after,
+*::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6rem;
+  overflow: hidden;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: rgb(204, 204, 204);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 7.5vh;
+  background: rgb(0, 0, 0);
+}
+.nav__brand {
+  text-transform: uppercase;
+}
+
+.nav__menu {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 3rem;
+}
+.nav__toggler {
+  display: none;
+}
+.nav__toggler div {
+  width: 2.5rem;
+  height: 0.2rem;
+  margin: 0.4rem;
+  background: rgb(204, 204, 204);
+  transition: 0.3s ease-in;
+}
+
+@media screen and (max-width: 768px) {
+  .nav__toggler {
+    display: block;
+    cursor: pointer;
+  }
+  .nav__menu {
+    position: fixed;
+    top: 7vh;
+    right: 0;
+    height: 93vh;
+    width: 50vw;
+    background: rgb(0, 33, 65);
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: 0.5s ease-in;
+  }
+}
+/* Active Class */
+.nav__active {
+  transform: translateX(0%);
+}
+
+/* Toggle Icon Animation */
+
+.toggle .line1 {
+  transform: rotate(-45deg) translate(-4px, 5px);
+}
+.toggle .line2 {
+  opacity: 0;
+}
+.toggle .line3 {
+  transform: rotate(45deg) translate(-4px, -5px);
+}
+
+/* Contact styling */
+main {
+  background-color: #000000;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  
+}
+
+
+#game-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* text-align: center; */
+  height: 80vh;
+  width: 100vw;
+  margin-bottom: 10%;
+  background-color: black;
+  overflow: hidden;
+  
+  
+}
+
+#title {
+  position: absolute;
+  text-align: center;
+  z-index: 5;
+  top: -20%;
+  left: 0;
+  right: 0;
+  background-color: white;
+  width: 100%;
+  font-family: 'Audiowide', sans-serif;
+  font-size: 40px;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-shadow: 0 0 10px #a053ff;
+}
+
+
+
+
+#game {
+  box-shadow: black 5px 5px 50px;
+  border-color: #ff00ff;
+  border-width: 10px;
+  border-style: solid;
+  position: relative;
+  width: 700px;
+  z-index: 0;
+  top: 5%;
+}
+
+
+#restart-container{
+  height: 100%;
+	width: 100%;
+}
+
+
+.button {
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  position: absolute;
+  background-color: #268748;
+  color: #ffffff;
+  display: none;
+  text-shadow: 0 0 10px #000000;
+  border-style: solid;
+  border-color: #000000;
+  border-width: 2px;
+  border-radius: 10px;
+  padding: 8px 20px;
+  top: 65%; 
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 16px;
+  letter-spacing: 2px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 10px;
+  line-height: 2.95em;
+}
+
+.button:hover {
+  background-color: #27b1a3;
+  box-shadow: 0px 0px 10px #27b1a3;
+}
+
+.button.fit {
+  display: block;
+  margin: 0 0 1em 0;
+  width: 100%;
+}
+
+
+/* Footer Code */
+
+#footerWrapper {
+  /* background: #21293a; */
+  background: #000000;
+  color: #fff;
+  padding: 2.5rem 0;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+#footerLinks{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+#footerLinks a {
+    color: #fff;
+    transition: color 0.2s ease-in-out;
+}
+
+#footerLinks a:hover {
+      color: #1db954;
+}
+
+#footerText {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+}
