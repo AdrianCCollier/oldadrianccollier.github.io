@@ -1,0 +1,38 @@
+body {
+    background-color: black;
+    height: 100vh;
+    width: 100vw;
+
+}
+h1{
+    text-align: center;
+    color: white;
+}
+
+#main {
+    height: 100vh;
+    width: 100vw;
+    background-color: blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#status-container {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#status-button {
+    width: 100px;
+    height: 100px;
+}
+
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+}

@@ -1,0 +1,181 @@
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: linear-gradient(45deg, #3b0154, #7803b3);
+  color: white;
+  padding: 0 16rem;
+  height: 3rem;
+  font-family: 'Press Start 2P', sans-serif;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  min-width: 768px;
+}
+
+.menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  margin-left: 1.5rem;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: 'Source Sans Pro', sans-serif;
+  line-height: 1.65;
+  letter-spacing: 1.5px;
+}
+
+.menu li a:hover {
+  color: rgb(41, 168, 32);
+}
+
+body {
+  overflow: hidden;
+}
+
+/* Contact styling */
+main {
+  background-color: #000000;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-container {
+  background-color: #ffffff;
+  width: 400px;
+  padding: 20px;
+  margin-bottom: 10%;
+}
+
+h2 {
+  color: #000000;
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+table {
+  background-color: #fff;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 10px;
+  font-size: 1.2em;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+i {
+  margin-right: 10px;
+  font-size: 1.2em;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+
+a:hover, i:hover {
+  color: #fff;
+  background-color: #333;
+}
+
+/* Footer Code */
+
+#footerWrapper {
+  /* background: #21293a; */
+ background: #000000;
+  color: #fff;
+  padding: 2.5rem 0;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+#footerLinks{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+#footerLinks a {
+    color: #fff;
+    transition: color 0.2s ease-in-out;
+}
+
+#footerLinks a:hover {
+      color: #1db954;
+}
+
+#footerText {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+}
+
+/* Media Queries for both mobile and desktop */
+
+/* Mobile */
+@media (max-width: 767px) {
+
+  /* Navbar */
+  nav {
+    padding: 0 2rem;
+  }
+  
+  /* Contact card */
+  .contact-container {
+    width: 90%;
+    margin-bottom: 20%;
+    padding: 10px;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  th, td {
+    font-size: 1em;
+  }
+}
+
+/* Desktops */
+@media (min-width: 768px) {
+
+  /* Navbar */
+  nav {
+    padding: 0 16rem;
+    min-width: 768px;
+  }
+
+  /* Contact card */
+  .contact-container {
+    width: 400px;
+    margin-bottom: 15%;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  th, td {
+    font-size: 1.2em;
+  }
+}

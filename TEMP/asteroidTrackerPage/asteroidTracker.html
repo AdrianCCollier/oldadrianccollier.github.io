@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Font-awesome import for footer-->
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+
+    <!--Font awesome import for contact icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all"/>
+
+    <!-- Actual CSS for this this page-->
+    <link rel="stylesheet" href="./asteroidTracker.css">
+    <title>Near Earth Asteroid Tracker UI</title>
+</head>
+<body>
+<!--Navbar-->
+  <nav>
+    <ul class="menu">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../contactPage/contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="grid-container">
+    <div class="canvas-grid">
+      <div class="message">
+        <h2>Hi there, this is a project I started over winter break but encountered lots of bugs along the way. I intend to use the experience learned from this class to soon finish it.</h1>
+      </div>
+      <canvas id="neoMap" width="1000" height="600"></canvas>
+    </div>
+    <!-- End canvas-grid -->
+    <!-- <div class="display-grid">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th colspan="2">Asteroid Tracker</th>
+          </tr>
+        </thead>
+<tbody>
+          <tr>
+            <td>ID:</td>
+            <td id="neo-id"></td>
+          </tr>
+          <tr>
+            <td>Name:</td>
+            <td id="neo-name"></td>
+          </tr>
+          <tr>
+            <td>Size:</td>
+            <td id="neo-size"></td>
+          </tr>
+          <tr>
+            <td>Potentially Dangerous:</td>
+            <td id="neo-danger"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+    
+       <!--Footer-->
+<footer id="footerWrapper">
+    <div id="footerLinks">
+      <a href="mailto:adrianccollier@gmail.com"><i class="fa-sharp fa-solid fa-envelope fa-xl"></i></a>
+      <a href="https://github.com/AdrianCCollier"><i class="fa-brands fa-github fa-xl"></i></a> 
+      <!-- <a href="./Adrian Collier Resume.pdf"><i class="fa-solid fa-download fa-xl" alt="Download Resume"></i></a>  -->
+    </div>
+</footer>
+
+<script src="./asteroidTracker.js"></script>
+</body>
+</html>
