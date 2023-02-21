@@ -2,37 +2,27 @@
 
 <html>
   <head>
-    <title>Adrian's Personal Website</title>
+    <title>Adrian's Coding Portfolio</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!--Font-awesome import for footer-->
+    <!--Font-awesome import for footer icons-->
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 
     <!--Landing page CSS styles-->
-      <link rel="stylesheet" href="./main.css" />
+      <link rel="stylesheet" href="./index.css" />
   </head>
 
   <body>
     
       <!--Navbar-->
-      <nav class="nav">
-      <a href="/" class="nav__brand"></a>
-      <ul class="nav__menu">
-        <li class="nav__item">
-          <a href="/" class="nav__link">Home</a>
-        </li>
-        <li class="nav__item">
-          <a href="/zCodeSite/contact.html" class="nav__link">Contact</a>
-        </li>
-      </ul>
-      <div class="nav__toggler">
-        <div class="line1"></div>
-        <div class="line2"></div>
-        <div class="line3"></div>
-      </div>
-    </nav>
+      <nav>
+        <ul class="menu">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./contactPage/contact.html">Contact</a></li>
+        </ul>
+      </nav>
 
     <!--Main body-->
     <div id="main">
@@ -41,7 +31,7 @@
         <div class="about-container">
 
             <div class="about-me picture">
-                <img src="/CS382/personalSite/images/henry.png" width="300px" alt="profile- picture">
+                <img src="./images/henry.png" width="300px" alt="profile- picture">
             </div>
 
             <div class="about-me bio">
@@ -52,36 +42,36 @@
 
         <div class="thumbnails">
           <div class="box">
-            <a href="/asteroidTracker/asteroidTracker.html" class="image fit">
-              <img src="/website/src/components/images/asteroid.jpg"  alt="Asteroid">
+            <a href="./asteroidTrackerPage/asteroidTracker.html" class="image fit">
+              <img src="./images/asteroid.jpg"  alt="Asteroid">
             </a>
             <div class="inner">
               <h3>Near Earth Asteroid Tracker UI</h3>
-              <p>Built with NASA's NeoWS API. Visualize the solar system.</p>
-              <a href="/asteroidTracker.html" class="button fit" data-poptrox="youtube,800x400">Demo</a>
+              <p>This project will fetch data from NASA's NeoW's API to draw the solar system. </p>
+              <a href="./asteroidTrackerPage/asteroidTracker.html" class="button fit" data-poptrox="youtube,800x400">Demo</a>
             </div>
           </div>
           <div class="box">
-            <a href="/audiovisualizer.html" class="image fit">
-              <img src="/CS382/personalSite/images/ataripong.jpg" alt="Asteroid">
+            <a href="./atariPongPage/atariPong.html" class="image fit">
+              <img src="./images/ataripong.jpg" alt="Asteroid">
             </a>
             <div class="inner">
-              <h3>Multiplayer Atari Pong </h3>
+              <h3>Multiplayer Atari Pong Game </h3>
               <p>Upcoming game for Dr. Hamilton's CS 382 class
 
               </p>
-              <a href="/audiovisualizer.html" class="button fit" data-poptrox="youtube,800x400">Demo</a>
+              <a href="./atariPongPage/atariPong.html" class="button fit" data-poptrox="youtube,800x400">Demo</a>
             </div>
           </div>
 
           <div class="box">
-            <a href="/zCodeSite/snakegame.html" class="image fit">
-              <img src="/website/src/components/images/snake.jpg" alt="Asteroid">
+            <a href="./snakeGamePage/snakegame.html" class="image fit">
+              <img src="./images/snake.jpg" alt="Asteroid">
             </a>
             <div class="inner">
               <h3>Snake Game</h3>
-              <p>An interactive snake game built with HTML, CSS, JavaScript.</p>
-              <a href="/zCodeSite/snakegame.html" class="button fit" data-poptrox="youtube,800x400">Demo</a>
+              <p>An interactive Snake game built with HTML, CSS, JavaScript.</p>
+              <a href="./snakeGamePage/snakegame.html" class="button fit" data-poptrox="youtube,800x400">Demo</a>
             </div>
           </div>
         </div>
@@ -93,14 +83,8 @@
     <div id="footerLinks">
       <a href="mailto:adrianccollier@gmail.com"><i class="fa-sharp fa-solid fa-envelope fa-xl"></i></a>
       <a href="https://github.com/AdrianCCollier"><i class="fa-brands fa-github fa-xl"></i></a> 
-      <a href="./Adrian Collier Resume.pdf"><i class="fa-solid fa-download fa-xl" alt="Download Resume"></i></a> 
+      <!-- <a href="./Adrian Collier Resume.pdf"><i class="fa-solid fa-download fa-xl" alt="Download Resume"></i></a>  -->
     </div>
 </footer>
-
-
-
-
-
-    
-  </body>
+</body>
 </html>
