@@ -1,18 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./battleshipGame.css">
-    <title>Battleship</title>
-</head>
-<body>
-    
-    <div id="player1-board" class="game-board"></div>
-    <div id="player2-board" class="game-board"></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!--Font-awesome import for footer-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
+
+    <!--Font awesome import for contact icons-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all"
+    />
+
+    <!-- Actual CSS for this this page-->
+    <link rel="stylesheet" href="./battleshipGame.css" />
+
+    <title>Battleship Game</title>
+  </head>
+  <body>
+    <!--Navbar-->
+    <nav>
+      <ul class="menu">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../contactPage/contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+
+
+
+
+
+
+
+    <div id="board-selection-screen">
+      <div id="player1-selection-ships">
+        <div id="player1-submarine">Submarine</div>
+      </div>
+
+
+
+
+      <div id="player1-selection-board"></div>
+    </div>
+
+
+
+    <div id="main-game-container" style="display: none;">
+      <div id="player1-board" class="game-board"></div>
+      <div id="player2-board" class="game-board"></div>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--Footer-->
+    <footer id="footerWrapper">
+      <div id="footerLinks">
+        <a href="mailto:adrianccollier@gmail.com"
+          ><i class="fa-sharp fa-solid fa-envelope fa-xl"></i
+        ></a>
+        <a href="https://github.com/AdrianCCollier"
+          ><i class="fa-brands fa-github fa-xl"></i
+        ></a>
+        <!-- <a href="./Adrian Collier Resume.pdf"><i class="fa-solid fa-download fa-xl" alt="Download Resume"></i></a>  -->
+      </div>
+    </footer>
 
     <script src="./battleshipGame.js"></script>
-</body>
+  </body>
 </html>
