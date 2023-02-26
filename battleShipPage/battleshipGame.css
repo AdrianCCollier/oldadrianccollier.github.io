@@ -1,0 +1,12 @@
+/* CSS styling to make a 400px by 400px game board with 10x10 fraction grids using display grid */
+#player1-board, #player2-board {
+    width: 400px;
+    height: 400px;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+}
+
+#player1-board .cell, #player2-board .cell {
+    border: 1px solid black;
+}
