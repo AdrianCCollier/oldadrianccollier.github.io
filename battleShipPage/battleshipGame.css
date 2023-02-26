@@ -34,12 +34,49 @@ body {
     background-color: rgb(4, 67, 161);
 }
 
-#player1-submarine {
+.submarine {
     height: 120px;
     width: 60px;
     background-color: black;
     grid-row: 1/5;
     grid-column: 5;
+    
+}
+
+.carrier {
+    height: 120px;
+    width: 60px;
+    background-color: black;
+    grid-row: 2/5;
+    grid-column: 4;
+    
+}
+
+.destroyer {
+    height: 120px;
+    width: 60px;
+    background-color: black;
+    grid-row: 3/5;
+    grid-column: 3;
+    
+}
+
+.battleship {
+    height: 120px;
+    width: 60px;
+    background-color: black;
+    grid-row: 2/5;
+    grid-column: 2;
+    
+}
+
+.cruiser {
+    height: 120px;
+    width: 60px;
+    background-color: black;
+    grid-row: 1/5;
+    grid-column: 1;
+    
 }
 
 #player1-selection-board {
