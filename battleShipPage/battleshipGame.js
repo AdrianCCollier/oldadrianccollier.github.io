@@ -29,39 +29,45 @@ player1SelectionPanel.addEventListener("dragend", function(event) {
 
 
 
-// Our function to know which ship has been clicked
-player1SelectionPanel.addEventListener("click", function(event) {
-    if(event.target.classList.contains("submarine")) {
-        selectedShip = "submarine";
-        console.log(selectedShip);
-    } else if (event.target.classList.contains("carrier")) {
-        selectedShip = "carrier";
-        console.log(selectedShip);
-    } else if(event.target.classList.contains("destroyer")) {
-        selectedShip = "destroyer";
-        console.log(selectedShip);
-    } else if(event.target.classList.contains("cruiser")) {
-        selectedShip = "cruiser";
-        console.log(selectedShip);
-    } else if(event.target.classList.contains("battleship")) {
-        selectedShip = "battleship";
-        console.log(selectedShip);
-    }
+
+
+// DOM reference to HTML
+const submarine = document.querySelector("#submarine");
+
+
+// First event listener, listen for beginning of drag start and prepare to transfer data
+submarine.addEventListener("dragstart", e => {
+    e.dataTransfer.setData("text/plain", submarine.id); // allow for the transfer of elementId
 });
 
-// Handle drag and drop of ship onto the board
-player1SelectionBoard.addEventListener("dragover", function(event) {
-    event.preventDefault();
+// Continously listen for dragover event inside both containers
+for(const dropZone of document.querySelectorAll(".drop-zone")) {
+    
+    // When a ship is over a drop zone
+    dropZone.addEventListener("dragover", e => {
+        e.preventDefault(); // allow us to actually be able to drop an item
+        console.log("dragging.."); // test
+        dropZone.classList.add("drop-zone--over") // updates opacity with CSS selector update
+    });
+
+// When a ship is no longer over the drop zone
+dropZone.addEventListener("dragleave", e => {
+    dropZone.classList.remove("drop-zone--over"); // update opacity back to normal by reverting CSS selector
 });
 
-player1SelectionBoard.addEventListener("drop", function(event) {
-    event.preventDefault();
-    const targetCell = event.target;
-    if(targetCell.classList.contains("cell")) {
-        targetCell.appendChild(document.getElementById(selectedShip));
-    } // end if 
-});
 
+// When a ship is dropped onto the drop zone
+dropZone.addEventListener("drop", e => {
+    e.preventDefault(); // needed for some reason, still don't understand why
+
+    const droppedSubmarineId = e.dataTransfer.getData("text/plain"); // receive the 
+    const droppedSubmarine = document.getElementById(droppedSubmarineId);
+
+    dropZone.appendChild(droppedSubmarine);
+    dropZone.classList.remove("drop-zone--over");
+    console.log(droppedSubmarineId);
+});
+}
 
 
 
@@ -83,3 +89,23 @@ player1SelectionBoard.addEventListener("drop", function(event) {
 //         player2Board.appendChild(cell.cloneNode()); // Clone our cell for board 2
 //     } // end j loop
 // } // end i loop
+
+// Our function to know which ship has been clicked
+// player1SelectionPanel.addEventListener("click", function(event) {
+//     if(event.target.classList.contains("submarine")) {
+//         selectedShip = "submarine";
+//         console.log(selectedShip);
+//     } else if (event.target.classList.contains("carrier")) {
+//         selectedShip = "carrier";
+//         console.log(selectedShip);
+//     } else if(event.target.classList.contains("destroyer")) {
+//         selectedShip = "destroyer";
+//         console.log(selectedShip);
+//     } else if(event.target.classList.contains("cruiser")) {
+//         selectedShip = "cruiser";
+//         console.log(selectedShip);
+//     } else if(event.target.classList.contains("battleship")) {
+//         selectedShip = "battleship";
+//         console.log(selectedShip);
+//     }
+// });
