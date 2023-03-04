@@ -2,126 +2,115 @@ body {
     height: 100vh;
     width: 100vw;
     background-image: linear-gradient(45deg, #3b0154, #7803b3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: -1.8%;
+    margin-top: 1.8%;
+    overflow: hidden;
 }
 
-#board-selection-screen {
-    background-color: rgb(0, 0, 0);
-    border: solid 10px rgb(0, 0, 0);
-    width: 80%;
-    height: 80%;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    text-align: center;
-    gap: 60px;
-
+.board-display {
+  width: 100%;
+  height: 60%;
+  background-color: rgb(107, 70, 70);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-#player1-selection-ships {
-    height: 600px;
-    width: 600px;
-    color: white;
-    font-size: 13px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    gap: 20px;
-    background-color: rgb(4, 67, 161);
+.game-board {
+  background-color: rgb(255, 255, 255);
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.drop-zone--over {
-  opacity: 0.5;
+.cell {
+  width: 40px;
+  height: 40px;
+  border: solid 1px rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+  box-sizing: border-box;
 }
 
-#submarine {
-    height: 120px;
-    width: 60px;
-    background-color: black;
-    grid-row: 1/5;
-    grid-column: 5;
-    
+
+
+.ship-display {
+  border: 5px solid rgb(1, 1, 1);
+  width: 100%;
+  height: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
-#carrier {
-    height: 120px;
-    width: 60px;
-    background-color: black;
-    grid-row: 2/5;
-    grid-column: 4;
-    
+.player1-ships {
+  width: 800px;
+  height: 300px;
+  margin: 30px 0;
+  border: 4px solid black;
+  display: flex;
+  align-items: center;
+  
 }
 
-#destroyer {
-    height: 120px;
-    width: 60px;
-    background-color: black;
-    grid-row: 3/5;
-    grid-column: 3;
-    
+.player2-ships {
+  width: 800px;
+  height: 300px;
+  margin: 30px 0;
+  border: 4px solid black;
+  display: flex;
+  align-items: center;
 }
 
-#battleship {
-    height: 120px;
-    width: 60px;
-    background-color: black;
-    grid-row: 2/5;
-    grid-column: 2;
-    
+/* Ship Styling */
+.submarine-before {
+  width: 120px;
+  height: 40px;
+  margin: 4px;
 }
 
-#cruiser {
-    height: 120px;
-    width: 60px;
-    background-color: black;
-    grid-row: 1/5;
-    grid-column: 1;
-    
+.submarine {
+  background-color: rgb(255, 255, 255);
 }
 
-#player1-selection-board {
-  width: 600px;
-  height: 600px;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+.destroyer-before {
+  width: 80px;
+  height: 40px;
+  margin: 4px;
 }
 
-#player1-selection-board .cell {
-    border: 2px solid rgb(255, 255, 255);
+.destroyer {
+  background-color: blue
 }
 
-#main-game-container {
-    background-color: black;
-    border: solid 10px rgb(0, 0, 0);
-    width: 80%;
-    height: 80%;
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px;
-    text-align: center;
+.cruiser-before {
+  width: 120px;
+  height: 40px;
+  margin: 4px;
 }
 
-/* CSS styling to make a 400px by 400px game board with 10x10 fraction grids using display grid */
-#player1-board,
-#player2-board {
-  width: 600px;
-  height: 600px;
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+.cruiser {
+  background-color: red;
 }
 
-#player1-board .cell,
-#player2-board .cell {
-    border: 2px solid rgb(255, 255, 255);
+.battleship-before {
+  width: 160px;
+  height: 40px;
+  margin: 4px;
 }
 
+.battleship {
+  background-color: yellow;
+}
+
+.carrier-before{
+  width: 200px;
+  height: 40px;
+  margin: 4px;
+}
+
+.carrier {
+  background-color: green;
+}
 
 /* Navbar */
 nav {
@@ -170,13 +159,14 @@ nav {
 
 #footerWrapper {
   /* background: #21293a; */
-  background: #000000;
+  background: #0a0a0a;
   color: #fff;
   padding: 2.5rem 0;
   text-align: center;
   position: fixed;
   bottom: 0;
   width: 100%;
+  height: 0;
 }
 
 #footerLinks {

@@ -31,33 +31,40 @@
       </ul>
     </nav>
 
+  <div class="board-display">
+    <div id="player1-board" class="game-board"></div>
+    <div id="player2-board" class="game-board"></div>
+  </div>
 
-
-
-
-
-
-
-    <div id="board-selection-screen">
-
-      <div id="player1-selection-ships" class="drop-zone">
-        <div id="submarine" class="ship" draggable="true">Submarine</div>
-        <div id="carrier" class="ship" draggable="true">Carrier</div>
-        <div id="destroyer" class="ship" draggable="true">Destroyer</div>
-        <div id="cruiser" class="ship" draggable="true">Cruiser</div>
-        <div id="battleship" class="ship" draggable="true">Battleship</div>
-      </div>
-      
-      <div id="player1-selection-board" class="drop-zone"></div>
+  <div class="ship-display">
+    <div class="player1-ships">
+      <div id="0" class="submarine-before submarine" draggable="true">submarine</div>
+      <div id="1" class="destroyer-before destroyer" draggable="true">destroyer</div>
+      <div id="2" class="cruiser-before cruiser" draggable="true">cruiser</div>
+      <div id="3" class="battleship-before battleship" draggable="true">battleship</div>
+      <div id="4" class="carrier-before carrier" draggable="true">carrier</div>
     </div>
 
+    <button id="player1-rotate-button">ROTATE</button>
+    <button id="player1-start-button">START</button>
+
+    <div class="player2-ships">
+      <div id="0" class="submarine-before submarine" draggable="true">submarine</div>
+      <div id="1" class="destroyer-before destroyer" draggable="true">destroyer</div>
+      <div id="2" class="cruiser-before cruiser" draggable="true">cruiser</div>
+      <div id="3" class="battleship-before battleship" draggable="true">battleship</div>
+      <div id="4" class="carrier-before carrier" draggable="true">carrier</div>
 
 
-    <div id="main-game-container" style="display: none;">
-      <div id="player1-board" class="game-board"></div>
-      <div id="player2-board" class="game-board"></div>
+
+
+
     </div>
-    
+  </div>
+
+
+
+
 
 
 
@@ -91,6 +98,6 @@
       </div>
     </footer>
 
-    <script src="./battleshipGame.js"></script>
+    <script src="./battleShipGame.js"></script>
   </body>
 </html>

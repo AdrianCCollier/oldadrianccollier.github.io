@@ -1,111 +1,77 @@
-const player1SelectionBoard = document.getElementById("player1-selection-board");
-
-const player1SelectionPanel = document.getElementById("player1-selection-ships");
-
-// initialize the selected ship to null to avoid future bugs
-let selectedShip = null;
-
-const gridSize = 10;
-
-// Here, we use a simple nested for loop to create our 10x10 grid and append it to our game board
-for(let i = 0; i < gridSize; i++) {
-    for(let j = 0; j < gridSize; j++) {
-        const cell = document.createElement("div");
-        cell.classList.add("cell");
-        player1SelectionBoard.appendChild(cell);
-    } // end i loop
-} // end j loop
+const gameBoard = document.querySelector('#player1-board');
+const P2GameBoard = document.querySelector('#player2-board');
+const shipsPlayerOne = document.querySelector('.player1-ships')
 
 
-player1SelectionPanel.addEventListener("dragstart", function(event){
-    selectedShip = event.target.id;
-});
+const rotateButtonPlayerOne = document.querySelector('#player1-rotate-button')
+
+// We retrieved the HTML reference to the player1-ships through the DOM and here we are accessing the ships inside the parent div, and storing them into an array.
+// This function allows the user to rotate the ships before they are placed on the board and it does this by first checking the current angle, it traverses the mentioned array and dynamically updates the CSS property of rotate, to either angle 0 or angle 90.
+let angle = 0
+function rotate() {
+  const shipsP1 = Array.from(shipsPlayerOne.children)
+
+  if (angle == 0) {
+    angle = 90
+  } else {
+    angle = 0
+  } // end else
+
+  shipsP1.forEach((ship) => (ship.style.transform = `rotate(${angle}deg)`))
+} // end rotate function
+
+// First event listener, allow the user to click the rotate button to rotate their ships
+rotateButtonPlayerOne.addEventListener('click', rotate)
+
+const gridSize = 10
+
+// this function dynamically creates an N*N Matrix of cell divs
+// this allows to specify and remember the exact coordinates of where
+// a ship was dropped, and we can later check if a ship has been hit
+function createMatrixBoard() {
+  for (let i = 0; i < gridSize; i++) {
+    for (let j = 0; j < gridSize; j++) {
+      const cell = document.createElement('div')
+      cell.classList.add('cell')
+      cell.id = i
+      gameBoard.append(cell);
+      P2GameBoard.cloneNode(cell);
+    } // end j loop
+  } // end i loop
+} // end createMatrixBoard function
+
+createMatrixBoard();
 
 
-// ensure that once the ship is no longer being dragged, reset to null
-player1SelectionPanel.addEventListener("dragend", function(event) {
-    selectedShip = null;
-});
+// Ship Creation
+class Ship {
+  constructor(name, length) {
+    this.name = name;
+    this.length = length;
+  } // end constructor
+} // end Ship class 
 
+// Use constructor to make new Ship objects
+const submarine = new Ship('submarine', 3);
+const destroyer = new Ship('destroyer', 2);
+const cruiser = new Ship('cruiser', 3);
+const battleship = new Ship('battleship', 4);
+const carrier = new Ship('carrier', 5);
 
+// Store them into an array
+const ships = [submarine, destroyer, cruiser, battleship, carrier];
 
+// Drag ships functionality
+let draggedShip;
 
+const optionShips = Array.from(shipsPlayerOne.children);
+optionShips.forEach(optionShip => optionShip.addEventListener('dragstart', dragStart));
 
-// DOM reference to HTML
-const submarine = document.querySelector("#submarine");
-
-
-// First event listener, listen for beginning of drag start and prepare to transfer data
-submarine.addEventListener("dragstart", e => {
-    e.dataTransfer.setData("text/plain", submarine.id); // allow for the transfer of elementId
-});
-
-// Continously listen for dragover event inside both containers
-for(const dropZone of document.querySelectorAll(".drop-zone")) {
-    
-    // When a ship is over a drop zone
-    dropZone.addEventListener("dragover", e => {
-        e.preventDefault(); // allow us to actually be able to drop an item
-        console.log("dragging.."); // test
-        dropZone.classList.add("drop-zone--over") // updates opacity with CSS selector update
-    });
-
-// When a ship is no longer over the drop zone
-dropZone.addEventListener("dragleave", e => {
-    dropZone.classList.remove("drop-zone--over"); // update opacity back to normal by reverting CSS selector
-});
-
-
-// When a ship is dropped onto the drop zone
-dropZone.addEventListener("drop", e => {
-    e.preventDefault(); // needed for some reason, still don't understand why
-
-    const droppedSubmarineId = e.dataTransfer.getData("text/plain"); // receive the 
-    const droppedSubmarine = document.getElementById(droppedSubmarineId);
-
-    dropZone.appendChild(droppedSubmarine);
-    dropZone.classList.remove("drop-zone--over");
-    console.log(droppedSubmarineId);
-});
+// This function fetches the target of the event listener target
+// In this case, we are getting the children of the parent container
+// player1-ships, which contains all ships, and we stored them into an array optionShips. By iterating through this array we can call our
+// dragStart function to fetch the 
+function dragStart(e) {
+  draggedShip = e.target;
+  console.log(draggedShip)
 }
-
-
-
-
-
-
-
-
-
-// Worry about this later
-// const player1Board = document.getElementById('player1-board')
-// const player2Board = document.getElementById('player2-board')
-// // Here, we use a simple nested for loop to create our 10x10 grid and append it to our game board
-// for(let i = 0; i < gridSize; i++) {
-//     for(let j = 0; j < gridSize; j++) {
-//         const cell = document.createElement("div");
-//         cell.classList.add("cell");
-//         player1Board.appendChild(cell);
-//         player2Board.appendChild(cell.cloneNode()); // Clone our cell for board 2
-//     } // end j loop
-// } // end i loop
-
-// Our function to know which ship has been clicked
-// player1SelectionPanel.addEventListener("click", function(event) {
-//     if(event.target.classList.contains("submarine")) {
-//         selectedShip = "submarine";
-//         console.log(selectedShip);
-//     } else if (event.target.classList.contains("carrier")) {
-//         selectedShip = "carrier";
-//         console.log(selectedShip);
-//     } else if(event.target.classList.contains("destroyer")) {
-//         selectedShip = "destroyer";
-//         console.log(selectedShip);
-//     } else if(event.target.classList.contains("cruiser")) {
-//         selectedShip = "cruiser";
-//         console.log(selectedShip);
-//     } else if(event.target.classList.contains("battleship")) {
-//         selectedShip = "battleship";
-//         console.log(selectedShip);
-//     }
-// });
