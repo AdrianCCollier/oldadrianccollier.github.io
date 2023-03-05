@@ -1,9 +1,8 @@
-const gameBoard = document.querySelector('#player1-board');
-const P2GameBoard = document.querySelector('#player2-board');
-const shipsPlayerOne = document.querySelector('.player1-ships')
+const gamesBoardContainer = document.querySelector('#gamesboard-container');
+const optionContainer = document.querySelector('.player1-ships')
 
 
-const rotateButtonPlayerOne = document.querySelector('#player1-rotate-button')
+const flipButton = document.querySelector('#player1-rotate-button')
 
 // We retrieved the HTML reference to the player1-ships through the DOM and here we are accessing the ships inside the parent div, and storing them into an array.
 // This function allows the user to rotate the ships before they are placed on the board and it does this by first checking the current angle, it traverses the mentioned array and dynamically updates the CSS property of rotate, to either angle 0 or angle 90.
@@ -23,24 +22,27 @@ function rotate() {
 // First event listener, allow the user to click the rotate button to rotate their ships
 rotateButtonPlayerOne.addEventListener('click', rotate)
 
-const gridSize = 10
+const width = 10
 
 // this function dynamically creates an N*N Matrix of cell divs
 // this allows to specify and remember the exact coordinates of where
 // a ship was dropped, and we can later check if a ship has been hit
-function createMatrixBoard() {
-  for (let i = 0; i < gridSize; i++) {
-    for (let j = 0; j < gridSize; j++) {
-      const cell = document.createElement('div')
-      cell.classList.add('cell')
-      cell.id = i
-      gameBoard.append(cell);
-      P2GameBoard.cloneNode(cell);
-    } // end j loop
+function createMatrixBoard(color, user) {
+  const gameBoardContainer = document.createElement('div');
+  gameBoardContainer.classList.add('game-board');
+  gameBoardContainer.style.backgroundColor = color;
+  gameBoardContainer.id = user;
+
+  for (let i = 0; i < width * width; i++) {
+      const block = document.createElement('div');
+      block.classList.add('block');
+      block.id = i;
+      gameBoard.append(gameBoardContainer);
   } // end i loop
 } // end createMatrixBoard function
 
-createMatrixBoard();
+createMatrixBoard('black', 'player');
+createMatrixBoard('red', 'computer');
 
 
 // Ship Creation
