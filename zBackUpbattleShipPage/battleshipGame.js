@@ -2,8 +2,7 @@
 const gamesBoardContainer = document.querySelector('#gamesboard-container');
 
 // this DOM reference will allow us to later get all its children (ship divs stored inside)
-const optionContainer = document.querySelector('.option-container');
-const optionContainerPlayer2 = document.querySelector('#player2-ships');
+const optionContainer = document.querySelector('.option-container')
 
 // buttons and display DOM references
 const flipButton = document.querySelector('#flip-button');
@@ -26,26 +25,8 @@ function rotate() {
   optionShips.forEach((optionShip) => (optionShip.style.transform = `rotate(${angle}deg)`))
 } // end rotate function
 
-// Function for Player 2, same method
-let angleP2 = 0;
-function rotateP2() {
-  const optionShipsP2 = Array.from(optionContainerPlayer2.children);
-
-  if(angleP2 == 0) {
-    angleP2 = 90;
-  } else {
-    angleP2 = 0;
-  }
-
-  optionShipsP2.forEach((optionShipP2) => optionShipP2.style.transform = `rotate(${angleP2}deg)`) 
-} 
-
-
 // First event listener, allow the user to click the rotate button to rotate their ships
-flipButton.addEventListener('click', function() {
-  rotate();
-  rotateP2();
-});
+flipButton.addEventListener('click', rotate)
 
 const width = 10;
 
@@ -73,7 +54,7 @@ function createMatrixBoard(color, user) {
 
 createMatrixBoard('white', 'player');
 createMatrixBoard('white', 'computer');
-createMatrixBoard('white', 'player2');
+
 
 
 // Simple class to make our ships with a name and length
@@ -92,18 +73,8 @@ const cruiser = new Ship('cruiser', 3);
 const battleship = new Ship('battleship', 4);
 const carrier = new Ship('carrier', 5);
 
-
-// Same for Player 2
-const destroyerP2 = new Ship('destroyer', 2);
-const submarineP2 = new Ship('submarine', 3);
-const cruiserP2 = new Ship('cruiser', 3);
-const battleshipP2 = new Ship('battleship', 4);
-const carrierP2 = new Ship('carrier', 5);
-
 // Store them into an array
 const ships = [destroyer, submarine, cruiser, battleship, carrier];
-
-const shipsP2 = [destroyerP2, submarineP2, cruiserP2, battleshipP2, carrierP2];
 
 // boolean later used in our drag and drop event listeners
 let notDropped;
@@ -177,14 +148,8 @@ let draggedShip;
 // fetch all the ships from the parent container, store them into an array
 const optionShips = Array.from(optionContainer.children);
 
-// *****************************************************
-
-
-
 // Iterate through this array and tie our dragStart function into the 'dragstart' event listener
 optionShips.forEach(optionShip => optionShip.addEventListener('dragstart', dragStart));
-
-
 
 // target all player blocks 
 const allPlayerBlocks = document.querySelectorAll('#player div');
