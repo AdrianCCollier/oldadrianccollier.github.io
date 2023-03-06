@@ -2,7 +2,10 @@ const gamesBoardContainer = document.querySelector('#gamesboard-container');
 const optionContainer = document.querySelector('.option-container')
 
 
-const flipButton = document.querySelector('#flip-button')
+const flipButton = document.querySelector('#flip-button');
+const startButton = document.querySelector('#start-button');
+const infoDisplay = document.querySelector('#info');
+const turnDisplay = document.querySelector('#turn-display');
 
 // We retrieved the HTML reference to the player1-ships through the DOM and here we are accessing the ships inside the parent div, and storing them into an array.
 // This function allows the user to rotate the ships before they are placed on the board and it does this by first checking the current angle, it traverses the mentioned array and dynamically updates the CSS property of rotate, to either angle 0 or angle 90.
@@ -113,7 +116,7 @@ function addShipPiece(user, ship, startId) {
       shipBlock.classList.add('taken')
     })
   } else {
-    if(user === 'computer') addShipPiece(ship)
+    if(user === 'computer') addShipPiece(user, ship, startId)
     if(user === 'player') notDropped = true;
   }
 
@@ -163,3 +166,157 @@ function dropShip(e) {
     draggedShip.remove();
   }
 }
+
+// Game logic
+
+let gameOver = false;
+let playerTurn = undefined;
+
+// Start Game
+function startGame() {
+
+  if(playerTurn === undefined) {
+
+     // only start game if all ships have been placed
+  
+  if(optionContainer.children.length != 0) {
+    infoDisplay.textContent = 'Please place all your pieces first!';
+  }
+  else {
+    const allBoardBlocks = document.querySelectorAll('#computer div')
+    allBoardBlocks.forEach(block => block.addEventListener('click', handleClick))
+    playerTurn = true;
+    turnDisplay.textContent = 'Your turn!';
+    infoDisplay.textContent = 'The game has started!';
+  }
+  
+
+  }
+  
+  
+ 
+}
+// trigger startGame function when clicking start button
+startButton.addEventListener('click', startGame);
+
+let playerHits = [];
+let computerHits = [];
+const playerSunkShips = [];
+const computerSunkShips = [];
+
+function handleClick(e) {
+   if(!gameOver) {
+    // if we click on a cell that is marked as taken, we have hit a ship
+    if(e.target.classList.contains('taken')) {
+      e.target.classList.add('boom')
+      infoDisplay.textContent = 'You hit a ship!'
+
+      // used to filter the class name from each ship, used to keep track of how many hits each ship has taken, stored in array
+      let classes = Array.from(e.target.classList);
+      classes = classes.filter(className => className !== 'block');
+      classes = classes.filter(className => className !== 'boom');
+      classes = classes.filter(className => className !== 'taken');
+      playerHits.push(...classes);
+      checkScore('player', playerHits, playerSunkShips);
+
+
+    } // end if 
+    // If we haven't hit a ship
+    if(!e.target.classList.contains('taken')) {
+      infoDisplay.textContent = 'Nothing his this time';
+      e.target.classList.add('empty');
+    }
+    // handle computer turn here
+    playerTurn = false;
+    const allBoardBlocks = document.querySelectorAll('#computer div');
+    allBoardBlocks.forEach(block => block.replaceWith(block.cloneNode(true)))
+    setTimeout(computerGo, 3000);
+   } // end if 
+} // end handeClick
+
+// Computer's turn
+function computerGo() {
+  if(!gameOver) {
+    turnDisplay.textContent = 'Computers turn';
+    infoDisplay.textContent = 'The Computer is thinking...'
+
+    setTimeout(() => {
+      // this guesses from 0 to 100
+      let randomGo = Math.floor(Math.random() * width * width);
+
+      // target player's divs
+      const allBoardBlocks = document.querySelectorAll('#player div');
+
+      // if computer picks a block that is labeled taken and boom, then make it go again
+      if(allBoardBlocks[randomGo].classList.contains('taken') &&
+         allBoardBlocks[randomGo].classList.contains('boom')) {
+          computerGo();
+          return;
+
+      } else if(
+              allBoardBlocks[randomGo].classList.contains('taken') &&
+              !allBoardBlocks[randomGo].classList.contains('boom')) {
+                  allBoardBlocks[randomGo].classList.add('boom');
+                  infoDisplay.textContent = 'The computer hit your ship';
+
+                  let classes = Array.from(allBoardBlocks[randomGo].classList);
+                  classes = classes.filter(className => className !== 'block');
+                  classes = classes.filter(className => className !== 'boom');
+                  classes = classes.filter(className => className !== 'taken');
+                  computerHits.push(...classes);
+                  checkScore('computer', computerHits, computerSunkShips);
+      } else {
+        infoDisplay.textContent = 'Nothing hit this time';
+        allBoardBlocks[randomGo].classList.add('empty');
+      }
+
+    }, 3000)
+    // back to the player's turn
+    setTimeout(() => {
+      playerTurn = true;
+      turnDisplay.textContent = 'Your go';
+      infoDisplay.textContent = 'Please take your go';
+      const allBoardBlocks = document.querySelectorAll('#computer div');
+
+      allBoardBlocks.forEach(block => block.addEventListener('click', handleClick))
+    }, 6000)
+  }
+}
+
+function checkScore(user, userHits, userSunkShips) {
+
+
+
+  function checkShip(shipName, shipLength) {
+    if(userHits.filter(storedShipName => storedShipName === shipName).length === shipLength) {
+            infoDisplay.textContent = `you sunk the ${user}'s ${shipName}`;
+
+            // convert playerHits into ships sunk, filter ship name from array if ship is
+            if(user === 'player') {
+              playerHits = userHits.filter(storedShipName => storedShipName !== shipName);
+            } // end if
+            if(user === 'computer') {
+              computerHits = userHits.filter(storedShipName => storedShipName !== shipName);
+            } // end if 
+            userSunkShips.push(shipName);
+   } // end if 
+} // end function checkShip
+  checkShip('destroyer', 2);
+  checkShip('submarine', 3);
+  checkShip('cruiser', 3);
+  checkShip('battleship', 4);
+  checkShip('carrier', 5);
+
+  console.log('player hits', playerHits);
+  console.log('player sunk ships', playerSunkShips);
+
+  if(playerSunkShips.length === 5) {
+    infoDisplay.textContent = 'You sunk all the computers ships. You WON!';
+    gameOver = true;
+  } // end if 
+  if(computerSunkShips.length === 5) {
+    infoDisplay.textContent = 'The computer has sunk all your ships. You LOST!'
+    gameOver = true;
+  } // end if 
+
+} 
