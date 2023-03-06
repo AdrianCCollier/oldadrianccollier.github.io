@@ -67,43 +67,99 @@ const carrier = new Ship('carrier', 5);
 // Store them into an array
 const ships = [destroyer, submarine, cruiser, battleship, carrier];
 
-function addShipPiece(ship) {
-  const allBoardBlocks = document.querySelectorAll('#computer div');
+let notDropped
+
+function addShipPiece(user, ship, startId) {
+  const allBoardBlocks = document.querySelectorAll(`#${user} div`);
   let randomBoolean = Math.random() < 0.5;
-  let isHorizontal = randomBoolean;
+  let isHorizontal = user === 'player' ? angle === 0: randomBoolean;
   let randomStartIndex = Math.floor(Math.random() * width * width);
-  console.log(randomStartIndex);
+
+
+  // startIndex for players
+  let startIndex = startId ? startId : randomStartIndex
+
+  let validStart = isHorizontal ? startIndex <= width * width - ship.length 
+      ? startIndex : width * width - ship.length :
+       startIndex <= width * width - width * ship.length
+    ? startIndex
+    : startIndex - ship.length * width + width
 
   let shipBlocks = [];
 
   for(let i = 0; i < ship.length; i++) {
-    if(isHorizontal == true) {
-      // color the cells with CSS 
-      console.log(allBoardBlocks[Number(randomStartIndex) + 1]);
-
+    if(isHorizontal) {
+      shipBlocks.push(allBoardBlocks[Number(validStart) + i])
+    } else {
+      shipBlocks.push(allBoardBlocks[Number(validStart) + i * width]);
     }
   }
-}
+  let valid;
 
-addShipPiece();
+  if(isHorizontal) {
+    shipBlocks.every((_shipBlock, index) =>
+      valid = shipBlocks[0].id % width !== width - 
+      (shipBlocks.length - (index + 1))) 
+  } else {
+    shipBlocks.every((_shipBlock, index) =>
+      valid = shipBlocks[0].id < 90 + (width * index + 1))
+  }
+
+  const notTaken = shipBlocks.every(shipBlock => !shipBlock.classList.contains('taken'))
+
+  if(valid && notTaken) {
+    shipBlocks.forEach((shipBlock) => {
+      shipBlock.classList.add(ship.name)
+      shipBlock.classList.add('taken')
+    })
+  } else {
+    if(user === 'computer') addShipPiece(ship)
+    if(user === 'player') notDropped = true;
+  }
+
+  
+} // end addShipPiece
+
+ships.forEach(ship => addShipPiece('computer',ship));
 
 
 
 
 
 // Drag ships functionality
-// let draggedShip;
+
+// we use this variable to keep track of which ship is being dragged, used in our dragStart function to store the event target data
+let draggedShip;
+
+// fetch all the ships from the parent container, store them into an array
+const optionShips = Array.from(optionContainer.children);
+
+// Iterate through this array and tie our dragStart function into the 'dragstart' event listener
+optionShips.forEach(optionShip => optionShip.addEventListener('dragstart', dragStart));
+
+// target all player blocks 
+const allPlayerBlocks = document.querySelectorAll('#player div');
+
+allPlayerBlocks.forEach(playerBlock => {
+  playerBlock.addEventListener('dragover', dragOver);
+  playerBlock.addEventListener('drop', dropShip);
+})
+
+function dragStart(e) {
+  notDropped = false;
+  draggedShip = e.target;
+}
 
 
+function dragOver(e) {
+  e.preventDefault();
+}
 
-// const optionShips = Array.from(shipsPlayerOne.children);
-// optionShips.forEach(optionShip => optionShip.addEventListener('dragstart', dragStart));
-
-// This function fetches the target of the event listener target
-// In this case, we are getting the children of the parent container
-// player1-ships, which contains all ships, and we stored them into an array optionShips. By iterating through this array we can call our
-// dragStart function to fetch the 
-// function dragStart(e) {
-//   draggedShip = e.target;
-//   console.log(draggedShip)
-// }
+function dropShip(e) {
+  const startId = e.target.id;
+  const ship = ships[draggedShip.id]
+  addShipPiece('player',ship, startId);
+  if(!notDropped) {
+    draggedShip.remove();
+  }
+}
