@@ -2,7 +2,7 @@
 const gamesBoardContainer = document.querySelector('#gamesboard-container')
 
 // this DOM reference will allow us to later get all its children (ship divs stored inside)
-const optionContainer = document.querySelector('#player1-ships')
+const optionContainer = document.querySelector('.option-container')
 const optionContainerPlayer2 = document.querySelector('#player2-ships')
 
 // buttons and display DOM references
@@ -74,9 +74,8 @@ function createMatrixBoard(color, user) {
 } // end createMatrixBoard function
 
 createMatrixBoard('white', 'player')
-
+createMatrixBoard('white', 'computer')
 createMatrixBoard('white', 'player2')
-// createMatrixBoard('white', 'computer')
 
 // Simple class to make our ships with a name and length
 class Ship {
@@ -101,40 +100,38 @@ const battleshipP2 = new Ship('battleship', 4)
 const carrierP2 = new Ship('carrier', 5)
 
 // Store them into an array
-const ships = [destroyer, submarine, cruiser, battleship, carrier];
+const ships = [destroyer, submarine, cruiser, battleship, carrier]
 
-const shipsP2 = [destroyerP2, submarineP2, cruiserP2, battleshipP2, carrierP2];
+const shipsP2 = [destroyerP2, submarineP2, cruiserP2, battleshipP2, carrierP2]
 
 // boolean later used in our drag and drop event listeners
-let notDropped;
-let notDroppedP2;
+let notDropped
+let notDroppedP2
 
 // a function to add blocks, we start by getting access to all the blocks of the player's board,
 function addShipPiece(user, ship, startId) {
   const allBoardBlocks = document.querySelectorAll(`#${user} div`)
-  // let randomBoolean = Math.random() < 0.5
+  let randomBoolean = Math.random() < 0.5
   let isHorizontal
 
   if (user === 'player' || user === 'player2') {
-    isHorizontal = angle === 0;
-  } 
-  // else {
-  //   isHorizontal = randomBoolean
-  // }
+    isHorizontal = angle === 0
+  } else {
+    isHorizontal = randomBoolean
+  }
 
-  // let randomStartIndex = Math.floor(Math.random() * width * width)
+  let randomStartIndex = Math.floor(Math.random() * width * width)
 
   // startIndex for players
   let startIndex
 
   if (startId) {
     startIndex = startId
-  } 
-  // else {
-  //   startIndex = randomStartIndex
-  // }
+  } else {
+    startIndex = randomStartIndex
+  }
 
-  let validStart;
+  let validStart
   if (isHorizontal) {
     if (startIndex <= width * width - ship.length) {
       validStart = startIndex
@@ -164,7 +161,7 @@ function addShipPiece(user, ship, startId) {
     }
   }
 
-  let valid;
+  let valid
 
   if (isHorizontal) {
     shipBlocks.every(
@@ -190,19 +187,19 @@ function addShipPiece(user, ship, startId) {
       shipBlock.classList.add('taken')
     })
   } else {
-    // if (user === 'computer') addShipPiece(user, ship, startId)
+    if (user === 'computer') addShipPiece(user, ship, startId)
     if (user === 'player') notDropped = true
     if (user === 'player2') notDroppedP2 = true
   }
 } // end addShipPiece
 
-// ships.forEach((ship) => addShipPiece('computer', ship))
+ships.forEach((ship) => addShipPiece('computer', ship))
 
 // Drag ships functionality
 
 // we use this variable to keep track of which ship is being dragged, used in our dragStart function to store the event target data
-let draggedShip;
-let draggedShipP2;
+let draggedShip
+let draggedShipP2
 
 // fetch all the ships from the parent container, store them into an array
 const optionShips = Array.from(optionContainer.children)
@@ -271,11 +268,11 @@ function dropShipP2(e) {
 // Game logic
 
 let gameOver = false
-let player1Turn = undefined
+let playerTurn = undefined
 
 // Start Game
 function startGame() {
-  if (player1Turn === undefined) {
+  if (playerTurn === undefined) {
     // only start game if all ships have been placed
     if (
       optionContainer.children.length != 0 &&
@@ -285,9 +282,8 @@ function startGame() {
     }
     // else, start the game
     else {
-      const allBoardBlocks = document.querySelectorAll('#player div')
       const allBoardBlocksP2 = document.querySelectorAll('#player2 div')
-      
+      const allBoardBlocks = document.querySelectorAll('#computer div')
 
       allBoardBlocks.forEach((block) =>
         block.addEventListener('click', handleClick)
@@ -297,9 +293,9 @@ function startGame() {
       )
 
       // FIXME possibly
-      player1Turn = true
-      turnDisplay.textContent = 'Player 1s turn!'
-      infoDisplay.textContent = 'The game has started, attack Player 2!'
+      playerTurn = true
+      turnDisplay.textContent = 'Your turn!'
+      infoDisplay.textContent = 'The game has started!'
     }
   }
 }
@@ -308,11 +304,11 @@ startButton.addEventListener('click', startGame)
 
 let playerHits = []
 let playerHitsP2 = []
-// let computerHits = []
+let computerHits = []
 
 const playerSunkShips = []
 const playerSunkShipsP2 = []
-// const computerSunkShips = []
+const computerSunkShips = []
 
 function handleClick(e) {
   if (!gameOver) {
@@ -323,46 +319,36 @@ function handleClick(e) {
 
       // used to filter the class name from each ship, used to keep track of how many hits each ship has taken, stored in array
       let classes = Array.from(e.target.classList)
-      let classesP2 = Array.from(e.target.classList);
-
       classes = classes.filter((className) => className !== 'block')
       classes = classes.filter((className) => className !== 'boom')
       classes = classes.filter((className) => className !== 'taken')
-
-
-      classesP2 = classesP2.filter((className) => className !== 'block')
-      classesP2 = classesP2.filter((className) => className !== 'boom')
-      classesP2 = classesP2.filter((className) => className !== 'taken')
-      playerHits.push(...classes);
-      playerHitsP2.push(...classesP2);
+      playerHits.push(...classes)
 
       checkScore('player', playerHits, playerSunkShips)
       checkScore('player2', playerHitsP2, playerSunkShipsP2)
     } // end if
     // If we haven't hit a ship
     if (!e.target.classList.contains('taken')) {
-      infoDisplay.textContent = 'Nothing his this time';
-      e.target.classList.add('empty');
+      infoDisplay.textContent = 'Nothing his this time'
+      e.target.classList.add('empty')
     }
-    // handle player2 turn here
-    player1Turn = false;
-    const allBoardBlocksP2 = document.querySelectorAll('#player2 div')
-    allBoardBlocksP2.forEach((blockP2) =>
-      blockP2.replaceWith(blockP2.cloneNode(true))
-    )
-    setTimeout(player2Turn, 500)
+    // handle computer turn here
+    playerTurn = false
+    const allBoardBlocks = document.querySelectorAll('#computer div')
+    allBoardBlocks.forEach((block) => block.replaceWith(block.cloneNode(true)))
+    setTimeout(computerGo, 500)
   } // end if
 } // end handeClick
 
 // Computer's turn
-function player2Turn() {
+function computerGo() {
   if (!gameOver) {
-    turnDisplay.textContent = 'Player 2s turn'
-    infoDisplay.textContent = 'attack Player 1!'
+    turnDisplay.textContent = 'Computers turn'
+    infoDisplay.textContent = 'The Computer is thinking...'
 
     setTimeout(() => {
       // this guesses from 0 to 100
-      // let randomGo = Math.floor(Math.random() * width * width)
+      let randomGo = Math.floor(Math.random() * width * width)
 
       // target player's divs
       const allBoardBlocks = document.querySelectorAll('#player div')
@@ -372,7 +358,7 @@ function player2Turn() {
         allBoardBlocks[randomGo].classList.contains('taken') &&
         allBoardBlocks[randomGo].classList.contains('boom')
       ) {
-        player2Turn();
+        computerGo()
         return
       } else if (
         allBoardBlocks[randomGo].classList.contains('taken') &&
@@ -394,7 +380,7 @@ function player2Turn() {
     }, 500)
     // back to the player's turn
     setTimeout(() => {
-      player1Turn = true
+      playerTurn = true
       turnDisplay.textContent = 'Your go'
       infoDisplay.textContent = 'Please take your go'
       const allBoardBlocks = document.querySelectorAll('#computer div')
@@ -455,4 +441,8 @@ function checkScore(user, userHits, userSunkShips) {
     gameOver = true
   } // end if
 
+  if (computerSunkShips.length === 5) {
+    infoDisplay.textContent = 'The computer has sunk all your ships. You LOST!'
+    gameOver = true
+  } // end if
 }
