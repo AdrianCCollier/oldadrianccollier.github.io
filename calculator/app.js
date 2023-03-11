@@ -1,36 +1,71 @@
+// DOM references
 const display = document.getElementById('display');
-const AC = document.getElementById('AC');
-const plusButton = document.getElementById('plus');
-const twoButton = document.getElementById('2')
-const equalButton = document.getElementById('=');
-const minusButton = document.getElementById('-');
-const onButton = document.getElementById('Empty');
+const AC = document.getElementById('AC-button');
+const twoButton = document.getElementById('two-button');
+const plusButton = document.getElementById('plus-button');
+const totalButton = document.getElementById('total-button');
+// Variables being used
 
+let previousValue = 0;
+let currentValue = 0; 
+let operator = '';
 let total = 0;
-let array = [];
-AC.onclick = function() {
-display.textContent = total;
+
+// Clear Screen function.
+// display 0 and reset all variables
+AC.onclick = function clearDisplay() {
+display.textContent = '0';
+previousValue = 0;
+currentValue = 0;
+operator = '';
+total = 0;
 }
 
-plusButton.onclick = function() {
-    plus = +
-array.push(plus)
+// Plus button click function.
+function plusButtonClick() {
+    if (operator === '') {
+        previousValue = parseFloat(currentValue);
+    } else {
+        performOperation();
+    }
+    operator = '+';
+    currentValue = 0;
 }
 
-equalButton.onclick = function() {
+// Equals button click function.
+function equalsButtonClick() {
+    performOperation();
+    operator = '';
+    currentValue = total;
     display.textContent = total;
 }
 
-onButton.onclick = function() {
-    window.alert('you will die in 7 days');
+// Addition function.
+function performOperation() {
+    switch (operator) {
+        case '+':
+            total = previousValue + parseFloat(currentValue);
+            break;
+        default:
+            break;
+    }
 }
 
-twoButton.onclick = function() {
-    two = 2;
-array.push(two)
-}
+// Event listeners for number buttons.
+document.querySelectorAll('.number').forEach((button) => {
+    button.addEventListener('click', () => {
+        currentValue = parseFloat(currentValue.toString() + button.textContent);
+        display.textContent = currentValue;
+    });
+});
 
-console.log(array);
+// Event listener for plus button.
+plusButton.onclick = plusButtonClick;
+
+// Event listener for equals button.
+equalsButton.onclick = equalsButtonClick;
+
+
 
 
 
