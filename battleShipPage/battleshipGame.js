@@ -1,26 +1,27 @@
 // this container will hold both of our game boards, we are accessing this DOM reference in our for loop to create the matrices
-const gamesBoardContainer = document.querySelector('#gamesboard-container')
+// we use JS to change the dom by appending two game boards to this container
+const gameContainer = document.querySelector('#game-container');
 
 // this DOM reference will allow us to later get all its children (ship divs stored inside)
-const optionContainer = document.querySelector('#player1-ships')
-const optionContainerPlayer2 = document.querySelector('#player2-ships')
+const shipContainerP1 = document.querySelector('#player1-ships');
+const shipContainerP2 = document.querySelector('#player2-ships');
 
 // buttons and display DOM references
-const flipButton = document.querySelector('#flip-button')
-const startButton = document.querySelector('#start-button')
-const infoDisplay = document.querySelector('#info')
-const turnDisplay = document.querySelector('#turn-display')
+const rotateButton = document.querySelector('#rotate-button');
+const startButton = document.querySelector('#start-button');
+const infoDisplay = document.querySelector('#info');
+const turnDisplay = document.querySelector('#turn-display');
 
 // We retrieved the HTML reference to the player1-ships through the DOM and here we are accessing the ships inside the parent div, and storing them into an array.
 // This function allows the user to rotate the ships before they are placed on the board and it does this by first checking the current angle, it traverses the mentioned array and dynamically updates the CSS property of rotate, to either angle 0 or angle 90.
-let angle = 0
+let angle = 0;
 function rotate() {
-  const optionShips = Array.from(optionContainer.children)
+  const optionShips = Array.from(shipContainerP1.children);
 
   if (angle == 0) {
-    angle = 90
+    angle = 90;
   } else {
-    angle = 0
+    angle = 0;
   } // end else
 
   optionShips.forEach(
@@ -31,26 +32,23 @@ function rotate() {
 // Function for Player 2, same method
 let angleP2 = 0
 function rotateP2() {
-  const optionShipsP2 = Array.from(optionContainerPlayer2.children)
+  const optionShipsP2 = Array.from(shipContainerP2.children);
 
   if (angleP2 == 0) {
-    angleP2 = 90
+    angleP2 = 90;
   } else {
-    angleP2 = 0
+    angleP2 = 0;
   }
-
-  optionShipsP2.forEach(
-    (optionShipP2) => (optionShipP2.style.transform = `rotate(${angleP2}deg)`)
-  )
+  optionShipsP2.forEach((optionShipP2) => (optionShipP2.style.transform = `rotate(${angleP2}deg)`))
 }
 
 // First event listener, allow the user to click the rotate button to rotate their ships
-flipButton.addEventListener('click', function () {
-  rotate()
-  rotateP2()
+rotateButton.addEventListener('click', function () {
+  rotate();
+  rotateP2();
 })
 
-const width = 10
+const width = 10;
 
 // this function dynamically creates an N*N Matrix of cell divs
 // this allows to specify and remember the exact coordinates of where
@@ -58,25 +56,27 @@ const width = 10
 // a game-board div is created and added to our container, from here we can
 // append the blocks to the game-boards.
 function createMatrixBoard(color, user) {
-  const gameBoardContainer = document.createElement('div')
-  gameBoardContainer.classList.add('game-board')
-  gameBoardContainer.style.backgroundColor = color
-  gameBoardContainer.id = user
+  const gameBoardContainer = document.createElement('div');
+  gameBoardContainer.classList.add('game-board');
+
+  // uses JS to dynamically change element styling
+  // we are using the color parameter to pass in a color when the user calls this function
+  gameBoardContainer.style.backgroundColor = color;
+  gameBoardContainer.id = user;
 
   for (let i = 0; i < width * width; i++) {
-    const block = document.createElement('div')
-    block.classList.add('block')
-    block.id = i
-    gameBoardContainer.append(block)
+    const block = document.createElement('div');
+    block.classList.add('block');
+    block.id = i;
+    gameBoardContainer.append(block);
   } // end i loop
 
-  gamesBoardContainer.append(gameBoardContainer)
+  gameContainer.append(gameBoardContainer)
 } // end createMatrixBoard function
 
-createMatrixBoard('white', 'player')
+createMatrixBoard('blue', 'player');
+createMatrixBoard('blue', 'player2');
 
-createMatrixBoard('white', 'player2')
-// createMatrixBoard('white', 'computer')
 
 // Simple class to make our ships with a name and length
 class Ship {
@@ -112,40 +112,36 @@ let notDroppedP2;
 // a function to add blocks, we start by getting access to all the blocks of the player's board,
 function addShipPiece(user, ship, startId) {
   const allBoardBlocks = document.querySelectorAll(`#${user} div`)
-  // let randomBoolean = Math.random() < 0.5
-  let isHorizontal
+  let isHorizontal = angle === 0;
 
-  if (user === 'player' || user === 'player2') {
-    isHorizontal = angle === 0;
-  } 
-  // else {
-  //   isHorizontal = randomBoolean
-  // }
-
-  // let randomStartIndex = Math.floor(Math.random() * width * width)
 
   // startIndex for players
-  let startIndex
+  let startIndex;
 
   if (startId) {
-    startIndex = startId
+    startIndex = startId;
   } 
-  // else {
-  //   startIndex = randomStartIndex
-  // }
 
+  // used to later determine if we can actually place a ship here
   let validStart;
+
+
   if (isHorizontal) {
+     // If the ship fits within the row, set the starting index to the input value
     if (startIndex <= width * width - ship.length) {
-      validStart = startIndex
+      validStart = startIndex;
     } else {
-      validStart = width * width - ship.length
+       // If the ship doesn't fit, adjust the starting index so that the ship fits within the row
+      validStart = width * width - ship.length;
     }
   } else {
+     // If the ship fits within the column, set the starting index to the input value
+     validStart = startIndex;
     if (startIndex <= width * width - width * ship.length) {
-      validStart = startIndex
+      validStart = startIndex;
     } else {
-      validStart = startIndex - ship.length * width + width
+       // If the ship doesn't fit, adjust the starting index so that the ship fits within the column
+      validStart = startIndex - ship.length * width + width;
     }
   }
 
@@ -167,36 +163,32 @@ function addShipPiece(user, ship, startId) {
   let valid;
 
   if (isHorizontal) {
-    shipBlocks.every(
-      (_shipBlock, index) =>
-        (valid =
-          shipBlocks[0].id % width !==
-          width - (shipBlocks.length - (index + 1)))
-    )
+    // If the ship is horizontal, check that every block is in the same row
+  // and that there is no gap between them
+    shipBlocks.every((_shipBlock, index) => (valid =shipBlocks[0].id % width !== width - (shipBlocks.length - (index + 1))))
   } else {
-    shipBlocks.every(
-      (_shipBlock, index) =>
-        (valid = shipBlocks[0].id < 90 + (width * index + 1))
-    )
+    // If the ship is vertical, check that every block is in the same column
+  // and that there is no gap between them
+    shipBlocks.every((_shipBlock, index) =>(valid = shipBlocks[0].id < 90 + (width * index + 1)))
   }
 
+  // Check that none of the ship's blocks are already taken by another ship
   const notTaken = shipBlocks.every(
     (shipBlock) => !shipBlock.classList.contains('taken')
   )
 
+// If the ship placement is valid and none of the blocks are taken,
+// add the ship's name and 'taken' class to each block
   if (valid && notTaken) {
     shipBlocks.forEach((shipBlock) => {
       shipBlock.classList.add(ship.name)
       shipBlock.classList.add('taken')
     })
   } else {
-    // if (user === 'computer') addShipPiece(user, ship, startId)
     if (user === 'player') notDropped = true
     if (user === 'player2') notDroppedP2 = true
   }
 } // end addShipPiece
-
-// ships.forEach((ship) => addShipPiece('computer', ship))
 
 // Drag ships functionality
 
@@ -205,23 +197,25 @@ let draggedShip;
 let draggedShipP2;
 
 // fetch all the ships from the parent container, store them into an array
-const optionShips = Array.from(optionContainer.children)
-const optionShipsP2 = Array.from(optionContainerPlayer2.children)
+const optionShips = Array.from(shipContainerP1.children)
+const optionShipsP2 = Array.from(shipContainerP2.children)
 
 // Iterate through this array and tie our dragStart function into the 'dragstart' event listener
 optionShips.forEach((optionShip) =>
   optionShip.addEventListener('dragstart', dragStart)
 )
 
-// Unsure about this logic
+// Same logic
 optionShipsP2.forEach((optionShipP2) =>
   optionShipP2.addEventListener('dragstart', dragStartP2)
 )
 
-// target all player blocks
+// target all player blocks for both players
 const allPlayerBlocks = document.querySelectorAll('#player div')
 const allPlayerBlocksP2 = document.querySelectorAll('#player2 div')
 
+
+// intiate dragover and drop events, html elements are set to draggable=true
 allPlayerBlocks.forEach((playerBlock) => {
   playerBlock.addEventListener('dragover', dragOver)
   playerBlock.addEventListener('drop', dropShip)
@@ -233,12 +227,12 @@ allPlayerBlocksP2.forEach((playerBlockP2) => {
 })
 
 function dragStart(e) {
-  notDropped = false
+  notDropped = false;
   draggedShip = e.target
 }
 
 function dragStartP2(e) {
-  notDroppedP2 = false
+  notDroppedP2 = false;
   draggedShipP2 = e.target
 }
 
@@ -268,191 +262,133 @@ function dropShipP2(e) {
   }
 }
 
+
 // Game logic
 
-let gameOver = false
-let player1Turn = undefined
+let gameOver = false;
+let player1Turn = undefined;
 
 // Start Game
 function startGame() {
-  if (player1Turn === undefined) {
-    // only start game if all ships have been placed
-    if (
-      optionContainer.children.length != 0 &&
-      optionContainerPlayer2.children.length != 0
-    ) {
-      infoDisplay.textContent = 'Please place all your pieces first!'
-    }
-    // else, start the game
-    else {
-      const allBoardBlocks = document.querySelectorAll('#player div')
-      const allBoardBlocksP2 = document.querySelectorAll('#player2 div')
-      
 
-      allBoardBlocks.forEach((block) =>
-        block.addEventListener('click', handleClick)
-      )
-      allBoardBlocksP2.forEach((blockP2) =>
-        blockP2.addEventListener('click', handleClick)
-      )
+  if(player1Turn === undefined) {
 
-      // FIXME possibly
-      player1Turn = true
-      turnDisplay.textContent = 'Player 1s turn!'
-      infoDisplay.textContent = 'The game has started, attack Player 2!'
-    }
+     // only start game if all ships have been placed
+     // Here, we use JS to change the text context of our span HTML elements, in our game-info container
+  if(shipContainerP1.children.length != 0 && shipContainerP2.children.length != 0) {
+    infoDisplay.textContent = 'Please place all your pieces first!';
+  }
+  else {
+    // target player2s board
+    const allBoardBlocks = document.querySelectorAll('#player2 div')
+    allBoardBlocks.forEach(block => block.addEventListener('click', handleClick))
+    player1Turn = true;
+    turnDisplay.textContent = 'Player1s turn!';
+    infoDisplay.textContent = 'Attack Player2s board!';
+  }
   }
 }
 // trigger startGame function when clicking start button
-startButton.addEventListener('click', startGame)
+startButton.addEventListener('click', startGame);
 
-let playerHits = []
-let playerHitsP2 = []
-// let computerHits = []
-
-const playerSunkShips = []
-const playerSunkShipsP2 = []
-// const computerSunkShips = []
+let playerHits = [];
+let player2Hits = [];
+const playerSunkShips = [];
+const player2SunkShips = [];
 
 function handleClick(e) {
-  if (!gameOver) {
+   if(!gameOver) {
     // if we click on a cell that is marked as taken, we have hit a ship
-    if (e.target.classList.contains('taken')) {
+    if(e.target.classList.contains('taken')) {
       e.target.classList.add('boom')
-      infoDisplay.textContent = 'You hit a ship!'
+      infoDisplay.textContent = 'You hit player2s ship!'
 
       // used to filter the class name from each ship, used to keep track of how many hits each ship has taken, stored in array
-      let classes = Array.from(e.target.classList)
-      let classesP2 = Array.from(e.target.classList);
-
-      classes = classes.filter((className) => className !== 'block')
-      classes = classes.filter((className) => className !== 'boom')
-      classes = classes.filter((className) => className !== 'taken')
-
-
-      classesP2 = classesP2.filter((className) => className !== 'block')
-      classesP2 = classesP2.filter((className) => className !== 'boom')
-      classesP2 = classesP2.filter((className) => className !== 'taken')
+      let classes = Array.from(e.target.classList);
+      classes = classes.filter(className => className !== 'block');
+      classes = classes.filter(className => className !== 'boom');
+      classes = classes.filter(className => className !== 'taken');
       playerHits.push(...classes);
-      playerHitsP2.push(...classesP2);
+      checkScore('player', playerHits, playerSunkShips);
 
-      checkScore('player', playerHits, playerSunkShips)
-      checkScore('player2', playerHitsP2, playerSunkShipsP2)
-    } // end if
+
+    } // end if 
     // If we haven't hit a ship
-    if (!e.target.classList.contains('taken')) {
-      infoDisplay.textContent = 'Nothing his this time';
+    if(!e.target.classList.contains('taken')) {
+      infoDisplay.textContent = 'Nothing hit this time';
       e.target.classList.add('empty');
     }
-    // handle player2 turn here
+    // handle player2s turn here
     player1Turn = false;
-    const allBoardBlocksP2 = document.querySelectorAll('#player2 div')
-    allBoardBlocksP2.forEach((blockP2) =>
-      blockP2.replaceWith(blockP2.cloneNode(true))
-    )
-    setTimeout(player2Turn, 500)
-  } // end if
-} // end handeClick
+    // target player1s board
+    const allBoardBlocksP2 = document.querySelectorAll('#player div');
+    allBoardBlocksP2.forEach(blockP2 => blockP2.addEventListener('click', handleClickP2))
+    turnDisplay.textContent = 'Player2s turn'
+   } // end if 
+} // end handleClick
 
-// Computer's turn
-function player2Turn() {
-  if (!gameOver) {
-    turnDisplay.textContent = 'Player 2s turn'
-    infoDisplay.textContent = 'attack Player 1!'
+function handleClickP2(e) {
+  if(!gameOver) {
+    if (e.target.classList.contains('taken')) {
+      e.target.classList.add('boom')
+      infoDisplay.textContent = 'Player2 hit a ship!'
 
-    setTimeout(() => {
-      // this guesses from 0 to 100
-      // let randomGo = Math.floor(Math.random() * width * width)
-
-      // target player's divs
-      const allBoardBlocks = document.querySelectorAll('#player div')
-
-      // if computer picks a block that is labeled taken and boom, then make it go again
-      if (
-        allBoardBlocks[randomGo].classList.contains('taken') &&
-        allBoardBlocks[randomGo].classList.contains('boom')
-      ) {
-        player2Turn();
-        return
-      } else if (
-        allBoardBlocks[randomGo].classList.contains('taken') &&
-        !allBoardBlocks[randomGo].classList.contains('boom')
-      ) {
-        allBoardBlocks[randomGo].classList.add('boom')
-        infoDisplay.textContent = 'The computer hit your ship'
-
-        let classes = Array.from(allBoardBlocks[randomGo].classList)
-        classes = classes.filter((className) => className !== 'block')
-        classes = classes.filter((className) => className !== 'boom')
-        classes = classes.filter((className) => className !== 'taken')
-        computerHits.push(...classes)
-        checkScore('computer', computerHits, computerSunkShips)
-      } else {
-        infoDisplay.textContent = 'Nothing hit this time'
-        allBoardBlocks[randomGo].classList.add('empty')
-      }
-    }, 500)
-    // back to the player's turn
-    setTimeout(() => {
-      player1Turn = true
-      turnDisplay.textContent = 'Your go'
-      infoDisplay.textContent = 'Please take your go'
-      const allBoardBlocks = document.querySelectorAll('#computer div')
-
-      allBoardBlocks.forEach((block) =>
-        block.addEventListener('click', handleClick)
-      )
-    }, 500)
-  }
+      // used to filter the class name from each ship, used to keep track of how many hits each ship has taken, stored in array
+      let classes = Array.from(e.target.classList);
+      classes = classes.filter(className => className !== 'block');
+      classes = classes.filter(className => className !== 'boom');
+      classes = classes.filter(className => className !== 'taken');
+      player2Hits.push(...classes);
+      checkScore('player2', player2Hits, player2SunkShips);
+  } // end actual hit if 
+   // If we haven't hit a ship
+   if (!e.target.classList.contains('taken')) {
+    infoDisplay.textContent = 'Nothing hit this time';
+    e.target.classList.add('empty');
+    }
+  // handle player1's turn here
+  player1Turn = true;
+  const allBoardBlocksP1 = document.querySelectorAll('#player div');
+  allBoardBlocksP1.forEach(blockP1 => blockP1.addEventListener('click', handleClick));
+  turnDisplay.textContent = 'Player1s turn!';
+  } // end gameOver if
 }
 
 function checkScore(user, userHits, userSunkShips) {
-  function checkShip(shipName, shipLength) {
-    if (
-      userHits.filter((storedShipName) => storedShipName === shipName)
-        .length === shipLength
-    ) {
-      infoDisplay.textContent = `you sunk the ${user}'s ${shipName}`
+function checkShip(shipName, shipLength) {
+    if(userHits.filter(storedShipName => storedShipName === shipName).length === shipLength) {
+            infoDisplay.textContent = `you sunk the ${user}'s ${shipName}`;
 
-      // convert playerHits into ships sunk, filter ship name from array if ship is
-      if (user === 'player') {
-        playerHits = userHits.filter(
-          (storedShipName) => storedShipName !== shipName
-        )
-      } // end if
-      if (user === 'player2') {
-        playerHitsP2 = userHits.filter(
-          (storedShipName) => storedShipName !== shipName
-        )
-      } // end if
-      if (user === 'computer') {
-        computerHits = userHits.filter(
-          (storedShipName) => storedShipName !== shipName
-        )
-      } // end if
-      userSunkShips.push(shipName)
-    } // end if
-  } // end function checkShip
-  checkShip('destroyer', 2)
-  checkShip('submarine', 3)
-  checkShip('cruiser', 3)
-  checkShip('battleship', 4)
-  checkShip('carrier', 5)
+            // convert playerHits into ships sunk, filter ship name from array if ship is
+            if(user === 'player') {
+              playerHits = userHits.filter(storedShipName => storedShipName !== shipName);
+            } // end if
+            if(user === 'player2') {
+              player2Hits = userHits.filter(storedShipName => storedShipName !== shipName);
+            } // end if 
+            userSunkShips.push(shipName);
+   } // end if 
+} // end function checkShip
+  checkShip('destroyer', 2);
+  checkShip('submarine', 3);
+  checkShip('cruiser', 3);
+  checkShip('battleship', 4);
+  checkShip('carrier', 5);
 
-  console.log('player hits', playerHits)
-  console.log('player sunk ships', playerSunkShips)
+  console.log('player hits', playerHits);
+  console.log('player sunk ships', playerSunkShips);
 
-  console.log('player2 hits', playerHitsP2)
-  console.log('player2 sunk ships', playerSunkShipsP2)
+  console.log('player2 hits', player2Hits);
+  console.log('player2 sunk ships', player2SunkShips);
 
-  if (playerSunkShips.length === 5) {
-    infoDisplay.textContent = 'You sunk all the computers ships. You WON!'
-    gameOver = true
-  } // end if
+  // each side has only 5 battleships, so the first to reach 5 sunken ships wins
+  if(playerSunkShips.length === 5) {
+    infoDisplay.textContent = 'You sunk all Player2s ships. Game over!';
+    gameOver = true;
+  } // end if 
+  if(player2SunkShips.length === 5) {
+    infoDisplay.textContent = 'You sunk all Player1s ships! Game over!'
+    gameOver = true;
+  } // end if 
 
-  if (playerSunkShipsP2.length === 5) {
-    infoDisplay.textContent = 'You sunk all Player 2s ships. You WON!'
-    gameOver = true
-  } // end if
-
-}
+} 

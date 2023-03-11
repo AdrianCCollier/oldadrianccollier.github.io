@@ -24,24 +24,31 @@
   </head>
   <body>
     <!--Navbar-->
-    <!-- <nav>
+    <nav>
       <ul class="menu">
         <li><a href="../index.html">Home</a></li>
         <li><a href="../contactPage/contact.html">Contact</a></li>
       </ul>
-    </nav> -->
+    </nav>
 
-    <div id="game-info">
-      <p>Turn: <span id="turn-display"></span></p>
-      <p>Info: <span id="info"></span></p>
-    </div>
-   
+    
+   <!--Here, I'm wrapping everything up in a main class so i can use flexbox on everything-->
     <div class="main">
+      <!--game-info is a simple container that uses span to dynamically give updates with JS textContext = ''-->
+      
+      
+      <!--gamesboard-container is the black container you see, I target this inside my JS and append two game-boards in my nested for loop-->
+      <div id="game-container"></div>
+      <div id="game-info">
+        <p>Turn: <span id="turn-display"></span></p>
+        <p>Info: <span id="info"></span></p>
+      </div>
 
-      <div id="gamesboard-container"></div>
-
+      <!--ship-displays only purpose is to house both p1,p2 ships so i can use flexbox on them to space them evenly-->
       <div class="ship-display">
-        <div id="player1-ships" class="option-container">
+
+        <!--each ship has two classes, as the animation was meant to change depending on the container-->
+        <div id="player1-ships" class="ship-container">
           
           <div id="0" class="destroyer-before destroyer" draggable="true">destroyer</div>
           <div id="1" class="submarine-before submarine" draggable="true">submarine</div>
@@ -50,7 +57,7 @@
           <div id="4" class="carrier-before carrier" draggable="true">carrier</div>
         </div>
 
-        <div id="player2-ships" class="option-container">
+        <div id="player2-ships" class="ship-container">
           
           <div id="0" class="destroyer-before destroyer" draggable="true">destroyer</div>
           <div id="1" class="submarine-before submarine" draggable="true">submarine</div>
@@ -58,17 +65,14 @@
           <div id="3" class="battleship-before battleship" draggable="true">battleship</div>
           <div id="4" class="carrier-before carrier" draggable="true">carrier</div>
         </div>
-
-        <div class="button-container">
-          <button id="flip-button">ROTATE</button>
-        <button id="start-button">START</button>
-        </div>
-        
-
+      </div>
+      <div class="button-container">
+        <button id="rotate-button">ROTATE</button>
+      <button id="start-button">START</button>
       </div>
     </div>
     <!--Footer-->
-    <!-- <footer id="footerWrapper">
+    <footer id="footerWrapper">
       <div id="footerLinks">
         <a href="mailto:adrianccollier@gmail.com"
           ><i class="fa-sharp fa-solid fa-envelope fa-xl"></i
@@ -78,7 +82,7 @@
         ></a>
     
       </div>
-    </footer> -->
+    </footer>
 
     <script src="./battleShipGame.js"></script>
   </body>
