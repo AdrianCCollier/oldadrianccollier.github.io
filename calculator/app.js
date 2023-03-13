@@ -1,72 +1,36 @@
 // DOM references
 const display = document.getElementById('display');
-const AC = document.getElementById('AC-button');
-const twoButton = document.getElementById('two-button');
-const plusButton = document.getElementById('plus-button');
-const totalButton = document.getElementById('total-button');
-// Variables being used
+const buttons = document.querySelectorAll('.button');
 
-let previousValue = 0;
-let currentValue = 0; 
-let operator = '';
-let total = 0;
+// An array to store our running calculation
+let calculation = [];
 
-// Clear Screen function.
-// display 0 and reset all variables
-AC.onclick = function clearDisplay() {
-display.textContent = '0';
-previousValue = 0;
-currentValue = 0;
-operator = '';
-total = 0;
-}
+// An array has commas by default, we remove them and store the result array into our total variable.
+let total;
 
-// Plus button click function.
-function plusButtonClick() {
-    if (operator === '') {
-        previousValue = parseFloat(currentValue);
+function calculate(button) {
+    const value = button.textContent;
+
+    if(value === 'AC') {
+        calculation = [];
+        total = 0;
+        display.textContent = '0';
+    } else if(value === '=') {
+        let result = eval(total);
+        if(result === 'Infinity') {
+            display.textContent = 'Naw'
+        }
+        display.textContent = result;
     } else {
-        performOperation();
-    }
-    operator = '+';
-    currentValue = 0;
-}
+        calculation.push(value)
+        total = calculation.join('')
+        display.textContent = total
+        console.log(total);
 
-// Equals button click function.
-function equalsButtonClick() {
-    performOperation();
-    operator = '';
-    currentValue = total;
-    display.textContent = total;
-}
-
-// Addition function.
-function performOperation() {
-    switch (operator) {
-        case '+':
-            total = previousValue + parseFloat(currentValue);
-            break;
-        default:
-            break;
     }
 }
 
-// Event listeners for number buttons.
-document.querySelectorAll('.number').forEach((button) => {
-    button.addEventListener('click', () => {
-        currentValue = parseFloat(currentValue.toString() + button.textContent);
-        display.textContent = currentValue;
-    });
-});
-
-// Event listener for plus button.
-plusButton.onclick = plusButtonClick;
-
-// Event listener for equals button.
-equalsButton.onclick = equalsButtonClick;
-
-
-
+buttons.forEach(button => button.addEventListener('click', () => calculate(button)));
 
 
 
