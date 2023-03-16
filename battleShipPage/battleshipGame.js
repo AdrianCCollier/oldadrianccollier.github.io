@@ -1,3 +1,5 @@
+
+
 // this container will hold both of our game boards, we are accessing this DOM reference in our for loop to create the matrices
 // we use JS to change the dom by appending two game boards to this container
 const gameContainer = document.querySelector('#game-container');
@@ -258,34 +260,73 @@ function dropShipP2(e) {
   const shipP2 = shipsP2[draggedShipP2.id]
   addShipPiece('player2', shipP2, startId)
   if (!notDroppedP2) {
-    draggedShipP2.remove()
+    draggedShipP2.remove();
   }
 }
 
 
 // Game logic
-
 let gameOver = false;
 let player1Turn = undefined;
+infoDisplay.textContent = 'Waiting to start the game, both players should now place their ships'
+
+
+function enablePlayer1Turn() {
+  const allBoardBlocksP1 = document.querySelectorAll('#player2 div')
+  allBoardBlocksP1.forEach((blockP1) => {
+    blockP1.addEventListener('click', handleClick)
+    // Highlight Player2's grid cells
+    blockP1.classList.add('highlight-board')
+  })
+
+  const allBoardBlocksP2 = document.querySelectorAll('#player div')
+  allBoardBlocksP2.forEach((blockP2) => {
+    // Remove highlight from Player1's grid cells
+    blockP2.classList.remove('highlight-board')
+  })
+}
+
+function enablePlayer2Turn() {
+  const allBoardBlocksP2 = document.querySelectorAll('#player div')
+  allBoardBlocksP2.forEach((blockP2) => {
+    blockP2.addEventListener('click', handleClickP2)
+    // Highlight Player1's grid cells
+    blockP2.classList.add('highlight-board')
+  })
+
+  const allBoardBlocksP1 = document.querySelectorAll('#player2 div')
+  allBoardBlocksP1.forEach((blockP1) => {
+    // Remove highlight from Player2's grid cells
+    blockP1.classList.remove('highlight-board')
+  })
+}
+
+function disablePlayer1Turn() {
+  const allBoardBlocksP1 = document.querySelectorAll('#player2 div');
+  allBoardBlocksP1.forEach(blockP1 => blockP1.removeEventListener('click', handleClick));
+}
+
+function disablePlayer2Turn() {
+  const allBoardBlocksP2 = document.querySelectorAll('#player div');
+  allBoardBlocksP2.forEach(blockP2 => blockP2.removeEventListener('click', handleClickP2));
+}
 
 // Start Game
 function startGame() {
-
   if(player1Turn === undefined) {
 
      // only start game if all ships have been placed
      // Here, we use JS to change the text context of our span HTML elements, in our game-info container
-  if(shipContainerP1.children.length != 0 && shipContainerP2.children.length != 0) {
+  if(shipContainerP1.children.length != 0 || shipContainerP2.children.length != 0) {
     infoDisplay.textContent = 'Please place all your pieces first!';
   }
   else {
-    // target player2s board
-    const allBoardBlocks = document.querySelectorAll('#player2 div')
-    allBoardBlocks.forEach(block => block.addEventListener('click', handleClick))
+    // It's player1's turn, he gets to target player2s board
+    enablePlayer1Turn();
     player1Turn = true;
     turnDisplay.textContent = 'Player1s turn!';
     infoDisplay.textContent = 'Attack Player2s board!';
-  }
+    }
   }
 }
 // trigger startGame function when clicking start button
@@ -297,11 +338,11 @@ const playerSunkShips = [];
 const player2SunkShips = [];
 
 function handleClick(e) {
-   if(!gameOver) {
+   if(!gameOver && player1Turn) {
     // if we click on a cell that is marked as taken, we have hit a ship
     if(e.target.classList.contains('taken')) {
       e.target.classList.add('boom')
-      infoDisplay.textContent = 'You hit player2s ship!'
+      infoDisplay.textContent = 'You hit player2s ship! Take another shot'
 
       // used to filter the class name from each ship, used to keep track of how many hits each ship has taken, stored in array
       let classes = Array.from(e.target.classList);
@@ -313,25 +354,27 @@ function handleClick(e) {
 
 
     } // end if 
+
     // If we haven't hit a ship
     if(!e.target.classList.contains('taken')) {
-      infoDisplay.textContent = 'Nothing hit this time';
-      e.target.classList.add('empty');
-    }
-    // handle player2s turn here
-    player1Turn = false;
-    // target player1s board
-    const allBoardBlocksP2 = document.querySelectorAll('#player div');
-    allBoardBlocksP2.forEach(blockP2 => blockP2.addEventListener('click', handleClickP2))
-    turnDisplay.textContent = 'Player2s turn'
+      infoDisplay.textContent = 'Nothing hit this time'
+      e.target.classList.add('empty')
+
+      // handle player2s turn here
+      player1Turn = false;
+      disablePlayer1Turn();
+      enablePlayer2Turn();
+      turnDisplay.textContent = 'Player2s turn'
+      infoDisplay.textContent = 'Attack Player1s board'
+    } // end if 
    } // end if 
 } // end handleClick
 
 function handleClickP2(e) {
-  if(!gameOver) {
+  if(!gameOver && !player1Turn) {
     if (e.target.classList.contains('taken')) {
       e.target.classList.add('boom')
-      infoDisplay.textContent = 'Player2 hit a ship!'
+      infoDisplay.textContent = 'Player2 hit a ship! Take another shot'
 
       // used to filter the class name from each ship, used to keep track of how many hits each ship has taken, stored in array
       let classes = Array.from(e.target.classList);
@@ -343,20 +386,24 @@ function handleClickP2(e) {
   } // end actual hit if 
    // If we haven't hit a ship
    if (!e.target.classList.contains('taken')) {
-    infoDisplay.textContent = 'Nothing hit this time';
-    e.target.classList.add('empty');
-    }
-  // handle player1's turn here
-  player1Turn = true;
-  const allBoardBlocksP1 = document.querySelectorAll('#player div');
-  allBoardBlocksP1.forEach(blockP1 => blockP1.addEventListener('click', handleClick));
-  turnDisplay.textContent = 'Player1s turn!';
+     infoDisplay.textContent = 'Nothing hit this time'
+     e.target.classList.add('empty')
+
+     // handle player1's turn here
+     player1Turn = true
+     disablePlayer2Turn();
+     enablePlayer1Turn();
+     turnDisplay.textContent = 'Player1s turn!'
+     infoDisplay.textContent = 'Attack player2s board!'
+   } // end if 
   } // end gameOver if
-}
+} // end handleClickP2 function
 
 function checkScore(user, userHits, userSunkShips) {
 function checkShip(shipName, shipLength) {
+
     if(userHits.filter(storedShipName => storedShipName === shipName).length === shipLength) {
+
             infoDisplay.textContent = `you sunk the ${user}'s ${shipName}`;
 
             // convert playerHits into ships sunk, filter ship name from array if ship is

@@ -1,5 +1,5 @@
 body {
-background-image: linear-gradient(45deg, #3b0154, #4d0272);
+background-image: linear-gradient(45deg, #000000, #13021b);
 background-color: black;
 overflow: hidden;
 }
@@ -33,22 +33,36 @@ overflow: hidden;
   font-weight: normal;
 }
 
+#title {
+  color: white;
+  font-size: 38px;
+  padding: 0px 30px;
+  margin-bottom: 10px;
+}
 #game-container {
   width: 100vw;
   height: 45vh;
-  background-color: black;
   display:flex;
   justify-content: space-evenly;
   align-items: center;
   
 }
 
+
+
 .game-board {
   width: 400px;
   height: 400px;
   display: flex;
   flex-wrap: wrap;
-  
+}
+
+.highlight-board{
+  background-color: rgba(255,255,255,0.3);
+}
+
+.block:hover {
+  background-color: rgb(255, 255, 255);
 }
 
 .block {

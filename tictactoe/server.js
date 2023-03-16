@@ -23,9 +23,15 @@
 //   }
 // })
 const express = require("express");
+const dotenv = require("dotenv").config();
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 5000; 
 
-app.listen(port,   )
+app.get('/api/contacts', (req, res) => {
+res.send('get all contacts')
+res.json({message: "get all contacts"});
+});
 
-console.log("I am in the express project");
+app.listen(port, () => {
+   console.log(`Server running on port ${port}`) 
+});
