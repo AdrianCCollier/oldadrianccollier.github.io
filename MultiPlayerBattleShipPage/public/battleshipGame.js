@@ -11,95 +11,122 @@ const rotateButton = document.querySelector('#rotate-button')
 const startButton = document.querySelector('#start-button')
 const infoDisplay = document.querySelector('#info')
 const turnDisplay = document.querySelector('#turn-display')
-const singlePlayerButton = document.querySelector('#singlePlayerButton');
-const multiPlayerButton = document.querySelector('#multiPlayerButton');
+const singlePlayerButton = document.querySelector('#singlePlayerButton')
+const multiPlayerButton = document.querySelector('#multiPlayerButton')
 
-
-
-let isHorizontal = true;
-let isGameOver = false;
+let isHorizontal = true
+let isGameOver = false
 let currentPlayer = 'user'
-const width = 10;
-let gameMode = "";
-let playerNum = 0;
-let ready = false;
-let enemyReady = false;
-let allShipsPlaced = false;
-let shotFired = -1;
-
+const width = 10
+let gameMode = ''
+let playerNum = 0
+let ready = false
+let enemyReady = false
+let allShipsPlaced = false
+let shotFired = -1
 
 // Select playerMode, delete later
-singlePlayerButton.addEventListener('click', startSinglePlayer);
-multiPlayerButton.addEventListener('click', startMultiPlayer);
+singlePlayerButton.addEventListener('click', startSinglePlayer)
+multiPlayerButton.addEventListener('click', startMultiPlayer)
 
 // Game logic for Multiplayer
 function playGameMulti(socket) {
-  if(isGameOver) 
-    return;
-  if(!ready) { 
-    socket.emit('player-ready');
-    ready = true;
-    playerReady(playerNum);
+  if (isGameOver) return
+  if (!ready) {
+    socket.emit('player-ready')
+    ready = true
+    // visually indicate player is ready
+    playerReady(playerNum)
+  }
 
+  if (enemyReady) {
+    if (currentPlayer === 'user') {
+      turnDisplay.textContent = 'Your turn'
+    }
+    if (currentPlayer === 'enemy') {
+      turnDisplay.textContent = 'Enemys turn'
+    }
   }
 }
 
+// green ready functionality
+function playerReady(num) {
+  let player = `.p${parseInt(num) + 1}`
+  document.querySelector(`${player} .ready span`).classList.toggle('green')
+}
 
 // Single player mode, not needed anymore, delete later
 function startSinglePlayer() {
-  gameMode = "singlePlayer"
+  gameMode = 'singlePlayer'
 }
 
 // Multiplayer
 function startMultiPlayer() {
-  gameMode = 'multiPlayer';
+  gameMode = 'multiPlayer'
 
-  const socket = io();
-
+  const socket = io()
 
   // Get your player number
-socket.on('player-number', num => {
-  if(num === -1) {
-    infoDisplay.textContent = "Sorry, the server is full";
-  } else {
-    playerNum = parseInt(num);
-    if(playerNum === 1) currentPlayer = "enemy";
-    console.log(playerNum)
+  socket.on('player-number', (num) => {
+    if (num === -1) {
+      infoDisplay.textContent = 'Sorry, the server is full'
+    } else {
+      playerNum = parseInt(num)
+      if (playerNum === 1) currentPlayer = 'enemy'
+      console.log(playerNum)
+
+
+      // Get other players status
+      socket.emit('check-players')
+    }
+  })
+
+  // Another player has connected or disconnected
+  socket.on('player-connection', (num) => {
+    console.log(`Player number ${num} has connected or disconnected`)
+    playerConnectedOrDisconnected(num)
+  })
+
+  // On enemy ready
+  socket.on('enemy-ready', (num) => {
+    enemyReady = true
+    playerReady(num)
+    if (ready) 
+      playGameMulti(socket)
+    
+  });
+
+  // Check player status
+  socket.on('check-players', players => {
+    players.forEach((p, i) => {
+      if(p.connected) playerConnectedOrDisconnected(i);
+      if(p.ready) {
+        playerReady(i);
+        if(i !== playerReady) 
+          enemyReady = true;
+      }
+    })
+  });
+
+  // Ready button click
+  startButton.addEventListener('click', () => {
+    if (allShipsPlaced) {
+      playGameMulti(socket)
+    } else {
+      infoDisplay.textContent = 'Place all ships yo'
+    }
+  })
+
+  function playerConnectedOrDisconnected(num) {
+    let player = `.p${parseInt(num) + 1}`
+    document
+      .querySelector(`${player} .connected span`)
+      .classList.toggle('green')
+    // know which player we are based on bold font
+    if (parseInt(num) === playerNum)
+      document.querySelector(player).style.fontWeight = 'bold'
   }
-});
-
-// Another player has connected or disconnected
-socket.on('player-connection', num => {
-  console.log(`Player number ${num} has connected or disconnected`)
-  playerConnectedOrDisconnected(num)
-})
-
-// Ready button click
-startButton.addEventListener('click', () => {
-  if(allShipsPlaced) {
-    playGameMulti(socket);
-  } else {
-    infoDisplay.textContent = "Place all ships yo"
-  }
-})
-
-function playerConnectedOrDisconnected(num) {
-  let player = `.p${parseInt(num) + 1}`
-  document.querySelector(`${player} .connected span`).classList.toggle('green');
-  // know which player we are based on bold font
-  if(parseInt(num) === playerNum) document.querySelector(player).style.fontWeight = 'bold';
-}
-
-
-} // end startMultiPlayer 
-
-
-
-
-
-
-
-
+} // end startMultiPlayer
 
 // We retrieved the HTML reference to the player1-ships through the DOM and here we are accessing the ships inside the parent div, and storing them into an array.
 // This function allows the user to rotate the ships before they are placed on the board and it does this by first checking the current angle, it traverses the mentioned array and dynamically updates the CSS property of rotate, to either angle 0 or angle 90.
@@ -138,8 +165,6 @@ rotateButton.addEventListener('click', function () {
   rotate()
   rotateP2()
 })
-
-
 
 // this function dynamically creates an N*N Matrix of cell divs
 // this allows to specify and remember the exact coordinates of where
@@ -205,7 +230,7 @@ function addShipPiece(user, ship, startId) {
   let isHorizontal = angle === 0
 
   // startIndex for players
-  let startIndex;
+  let startIndex
 
   if (startId) {
     startIndex = startId
@@ -290,9 +315,6 @@ function addShipPiece(user, ship, startId) {
   // if(shipContainerP1.children !== 0 || shipContainerP2.children !== 0) {
   //   allShipsPlaced = true;
   // }
-
-
-  
 } // end addShipPiece
 
 // Drag ships functionality
@@ -421,10 +443,13 @@ function startGame() {
   if (player1Turn === undefined) {
     // only start game if all ships have been placed
     // Here, we use JS to change the text context of our span HTML elements, in our game-info container
-    if (shipContainerP1.children.length != 0 || shipContainerP2.children.length != 0) {
+    if (
+      shipContainerP1.children.length != 0 ||
+      shipContainerP2.children.length != 0
+    ) {
       infoDisplay.textContent = 'Please place all your pieces first!'
     } else {
-      allShipsPlaced = true;
+      allShipsPlaced = true
       // It's player1's turn, he gets to target player2s board
       enablePlayer1Turn()
       player1Turn = true
@@ -545,4 +570,3 @@ function checkScore(user, userHits, userSunkShips) {
     gameOver = true
   } // end if
 }
-
