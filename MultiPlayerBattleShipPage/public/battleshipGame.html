@@ -24,15 +24,33 @@
   </head>
   <body>
     <!--Navbar-->
-    <nav>
+    <!-- <nav>
       <ul class="menu">
         <li><a href="../index.html">Home</a></li>
         <li><a href="../contactPage/contact.html">Contact</a></li>
       </ul>
-    </nav>
+    </nav> -->
 
     <!--Here, I'm wrapping everything up in a main class so i can use flexbox on everything-->
     <div class="main">
+
+      <button id="singlePlayerButton">Single Player</button>
+      <button id="multiPlayerButton">Multiplayer</button>
+
+      <div class="player p1">
+        Player 1
+        <div class="connected">Connected <span></span></div>
+        <div class="ready">Ready <span></span></div>
+      </div>
+      <div class="player p2">
+        Player 2
+        <div class="connected">Connected <span></span></div>
+        <div class="ready">Ready <span></span></div>
+      </div>
+
+
+
+
       <!--game-info is a simple container that uses span to dynamically give updates with JS textContext = ''-->
 
       <!-- <div id="title">BattleShips</div> -->
@@ -88,7 +106,7 @@
       </div>
     </div>
     <!--Footer-->
-    <footer id="footerWrapper">
+    <!-- <footer id="footerWrapper">
       <div id="footerLinks">
         <a href="mailto:adrianccollier@gmail.com"
           ><i class="fa-sharp fa-solid fa-envelope fa-xl"></i
@@ -97,12 +115,9 @@
           ><i class="fa-brands fa-github fa-xl"></i
         ></a>
       </div>
-    </footer>
+    </footer> -->
 
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-
-    <script src="./client.js"></script>
-
     <script src="./battleshipGame.js"></script>
   </body>
 </html>

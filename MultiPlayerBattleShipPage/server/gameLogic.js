@@ -1,25 +1,35 @@
+const { createMatrixBoard } = require('../public/battleshipGame')
+
 // Handling game state logic here
+
+
+class Player {
+  constructor(id) {
+    this.id = id;
+    this.board = createMatrixBoard();
+  }
+}
+
 
 class Game{
   constructor() {
-    // initialize game state variables, player boards, turn, etc.
-    this.id = Date.now();
     this.players = [];
-    this.state = 'waitingForPlayers'
+    this.currentPlayer = 'null'
   }
 
   // Add a new player to the game state 
-  addPlayer(playerId) {
-    this.players.push({ id: playerId });
+  addPlayer(player) {
+    if(this.players.length < 2) {
+      this.players.push(player);
+      if(this.players.length === 1) {
+        this.currentPlayer = player.id;
+      }
+      return true;
+    }
+      return false;
   }
 
-  // Method to remove a player from the game
-  removePlayer(playerId) {
-    // Remove the player from the game state
-  }
-
-  // Other game-related methods, later
 }
 
-// Export the Game class so that it can be accessed by the other files
-module.exports = Game;
+// Export these classes so they can be public to client.js, server.js
+module.exports = { Game, Player };

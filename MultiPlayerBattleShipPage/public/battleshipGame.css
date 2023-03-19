@@ -1,7 +1,7 @@
 body {
-background-image: linear-gradient(45deg, #000000, #13021b);
+background-image: linear-gradient(45deg, #959292, #13021b);
 background-color: black;
-overflow: hidden;
+
 }
 
 .main {
@@ -290,4 +290,20 @@ nav {
     margin-top: 15rem;
     margin-bottom: 15rem;
   }
+}
+
+.connected, .ready {
+  font-weight: normal;
+}
+
+.connected span, 
+.ready span {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background: red;
+}
+
+span.green {
+  background: green;
 }
