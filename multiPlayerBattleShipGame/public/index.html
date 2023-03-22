@@ -2,12 +2,19 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Battle Ships</title>
+    <title>MultiPlayer Battleships Game CS </title>
+
+    <!--Link to external CSS file-->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Font awesome library import-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <script>
       let gameMode = 'multiPlayer'
     </script>
+
+    <!-- Socket.io library import-->
     <script src="/socket.io/socket.io.js"></script>
     <script src="app.js" charset="utf-8"></script>
   </head>
@@ -39,22 +46,20 @@
       
       <div class="boards-container">
         <div class="container">
-          <div class="battleship-grid grid-user"></div>
+          <div class="battleship-grid grid-player1"></div>
 
 
           <div class="container hidden-info">
+
+            <!-- Font awesome library imported above, using icons for play and rotate buttons here-->
             <div class="setup-buttons" id="setup-buttons">
-              <button id="start" class="btn">
-                <i class="fas fa-play"></i>
-            </button>
-              <button id="rotate" class="btn">
-    <i class="fas fa-redo rotate-icon"></i>
-</button>
+              <button id="start" class="btn"><i class="fas fa-play"></i></button>
+              <button id="rotate" class="btn"><i class="fas fa-redo rotate-icon"></i></button>
             </div>
-            <h3 id="whose-go" class="info-text">Your Turn</h3>
+            <h3 id="turn-display" class="info-text">Your Turn</h3>
             <h3 id="info" class="info-text"></h3>
           </div>
-          <div class="battleship-grid grid-computer"></div>
+          <div class="battleship-grid grid-player2"></div>
         </div>
 
 
