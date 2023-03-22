@@ -5,7 +5,7 @@
     <title>MultiPlayer Battleships Game CS </title>
 
     <!--Link to external CSS file-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 
     <!-- Font awesome library import-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -14,9 +14,8 @@
       let gameMode = 'multiPlayer'
     </script>
 
-    <!-- Socket.io library import-->
     <script src="/socket.io/socket.io.js"></script>
-    <script src="app.js" charset="utf-8"></script>
+    <script src="game.js" charset="utf-8"></script>
   </head>
   <body>
     
@@ -42,16 +41,11 @@
         <div class="ship battleship-container" draggable="true"><div id="battleship-0"></div><div id="battleship-1"></div><div id="battleship-2"></div><div id="battleship-3"></div></div>
         <div class="ship carrier-container" draggable="true"><div id="carrier-0"></div><div id="carrier-1"></div><div id="carrier-2"></div><div id="carrier-3"></div><div id="carrier-4"></div></div>
       </div>
-      
-      
       <div class="boards-container">
         <div class="container">
           <div class="battleship-grid grid-player1"></div>
-
-
           <div class="container hidden-info">
 
-            <!-- Font awesome library imported above, using icons for play and rotate buttons here-->
             <div class="setup-buttons" id="setup-buttons">
               <button id="start" class="btn"><i class="fas fa-play"></i></button>
               <button id="rotate" class="btn"><i class="fas fa-redo rotate-icon"></i></button>
@@ -61,18 +55,7 @@
           </div>
           <div class="battleship-grid grid-player2"></div>
         </div>
-
-
-
-        <!-- here-->
-        
-
       </div>
-      
     </div>
-
-    
-
-    
   </body>
 </html>

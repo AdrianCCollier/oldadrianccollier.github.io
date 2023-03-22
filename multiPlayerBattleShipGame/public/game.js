@@ -1,29 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const player1Grid = document.querySelector('.grid-player1')
-  const player2Grid = document.querySelector('.grid-player2')
-  const displayGrid = document.querySelector('.grid-display')
-  const ships = document.querySelectorAll('.ship')
-  const destroyer = document.querySelector('.destroyer-container')
-  const submarine = document.querySelector('.submarine-container')
-  const cruiser = document.querySelector('.cruiser-container')
-  const battleship = document.querySelector('.battleship-container')
-  const carrier = document.querySelector('.carrier-container')
-  const startButton = document.querySelector('#start')
-  const rotateButton = document.querySelector('#rotate')
-  const turnDisplay = document.querySelector('#turn-display')
-  const infoDisplay = document.querySelector('#info')
-  const setupButtons = document.getElementById('setup-buttons')
-  const player1Grids = []
-  const player2Grids = []
-  let isHorizontal = true
-  let isGameOver = false
-  let currentPlayer = 'current-player'
-  const width = 10
-  let playerNum = 0
-  let ready = false
-  let player2Ready = false
-  let allShipsPlaced = false
-  let shotFired = -1
+  const player1Grid = document.querySelector('.grid-player1');
+  const player2Grid = document.querySelector('.grid-player2');
+  const displayGrid = document.querySelector('.grid-display');
+  const ships = document.querySelectorAll('.ship');
+  const destroyer = document.querySelector('.destroyer-container');
+  const submarine = document.querySelector('.submarine-container');
+  const cruiser = document.querySelector('.cruiser-container');
+  const battleship = document.querySelector('.battleship-container');
+  const carrier = document.querySelector('.carrier-container');
+  const startButton = document.querySelector('#start');
+  const rotateButton = document.querySelector('#rotate');
+  const turnDisplay = document.querySelector('#turn-display');
+  const infoDisplay = document.querySelector('#info');
+  const setupButtons = document.getElementById('setup-buttons');
+  const player1Grids = [];
+  const player2Grids = [];
+  let isHorizontal = true;
+  let isGameOver = false;
+  let currentPlayer = 'current-player';
+  const width = 10;
+  let playerNum = 0;
+  let player1Ready = false;
+  let player2Ready = false;
+  let allShipsPlaced = false;
+  let shotFired = -1;
 
   // It's necessary to create an array of objects to give each ship their own unique dimensions, keep in mind that due to the game boards always being 10x10, and width = 10, I'm using width to dynamically represent 10
   const shipArray = [
@@ -84,20 +84,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // Multiplayer()
   // This function is responsible for creating the handshake between our server.js file and the connecting clients. We begin by creating a socket.io connection and listening to our server(socket.on() ) or sending data to our server (socket.emit() ), more specific comments below. 
   function startMultiPlayer() {
-    // Create socket.io connection
+    // Create socket.io connection to communicate with server
     const socket = io();
 
     // Listen for the player number that server.js has assigned to us
     socket.on('player-number', (num) => {
 
-      // the for loop in server.js that generates player numbers starts at 0, therefore -1 is used when an invalid player attempts to join
+      // the for loop in server.js that generates player numbers iterates through [0,1], therefore -1 is used when player 3 tries to join the game
       if (num === -1) {
-        infoDisplay.innerHTML = 'Sorry, the server is full'
+        infoDisplay.textContent = 'Sorry, the server is full'
       } else {
         // Store playerNum, convert String to int, avoid bugs
         playerNum = parseInt(num)
-        // toggle between players depending on playerNum,
-        // playerNum === 0, player1 playerNum === 1, player2
+        
+        // Based on the player number that server assigns the client, you are either player1 or player2
+        // player1 is set by default
         if (playerNum === 1) currentPlayer = 'player2'
 
         // console.log(playerNum)
@@ -108,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }); // end player-number listener function
 
 
-    // Another player has connected or disconnected
+    // Listen for when another player has connected or disconnected
     socket.on('player-connection', (num) => {
       // console.log(`Player number ${num} has connected or disconnected`)
       playerConnect(num)
@@ -116,13 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // On player2 ready
     socket.on('player2-ready', (num) => {
-      player2Ready = true
-      playerReady(num)
-      if (ready) {
-        playGameMulti(socket)
-        setupButtons.style.display = 'none'
+      player2Ready = true;
+      playerReady(num);
+      if (player1Ready) {
+        playGameMulti(socket);
+        setupButtons.style.display = 'none';
       }
-    })
+    });
 
     // Check player status
     socket.on('check-players', (players) => {
@@ -144,7 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Setup event listeners for firing
     player2Grids.forEach((square) => {
       square.addEventListener('click', () => {
-        if (currentPlayer === 'current-player' && ready && player2Ready) {
+        if (
+          currentPlayer === 'current-player' &&
+          player1Ready &&
+          player2Ready
+        ) {
           shotFired = square.dataset.id
           socket.emit('fire', shotFired)
         }
@@ -337,18 +342,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Game Logic for MultiPlayer
   function playGameMulti(socket) {
-    setupButtons.style.display = 'none'
-    if (isGameOver) return
-    if (!ready) {
+    setupButtons.style.display = 'none';
+    if (isGameOver) 
+      return;
+    if(!player1Ready) {
       socket.emit('player-ready')
-      ready = true
-      playerReady(playerNum)
+      player1Ready = true
+      playerReady(playerNum);
     }
 
     if (player2Ready) {
       if (currentPlayer === 'current-player') {
-        turnDisplay.innerHTML = 'Your Turn'
-      }
+        turnDisplay.innerHTML = 'Your Turn';
+      } // end if 
       if (currentPlayer === 'player2') {
         turnDisplay.innerHTML =
           'Waiting for the other player to take their turn'
@@ -417,23 +423,23 @@ document.addEventListener('DOMContentLoaded', () => {
   function checkScore() {
     if (gameMode === 'multiPlayer') player2 = 'player2'
     if (destroyerCount === 2) {
-      infoDisplay.innerHTML = `You sunk the ${player2}'s destroyer`
+      infoDisplay.innerHTML = `You sunk ${player2}'s destroyer`
       destroyerCount = 10
     }
     if (submarineCount === 3) {
-      infoDisplay.innerHTML = `You sunk the ${player2}'s submarine`
+      infoDisplay.innerHTML = `You sunk ${player2}'s submarine`
       submarineCount = 10
     }
     if (cruiserCount === 3) {
-      infoDisplay.innerHTML = `You sunk the ${player2}'s cruiser`
+      infoDisplay.innerHTML = `You sunk ${player2}'s cruiser`
       cruiserCount = 10
     }
     if (battleshipCount === 4) {
-      infoDisplay.innerHTML = `You sunk the ${player2}'s battleship`
+      infoDisplay.innerHTML = `You sunk ${player2}'s battleship`
       battleshipCount = 10
     }
     if (carrierCount === 5) {
-      infoDisplay.innerHTML = `You sunk the ${player2}'s carrier`
+      infoDisplay.innerHTML = `You sunk ${player2}'s carrier`
       carrierCount = 10
     }
     if (cpuDestroyerCount === 2) {
