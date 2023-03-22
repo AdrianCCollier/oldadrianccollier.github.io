@@ -47,7 +47,7 @@ io.on('connection', socket => {
     connections[playerIndex] = null;
     //Tell everyone what player numbe just disconnected
     socket.broadcast.emit('player-connection', playerIndex);
-  })
+  });
 
   // On Ready
   socket.on('player-ready', () => {
