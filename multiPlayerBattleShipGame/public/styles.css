@@ -65,7 +65,7 @@ body {
   }
 
   .destroyer-container {
-    background-color: red;
+    background-color: white;
   }
   
   .submarine-container {
@@ -83,6 +83,29 @@ body {
   .carrier-container > div {
     background-color: purple;
   }
+
+
+  
+  .taken.destroyer {
+    background-color: white;
+  }
+  
+  .taken.submarine {
+    background-color: green;
+  }
+
+  .taken.cruiser{
+    background-color: yellow;
+  }
+
+  .taken.battleship {
+    background-color: brown;
+  }
+
+  .taken.carrier {
+    background-color: purple;
+  }
+
 
 
   

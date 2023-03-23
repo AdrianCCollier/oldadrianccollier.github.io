@@ -401,24 +401,25 @@ document.addEventListener('DOMContentLoaded', () => {
     currentPlayer = 'player2'
   }
 
-  let cpuDestroyerCount = 0
-  let cpuSubmarineCount = 0
-  let cpuCruiserCount = 0
-  let cpuBattleshipCount = 0
-  let cpuCarrierCount = 0
+
+  let p2DestroyerCount = 0
+  let p2SubmarineCount = 0
+  let p2CruiserCount = 0
+  let p2BattleshipCount = 0
+  let p2CarrierCount = 0
 
   function player2Turn(square) {
     if (!player1Grids[square].classList.contains('boom')) {
       const hit = player1Grids[square].classList.contains('taken')
       player1Grids[square].classList.add(hit ? 'boom' : 'miss')
       if (player1Grids[square].classList.contains('destroyer'))
-        cpuDestroyerCount++
+        p2DestroyerCount++
       if (player1Grids[square].classList.contains('submarine'))
-        cpuSubmarineCount++
-      if (player1Grids[square].classList.contains('cruiser')) cpuCruiserCount++
+        p2SubmarineCount++
+      if (player1Grids[square].classList.contains('cruiser')) p2CruiserCount++
       if (player1Grids[square].classList.contains('battleship'))
-        cpuBattleshipCount++
-      if (player1Grids[square].classList.contains('carrier')) cpuCarrierCount++
+        p2BattleshipCount++
+      if (player1Grids[square].classList.contains('carrier')) p2CarrierCount++
       checkScore()
     }
     currentPlayer = 'current-player'
@@ -428,44 +429,44 @@ document.addEventListener('DOMContentLoaded', () => {
   function checkScore() {
     if (gameMode === 'multiPlayer') player2 = 'player2'
     if (destroyerCount === 2) {
-      infoDisplay.innerHTML = `You sunk ${player2}'s destroyer`
+      infoDisplay.innerHTML = `You sunk a destroyer`
       destroyerCount = 10
     }
     if (submarineCount === 3) {
-      infoDisplay.innerHTML = `You sunk ${player2}'s submarine`
+      infoDisplay.innerHTML = `You sunk a submarine`
       submarineCount = 10
     }
     if (cruiserCount === 3) {
-      infoDisplay.innerHTML = `You sunk ${player2}'s cruiser`
+      infoDisplay.innerHTML = `You sunk a cruiser`
       cruiserCount = 10
     }
     if (battleshipCount === 4) {
-      infoDisplay.innerHTML = `You sunk ${player2}'s battleship`
+      infoDisplay.innerHTML = `You sunk a battleship`
       battleshipCount = 10
     }
     if (carrierCount === 5) {
-      infoDisplay.innerHTML = `You sunk ${player2}'s carrier`
+      infoDisplay.innerHTML = `You sunk a carrier`
       carrierCount = 10
     }
-    if (cpuDestroyerCount === 2) {
-      infoDisplay.innerHTML = `${player2} sunk your destroyer`
-      cpuDestroyerCount = 10
+    if (p2DestroyerCount === 2) {
+      infoDisplay.innerHTML = `The other player sunk your destroyer`
+      p2DestroyerCount = 10
     }
-    if (cpuSubmarineCount === 3) {
-      infoDisplay.innerHTML = `${player2} sunk your submarine`
-      cpuSubmarineCount = 10
+    if (p2SubmarineCount === 3) {
+      infoDisplay.innerHTML = `The other player sunk your submarine`
+      p2SubmarineCount = 10
     }
-    if (cpuCruiserCount === 3) {
-      infoDisplay.innerHTML = `${player2} sunk your cruiser`
-      cpuCruiserCount = 10
+    if (p2CruiserCount === 3) {
+      infoDisplay.innerHTML = `The other player sunk your cruiser`
+      p2CruiserCount = 10
     }
-    if (cpuBattleshipCount === 4) {
-      infoDisplay.innerHTML = `${player2} sunk your battleship`
-      cpuBattleshipCount = 10
+    if (p2BattleshipCount === 4) {
+      infoDisplay.innerHTML = `The other player sunk your battleship`
+      p2BattleshipCount = 10
     }
-    if (cpuCarrierCount === 5) {
-      infoDisplay.innerHTML = `${player2} sunk your carrier`
-      cpuCarrierCount = 10
+    if (p2CarrierCount === 5) {
+      infoDisplay.innerHTML = `The other player sunk your carrier`
+      p2CarrierCount = 10
     }
 
     if (
@@ -480,14 +481,14 @@ document.addEventListener('DOMContentLoaded', () => {
       gameOver()
     }
     if (
-      cpuDestroyerCount +
-        cpuSubmarineCount +
-        cpuCruiserCount +
-        cpuBattleshipCount +
-        cpuCarrierCount ===
+      p2DestroyerCount +
+        p2SubmarineCount +
+        p2CruiserCount +
+        p2BattleshipCount +
+        p2CarrierCount ===
       50
     ) {
-      infoDisplay.innerHTML = `${player2.toUpperCase()} WINS`
+      infoDisplay.innerHTML = `YOUR OPPONENT WINS`
       gameOver()
     }
   }

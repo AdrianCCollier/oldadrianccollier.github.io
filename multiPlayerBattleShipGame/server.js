@@ -71,6 +71,7 @@ io.on('connection', socket => {
   socket.on('player-ready', () => {
     socket.broadcast.emit('player2-ready', playerIndex);
     connections[playerIndex] = true;
+    console.log(`player ${playerIndex} is ready`);
   });
 
   // Listen for when a client asks if other players are ready
