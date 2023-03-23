@@ -67,20 +67,29 @@ io.on('connection', socket => {
     socket.broadcast.emit('player-connection', playerIndex);
   });
 
-  // Listen for when a client has pressed
+  // Listen for when a client has emitted they are ready to start and mark their ready status to true
   socket.on('player-ready', () => {
     socket.broadcast.emit('player2-ready', playerIndex);
     connections[playerIndex] = true;
-  })
+  });
 
-  // Check player connections
+  // Listen for when a client asks if other players are ready
+  // Check connected and ready status of each player
+  // Reply back to client
   socket.on('check-players', () => {
     const players = [];
     for (const i in connections) {
-      connections[i] === null ? players.push({connected: false, ready: false}) : players.push({connected: true, ready: connections[i]});
+      if(connections[i] === null) {
+        // if array is null, nobody is connected
+        players.push({connected: false, ready: false})
+      }
+      else {
+        // otherwise, a player is connected, pass back their ready boolean status depending on their 'player-'ready' response
+        players.push({connected: true, ready: connections[i]});
+      }
     } // end for 
     socket.emit('check-players', players);
-  })
+  });
 
   // On Fire Received
   socket.on('fire', id => {

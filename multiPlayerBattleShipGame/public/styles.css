@@ -1,9 +1,16 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #F3F3F3;
-    overflow-x: hidden;
     background-color: purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .game-title {
+    text-shadow: 3px 3px 0px rgba(0, 0, 0 0.1);
   }
 
   .game-container {
@@ -11,8 +18,10 @@ body {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    border: black solid 3px;
-    background-color: black;
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    width: 80%;
+    height: 40%;
   }
   
   .boards-container {
@@ -46,13 +55,36 @@ body {
     display: flex;
     flex-direction: column;
     margin-left: 2vmin;
-    border: solid black 3px;
+    
   }
+  
   
   .ship > div {
     width: 3vmin;
     height: 3vmin;
   }
+
+  .destroyer-container {
+    background-color: red;
+  }
+  
+  .submarine-container {
+    background-color: green;
+  }
+
+  .cruiser-container{
+    background-color: yellow;
+  }
+
+  .battleship-container {
+    background-color: brown;
+  }
+
+  .carrier-container > div {
+    background-color: purple;
+  }
+
+
   
   .ship {
     display: flex;
@@ -64,8 +96,12 @@ body {
   
   .battleship-grid div {
     border: 1px solid black;
+    transition: box-shadow;
   }
   
+  .battleship-grid div:hover {
+     box-shadow: 0 0 5px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.8);
+  }
   .destroyer-container {
     --width: 2;
   }

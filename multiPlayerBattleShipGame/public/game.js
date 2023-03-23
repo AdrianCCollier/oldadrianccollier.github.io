@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // console.log(playerNum)
 
-        // Get other player status
+        // send server update of which players are ready
         socket.emit('check-players')
       } // end else 
     }); // end player-number listener function
@@ -111,35 +111,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Listen for when another player has connected or disconnected
     socket.on('player-connection', (num) => {
-      // console.log(`Player number ${num} has connected or disconnected`)
-      playerConnect(num)
+      playerConnect(num);
     }); // end player-connection listener function
 
-    // On player2 ready
+    // Listen for when player 2 is ready, if both players are at this point, trigger updateGameState()
     socket.on('player2-ready', (num) => {
       player2Ready = true;
       playerReady(num);
       if (player1Ready) {
-        playGameMulti(socket);
+        updateGameState(socket);
         setupButtons.style.display = 'none';
-      }
+      } // end if 
     });
 
-    // Check player status
+    // Listen for 'check-players' event from server. Server will send an array of players with their connection/ready status.
+    // Client iterates through this array to check the status for each player, and update the below helper functions
     socket.on('check-players', (players) => {
       players.forEach((p, i) => {
-        if (p.connected) playerConnect(i)
+        if (p.connected) 
+          playerConnect(i);
         if (p.ready) {
-          playerReady(i)
-          if (i !== playerReady) player2Ready = true
+          playerReady(i);
+          if (i !== playerReady) 
+          player2Ready = true;
         }
       })
-    })
+    });
 
-    // Ready button click
+    // Ready button event listener
+    // Only once the ship container is empty, will allShipsPlaced be true, if this is the case, then the game can begin, otherwise prompt the user to place their ships.
     startButton.addEventListener('click', () => {
-      if (allShipsPlaced) playGameMulti(socket)
-      else infoDisplay.innerHTML = 'Please place all ships to start the game.'
+      if (allShipsPlaced)
+        updateGameState(socket);
+      else 
+        infoDisplay.textContent = 'Please place all ships to start the game.'
     })
 
     // Setup event listeners for firing
@@ -150,8 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
           player1Ready &&
           player2Ready
         ) {
-          shotFired = square.dataset.id
-          socket.emit('fire', shotFired)
+          shotFired = square.dataset.id;
+          socket.emit('fire', shotFired);
         }
       })
     })
@@ -161,13 +166,13 @@ document.addEventListener('DOMContentLoaded', () => {
       player2Turn(id)
       const square = player1Grids[id]
       socket.emit('fire-reply', square.classList)
-      playGameMulti(socket)
+      updateGameState(socket)
     })
 
     // On Fire Reply Received
     socket.on('fire-reply', (classList) => {
       revealSquare(classList)
-      playGameMulti(socket)
+      updateGameState(socket)
     })
 
     function playerConnect(num) {
@@ -340,14 +345,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // console.log('dragend')
   }
 
-  // Game Logic for MultiPlayer
-  function playGameMulti(socket) {
+  // Game state logic for socket.io
+  function updateGameState(socket) {
     setupButtons.style.display = 'none';
     if (isGameOver) 
       return;
     if(!player1Ready) {
-      socket.emit('player-ready')
-      player1Ready = true
+      socket.emit('player-ready');
+      player1Ready = true;
       playerReady(playerNum);
     }
 
