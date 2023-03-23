@@ -1,25 +1,39 @@
+// Import express library, to create a web server easily
 const express = require('express');
-const path = require('path');
-const http = require('http');
-const PORT = process.env.PORT || 3000;
-const socketio = require('socket.io');
+
+// Create an instance of the express app
 const app = express();
-const server = http.createServer(app);
+
+// Import http library to create an http server
+const http = require('http');
+const server = http.createServer(app)
+
+// Import socket library and create socket.io server, passing in http instance
+const socketio = require('socket.io');
 const io = socketio(server);
 
-// Set static folder
-app.use(express.static(path.join(__dirname, "public")));
+// Constant value for port that server will be running on
+const PORT = 3000;
 
-// Start server
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Set static folder with express
+app.use(express.static((__dirname, "public")));
 
-// Handle a socket connection request from web client
+// Start the server
+server.listen(PORT, () => { 
+  console.log(`Server listening on port: ${PORT}`)
+});
+
+// Handle a max of 2 socket connection requests from game.js
+// this array will be used to store the player index generated from the for loop
 const connections = [null, null];
 
+// When a player connects, this event will be triggered and a player number will be generated for them
 io.on('connection', socket => {
-  // console.log('New WS Connection')
+  // console.log('new connection made');
 
-  // Find an available player number
+  // The for loop will only traverse and assign through [0,1]
+  // Assign either 0 or 1
+  // so -1 indicates that the game is already full (player 3 or above)
   let playerIndex = -1;
   for (const i in connections) {
     if (connections[i] === null) {
@@ -33,36 +47,49 @@ io.on('connection', socket => {
 
   console.log(`Player ${playerIndex} has connected`);
 
-  // Ignore player 3
-  if (playerIndex === -1) return;
+  // Let player 3 know that the game is already full 
+  if (playerIndex === -1) {
+    console.log('Game is already full, sorry');
+    return;
+  } // end if 
 
+  // Once a player connects, set their ready status to false by default, this will change to true once they have placed their ships and have actually started the game
   connections[playerIndex] = false;
 
-  // Tell eveyone what player number just connected
+  // Tell everyone which player number just connected with broadcast
   socket.broadcast.emit('player-connection', playerIndex);
 
   // Handle when a player disconnects, empty their index
   socket.on('disconnect', () => {
     console.log(`Player ${playerIndex} disconnected`);
     connections[playerIndex] = null;
-    //Tell everyone what player numbe just disconnected
+    //Tell everyone what player number just disconnected
     socket.broadcast.emit('player-connection', playerIndex);
-  })
+  });
 
-  // On Ready
+  // Listen for when a client has emitted they are ready to start and mark their ready status to true
   socket.on('player-ready', () => {
     socket.broadcast.emit('player2-ready', playerIndex);
     connections[playerIndex] = true;
-  })
+  });
 
-  // Check player connections
+  // Listen for when a client asks if other players are ready
+  // Check connected and ready status of each player
+  // Reply back to client
   socket.on('check-players', () => {
     const players = [];
     for (const i in connections) {
-      connections[i] === null ? players.push({connected: false, ready: false}) : players.push({connected: true, ready: connections[i]});
-    }
+      if(connections[i] === null) {
+        // if array is null, nobody is connected
+        players.push({connected: false, ready: false})
+      }
+      else {
+        // otherwise, a player is connected, pass back their ready boolean status depending on their 'player-'ready' response
+        players.push({connected: true, ready: connections[i]});
+      }
+    } // end for 
     socket.emit('check-players', players);
-  })
+  });
 
   // On Fire Received
   socket.on('fire', id => {
@@ -70,14 +97,13 @@ io.on('connection', socket => {
 
     // Emit the move to the other player
     socket.broadcast.emit('fire', id);
-  })
+  });
 
   // on Fire Reply
-  socket.on('fire-reply', square => {
-    console.log(square);
+  socket.on('fire-reply', grid => {
+    console.log(grid);
 
     // Forward the reply to the other player
-    socket.broadcast.emit('fire-reply', square);
-  })
-
-})
+    socket.broadcast.emit('fire-reply', grid);
+  });
+});
