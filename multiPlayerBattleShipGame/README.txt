@@ -1,8 +1,10 @@
-Installation commands for dependencies:
+Multiplayer game hosted at: https://web.nmsu.edu/~collierc/battleShipPage/battleshipGame.html
+
+Installation commands for packages used for this project:
 
     npm install express socket.io nodemon
 
-Run scripts added to package.json to run server:
+Scripts added to package.json:
 
     npm run start -> node server.js
     npm run dev   -> nodemon server.js
