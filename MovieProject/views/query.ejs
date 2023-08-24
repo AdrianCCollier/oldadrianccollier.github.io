@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Query</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Search for Movies by Rating</h1>
+    <form id="search-form">
+        <label for="rating">Minimum Rating:</label>
+        <input type="number" id="rating" name="rating" min="1" max="10" step="1">
+        <button type="submit">Search</button>
+    </form>
+    <h2>Results:</h2>
+    <ul id="results">
+    </ul>
+
+    <script>
+        $(document).ready(function() {
+            $('#search-form').on('submit', function(event) {
+                event.preventDefault();
+                const rating = $('#rating').val();
+                $.ajax({
+                    url: '/movies?minRating=' + rating,
+                    method: 'GET',
+                    success: function(data) {
+                        const results = $('#results');
+                        results.empty();
+                        data.forEach(function(movie) {
+                            results.append('<li>' + movie.name + ' - ' + movie.genre + ' - ' + (movie.releaseDate ? new Date(movie.releaseDate).toDateString() : 'Unknown') + ' - Rating: ' + movie.rating + '</li>');
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
