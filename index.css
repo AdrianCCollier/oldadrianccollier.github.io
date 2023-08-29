@@ -111,6 +111,8 @@ body {
   color: rgba(255, 255, 255, 0.75);
   font-family: 'Source Sans Pro', sans-serif;
   line-height: 1.65;
+  background-color: rgb(0, 0, 0);
+
 }
 
 
@@ -133,10 +135,7 @@ h3 {
 
 /* Thumbnails Section*/
 
-body {
-  background-color: rgb(0, 0, 0);
-  
-}
+
 
 .thumbnails {
   display: flex;
@@ -328,10 +327,19 @@ body {
   }
 }
 
+#main {
+  border: solid 5px red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 3rem - 2.5rem);
+  
+}
 #main .inner {
   width: 90%;
   max-width: 80em;
   margin: 0 auto;
+  
 }
 
 @media screen and (max-width: 480px) {
