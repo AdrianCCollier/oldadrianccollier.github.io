@@ -59,9 +59,9 @@ let yVelocity = 0
 let score = 0
 
 // define sounds
-const biteSound = new Audio('/assets/sounds/appleBite.mp3')
+const biteSound = new Audio('./appleBite.mp3')
 
-const gameOverSound = new Audio('/assets/sounds/gameOverSound.mp3')
+const gameOverSound = new Audio('./gameOverSound.mp3')
 
 // call additional functions and refresh canvas 1000 milliseconds / defined speed
 // changeSnakePosition() must be called first in order to maintain game over logic consistent. Check if any collisions have occurred, if they have, don't call the other functions, just call game over
