@@ -6,33 +6,6 @@
   box-sizing: border-box;
 }
 
-.thumbnails {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  
-}
-
-/* My Project Boxes */
-body {
-  color: rgba(255, 255, 255, 0.75);
-  font-family: 'Source Sans Pro', sans-serif;
-  line-height: 1.65;
-}
-
-#main {
-  display: flex; /* Sets the display to flexbox */
-  justify-content: center; /* Centers children horizontally */
-  align-items: center; /* Centers children vertically */
-  min-height: calc(100vh - 3rem - 2.5rem); /* 100vh is the full height. Remove the heights of navbar and footer */
-  margin-top: 3rem; /* This pushes it below the navbar */
-}
-
-
-
-
-
 li {
   list-style: none;
 }
@@ -45,7 +18,8 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #4f56e0;
+  background-image: linear-gradient(45deg, #3b0154, #7803b3);
+  color: white;
   color: white;
   padding: 0 16rem;
   height: 3rem;
@@ -58,7 +32,6 @@ nav {
   list-style: none;
   margin: 0;
   padding: 0;
-  
 }
 
 .menu li {
@@ -111,7 +84,6 @@ nav {
     height: 200px;
     margin-right: 20px;
     overflow: hidden;
-    
 }
 
 .picture img {
@@ -134,7 +106,12 @@ nav {
   text-align: center;
 }
 
-
+/* My Project Boxes */
+body {
+  color: rgba(255, 255, 255, 0.75);
+  font-family: 'Source Sans Pro', sans-serif;
+  line-height: 1.65;
+}
 
 
 
@@ -157,23 +134,23 @@ h3 {
 /* Thumbnails Section*/
 
 body {
-  background-color: #2c0735;
+  background-color: rgb(0, 0, 0);
   
 }
 
 .thumbnails {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   flex-wrap: wrap;
-  /* background-color: #2c0735; */
+  margin-top: 2%;
   
 }
 
 .thumbnails .box {
   margin: 0em 1em 2em 1em;
   width: 30%;
-  background-color: rgb(59, 11, 91);
+  background-color: rgb(0, 0, 0);
 }
 
 /* Box */
@@ -214,9 +191,8 @@ body {
 
 .button {
   transition: all 0.2s ease-in-out;
-  background-color: #97dffc;
+  background-color: #268748;
   border-radius: 10px;
-  color: #2c0735;
   line-height: 2.95em;
   
 }
@@ -234,7 +210,7 @@ body {
 /* Footer Code */
 
 #footerWrapper {
-  background-color: #2c0735;
+  background-color: black;
   color: #fff;
   padding: 2.5rem 0;
   text-align: center;
@@ -345,6 +321,7 @@ body {
 
 
 
+/* Specific attributes I needed to target, find a better way later */
 @media screen and (max-width: 736px) {
   #main {
     padding: 3em 0 1em 0;
