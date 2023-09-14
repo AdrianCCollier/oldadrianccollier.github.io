@@ -6,6 +6,13 @@
   box-sizing: border-box;
 }
 
+#main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 3rem); /* subtracting the height of the navbar */
+  flex-direction: column; /* makes sure the content inside stays vertically aligned */
+}
 .thumbnails {
   display: flex;
   justify-content: center;
@@ -148,7 +155,7 @@ h3 {
 /* Thumbnails Section*/
 
 body {
-  background-color: #2c0735;
+  background-color: black;
   
 }
 
@@ -157,7 +164,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  /* background-color: #2c0735; */
+  border: solid 5px purple;
   
 }
 
